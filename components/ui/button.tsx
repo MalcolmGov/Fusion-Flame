@@ -16,15 +16,15 @@ const buttonVariants = cva(
       variant: {
         /** Solid gold-to-fire gradient — primary CTA */
         fire: [
-          "text-[#1a1104] bg-[linear-gradient(120deg,#f4d67a,#d4af37_35%,#ff8a00_100%)]",
+          "text-[#1a1104] bg-[linear-gradient(120deg,#f2d26d,#dda943_35%,#fa6906_85%,#f91304_100%)]",
           "bg-[length:150%_auto] hover:bg-[position:100%_0]",
-          "shadow-[0_0_28px_-6px_rgba(255,138,0,0.55)] hover:shadow-[0_0_44px_-4px_rgba(255,138,0,0.75)]",
+          "shadow-[0_0_28px_-6px_rgba(250,105,6,0.55)] hover:shadow-[0_0_44px_-4px_rgba(249,19,4,0.65)]",
           "hover:-translate-y-0.5 active:translate-y-0",
         ].join(" "),
         /** Gold outline — secondary CTA */
         outline: [
           "border border-gold/60 text-gold-light bg-transparent",
-          "hover:bg-gold/10 hover:border-gold hover:shadow-[0_0_28px_-8px_rgba(212,175,55,0.55)]",
+          "hover:bg-gold/10 hover:border-gold hover:shadow-[0_0_28px_-8px_rgba(221,169,67,0.55)]",
           "hover:-translate-y-0.5 active:translate-y-0",
         ].join(" "),
         /** Quiet glass button */

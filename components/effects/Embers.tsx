@@ -27,7 +27,7 @@ export function Embers({ count = 18, className }: EmbersProps) {
           delay: rand(3) * 6,
           duration: 5 + rand(4) * 6,
           drift: Math.round((rand(5) - 0.5) * 90),
-          hue: rand(6) > 0.5 ? "#ff8a00" : "#d4af37",
+          hue: rand(6) > 0.66 ? "#f91304" : rand(6) > 0.33 ? "#fa6906" : "#fdc430",
         };
       }),
     [count],

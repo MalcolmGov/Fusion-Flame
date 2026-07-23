@@ -5,10 +5,12 @@
   --color-background: #050505;
   --color-surface: #111111;
   --color-card: #181818;
-  --color-gold: #d4af37;
-  --color-gold-light: #f4d67a;
-  --color-flame-orange: #ff8a00;
-  --color-flame-red: #e53935;
+  /* Sampled from the Fusion Flame logo */
+  --color-gold: #dda943;
+  --color-gold-light: #f2d26d;
+  --color-flame-orange: #fa6906;
+  --color-flame-red: #f91304;
+  --color-flame-deep: #c20b09;
   --color-foreground: #fafafa;
   --color-muted: #a0a0a0;
   --color-line: rgba(255, 255, 255, 0.08);
@@ -18,8 +20,8 @@
   --font-accent: var(--font-cormorant), ui-serif, Georgia, serif;
 
   --shadow-luxe: 0 24px 60px -12px rgba(0, 0, 0, 0.7);
-  --shadow-glow-gold: 0 0 40px -8px rgba(212, 175, 55, 0.45);
-  --shadow-glow-fire: 0 0 48px -10px rgba(255, 138, 0, 0.5);
+  --shadow-glow-gold: 0 0 40px -8px rgba(221, 169, 67, 0.45);
+  --shadow-glow-fire: 0 0 48px -10px rgba(250, 105, 6, 0.5);
 
   --animate-ember: ember 6s ease-in-out infinite;
   --animate-shimmer: shimmer 2.8s linear infinite;
@@ -91,7 +93,7 @@ body {
 }
 
 ::selection {
-  background: rgba(212, 175, 55, 0.35);
+  background: rgba(221, 169, 67, 0.35);
   color: #fff;
 }
 
@@ -124,15 +126,15 @@ body {
   font-family: var(--font-accent);
 }
 
-/* Gold metallic text */
+/* Gold metallic text — logo lettering gold */
 @utility text-gold-gradient {
   background: linear-gradient(
     100deg,
-    #8a6d1f 0%,
-    #d4af37 25%,
-    #fff0bd 50%,
-    #d4af37 75%,
-    #8a6d1f 100%
+    #8a5f1a 0%,
+    #dda943 25%,
+    #fef495 50%,
+    #dda943 75%,
+    #8a5f1a 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -140,9 +142,15 @@ body {
   color: transparent;
 }
 
-/* Fire text */
+/* Fire text — logo flame ramp: gold → red-orange → vivid red → crimson */
 @utility text-fire-gradient {
-  background: linear-gradient(100deg, #d4af37 0%, #ff8a00 45%, #e53935 100%);
+  background: linear-gradient(
+    100deg,
+    #fdc430 0%,
+    #fa6906 40%,
+    #f91304 75%,
+    #c20b09 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -152,11 +160,11 @@ body {
 @utility text-gold-shimmer {
   background: linear-gradient(
     100deg,
-    #d4af37 20%,
-    #fff3c4 40%,
-    #f4d67a 50%,
-    #fff3c4 60%,
-    #d4af37 80%
+    #dda943 20%,
+    #fef495 40%,
+    #f2d26d 50%,
+    #fef495 60%,
+    #dda943 80%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -186,10 +194,10 @@ body {
     linear-gradient(#181818, #181818) padding-box,
     linear-gradient(
         130deg,
-        rgba(212, 175, 55, 0.65),
-        rgba(255, 138, 0, 0.15) 40%,
-        rgba(212, 175, 55, 0.05) 60%,
-        rgba(212, 175, 55, 0.5)
+        rgba(221, 169, 67, 0.65),
+        rgba(250, 105, 6, 0.18) 40%,
+        rgba(221, 169, 67, 0.05) 60%,
+        rgba(221, 169, 67, 0.5)
       )
       border-box;
   border: 1px solid transparent;
@@ -201,7 +209,7 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.42em;
   text-transform: uppercase;
-  color: #d4af37;
+  color: #dda943;
 }
 
 /* Fire radial ambience behind sections */
@@ -209,12 +217,12 @@ body {
   background:
     radial-gradient(
       52% 42% at 50% 0%,
-      rgba(255, 138, 0, 0.08) 0%,
+      rgba(250, 105, 6, 0.09) 0%,
       transparent 70%
     ),
     radial-gradient(
       40% 35% at 85% 100%,
-      rgba(212, 175, 55, 0.06) 0%,
+      rgba(221, 169, 67, 0.06) 0%,
       transparent 70%
     );
 }
@@ -244,7 +252,7 @@ body {
   width: 100%;
   transform: scaleX(0);
   transform-origin: right;
-  background: linear-gradient(90deg, #d4af37, #ff8a00);
+  background: linear-gradient(90deg, #dda943, #fa6906, #f91304);
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .link-underline:hover::after,

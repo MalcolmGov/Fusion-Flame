@@ -110,7 +110,7 @@ export function Hero() {
       />
       <div
         aria-hidden
-        className="absolute inset-0 animate-flame-pulse bg-[radial-gradient(58%_45%_at_50%_100%,rgba(255,138,0,0.16)_0%,transparent_70%)]"
+        className="absolute inset-0 animate-flame-pulse bg-[radial-gradient(58%_45%_at_50%_100%,rgba(250,105,6,0.17)_0%,rgba(249,19,4,0.05)_45%,transparent_70%)]"
       />
 
       <Embers count={22} />

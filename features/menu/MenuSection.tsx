@@ -133,7 +133,7 @@ export function MenuSection({ categories }: { categories: MenuCategory[] }) {
                     layoutId="menu-tab-pill"
                     aria-hidden
                     transition={{ type: "spring", stiffness: 380, damping: 34 }}
-                    className="absolute inset-0 rounded-full bg-[linear-gradient(120deg,#f4d67a,#d4af37_45%,#ff8a00)] shadow-glow-gold"
+                    className="absolute inset-0 rounded-full bg-[linear-gradient(120deg,#f2d26d,#dda943_45%,#fa6906)] shadow-glow-gold"
                   />
                 )}
                 <span className="relative z-10">{category.label}</span>
