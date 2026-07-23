@@ -1,0 +1,44 @@
+[
+  {
+    "id": "pe-1",
+    "title": "Corporate Functions",
+    "description": "Impress clients and celebrate wins in our glass-walled boardroom-dining suite with dedicated service and AV.",
+    "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=1400&auto=format&fit=crop",
+    "capacity": "Up to 60 guests"
+  },
+  {
+    "id": "pe-2",
+    "title": "Weddings",
+    "description": "An unforgettable golden-hour venue with private terrace, bespoke menus and our events team at your side.",
+    "image": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1400&auto=format&fit=crop",
+    "capacity": "Up to 120 guests"
+  },
+  {
+    "id": "pe-3",
+    "title": "Birthdays",
+    "description": "From intimate chef's-table dinners to full-floor takeovers with DJ, cake and flame-side celebrations.",
+    "image": "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=1400&auto=format&fit=crop",
+    "capacity": "10 – 150 guests"
+  },
+  {
+    "id": "pe-4",
+    "title": "Engagements",
+    "description": "Rose petals, private corners, hidden rings in dessert domes — we've perfected the art of the yes.",
+    "image": "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1400&auto=format&fit=crop",
+    "capacity": "2 – 40 guests"
+  },
+  {
+    "id": "pe-5",
+    "title": "Baby Showers",
+    "description": "A softly-lit afternoon affair with high tea towers, mocktail pairings and pastel dessert tables.",
+    "image": "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?q=80&w=1400&auto=format&fit=crop",
+    "capacity": "Up to 50 guests"
+  },
+  {
+    "id": "pe-6",
+    "title": "Networking & Conference Dining",
+    "description": "Canapé receptions, plated conference dinners and walk-and-talk grazing menus for delegations of any size.",
+    "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1400&auto=format&fit=crop",
+    "capacity": "Up to 200 guests"
+  }
+]

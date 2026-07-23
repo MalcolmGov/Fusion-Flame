@@ -1,0 +1,50 @@
+[
+  {
+    "id": "t1",
+    "name": "Thandiwe M.",
+    "avatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=200&auto=format&fit=crop",
+    "rating": 5,
+    "quote": "The flame-grilled ribeye is life-changing. The atmosphere feels like a five-star hotel and the service made our anniversary unforgettable.",
+    "date": "2026-06-14"
+  },
+  {
+    "id": "t2",
+    "name": "James R.",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+    "rating": 5,
+    "quote": "Booked the private dining room for a corporate dinner — flawless from the welcome cocktail to the last dessert. Clients are still talking about it.",
+    "date": "2026-05-30"
+  },
+  {
+    "id": "t3",
+    "name": "Aisha K.",
+    "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop",
+    "rating": 5,
+    "quote": "Jazz night with the 2-for-1 cocktails is my new Friday ritual. The espresso martini alone deserves its own award.",
+    "date": "2026-06-21"
+  },
+  {
+    "id": "t4",
+    "name": "Pieter V.",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+    "rating": 5,
+    "quote": "As someone who grew up around braais, I'm picky about fire-cooked meat. This is the best grill in Johannesburg. Full stop.",
+    "date": "2026-04-18"
+  },
+  {
+    "id": "t5",
+    "name": "Naledi S.",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    "rating": 5,
+    "quote": "The seafood platter is theatre on a plate. Beautiful room, glowing candlelight, and a wine list that goes on forever.",
+    "date": "2026-06-02"
+  },
+  {
+    "id": "t6",
+    "name": "Daniel O.",
+    "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop",
+    "rating": 5,
+    "quote": "Proposed here on Saturday — the team arranged rose petals, a private corner and a surprise dessert. She said yes. 10/10.",
+    "date": "2026-05-09"
+  }
+]

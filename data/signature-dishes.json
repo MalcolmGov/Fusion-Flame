@@ -1,0 +1,42 @@
+[
+  {
+    "id": "sig-1",
+    "name": "Tomahawk 1.2kg",
+    "tagline": "Carved tableside over glowing coals",
+    "description": "Our show-stopping bone-in ribeye is dry-aged for 35 days, seared over oak embers and carved at your table with smoked bone-marrow butter.",
+    "price": 1150,
+    "image": "https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=2000&auto=format&fit=crop"
+  },
+  {
+    "id": "sig-2",
+    "name": "Seafood Fire Platter",
+    "tagline": "The ocean, kissed by flame",
+    "description": "Lobster tail, queen prawns, calamari and black mussels grilled over open coals with peri-peri and lemon-garlic butters. Built for two.",
+    "price": 895,
+    "image": "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=2000&auto=format&fit=crop"
+  },
+  {
+    "id": "sig-3",
+    "name": "Signature Flame Platter",
+    "tagline": "A celebration of live fire",
+    "description": "Ribeye, Karoo lamb cutlets, boerewors and sticky BBQ wings, stacked over coals and served with ember-roasted vegetables.",
+    "price": 695,
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2000&auto=format&fit=crop"
+  },
+  {
+    "id": "sig-4",
+    "name": "Lobster Linguine",
+    "tagline": "Silk, smoke and the sea",
+    "description": "Half lobster tail folded through fresh linguine in a flamed bisque butter with confit tomatoes and basil oil.",
+    "price": 385,
+    "image": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?q=80&w=2000&auto=format&fit=crop"
+  },
+  {
+    "id": "sig-5",
+    "name": "Flaming Crème Brûlée",
+    "tagline": "Torched before your eyes",
+    "description": "Vanilla-bean custard under a caramel shell, torched tableside and finished with Amarula caramel and gold dust.",
+    "price": 115,
+    "image": "https://images.unsplash.com/photo-1470324161839-ce2bb6fa6bc3?q=80&w=2000&auto=format&fit=crop"
+  }
+]

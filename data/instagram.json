@@ -1,0 +1,32 @@
+[
+  {
+    "id": "ig1",
+    "src": "https://images.unsplash.com/photo-1546964124-0cce460f38ef?q=80&w=800&auto=format&fit=crop",
+    "alt": "Seared fillet with peppercorn sauce"
+  },
+  {
+    "id": "ig2",
+    "src": "https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=800&auto=format&fit=crop",
+    "alt": "Golden spritz cocktail"
+  },
+  {
+    "id": "ig3",
+    "src": "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800&auto=format&fit=crop",
+    "alt": "Wood-fired pizza fresh from the oven"
+  },
+  {
+    "id": "ig4",
+    "src": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=800&auto=format&fit=crop",
+    "alt": "Dessert with berries and cream"
+  },
+  {
+    "id": "ig5",
+    "src": "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800&auto=format&fit=crop",
+    "alt": "Guests enjoying dinner"
+  },
+  {
+    "id": "ig6",
+    "src": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop",
+    "alt": "Barista pouring coffee"
+  }
+]

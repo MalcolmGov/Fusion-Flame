@@ -1,0 +1,698 @@
+[
+  {
+    "id": "starters",
+    "label": "Starters",
+    "items": [
+      {
+        "id": "st-1",
+        "name": "Flame-Seared Beef Carpaccio",
+        "description": "Torched fillet ribbons, truffle aioli, parmesan crisp and wild rocket.",
+        "price": 165,
+        "calories": 320,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "st-2",
+        "name": "Smoked Chilli Prawns",
+        "description": "Tiger prawns flamed in chilli-garlic butter with charred lemon.",
+        "price": 185,
+        "calories": 290,
+        "spiceLevel": 2,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "st-3",
+        "name": "Burrata & Ember Tomatoes",
+        "description": "Creamy burrata, fire-roasted heirloom tomatoes, basil oil and sourdough ash crumb.",
+        "price": 145,
+        "calories": 380,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1608897013039-887f21d8c804?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "st-4",
+        "name": "Sticky Fire Wings",
+        "description": "Twice-cooked wings glazed in gochujang honey with toasted sesame.",
+        "price": 125,
+        "calories": 540,
+        "spiceLevel": 3,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "grills",
+    "label": "Grills",
+    "items": [
+      {
+        "id": "gr-1",
+        "name": "Signature Flame Platter",
+        "description": "Ribeye, lamb cutlets, boerewors and BBQ wings over oak coals, for two.",
+        "price": 695,
+        "calories": 1450,
+        "spiceLevel": 1,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "gr-2",
+        "name": "Smoked Beef Short Rib",
+        "description": "12-hour smoked rib, burnt-end glaze, charred corn and jalapeño crema.",
+        "price": 385,
+        "calories": 980,
+        "spiceLevel": 2,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "gr-3",
+        "name": "Karoo Lamb Chops",
+        "description": "Herb-basted Karoo lamb over open flame with rosemary jus.",
+        "price": 345,
+        "calories": 820,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "gr-4",
+        "name": "Peri-Peri Espetada",
+        "description": "Hanging beef skewer flamed tableside with Mozambican peri-peri butter.",
+        "price": 315,
+        "calories": 760,
+        "spiceLevel": 3,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "steaks",
+    "label": "Steaks",
+    "items": [
+      {
+        "id": "sk-1",
+        "name": "Dry-Aged Ribeye 400g",
+        "description": "35-day dry-aged, grass-fed ribeye with smoked bone-marrow butter.",
+        "price": 495,
+        "calories": 1050,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "sk-2",
+        "name": "Fillet au Poivre 250g",
+        "description": "Centre-cut fillet, green peppercorn flambé sauce, pommes purée.",
+        "price": 425,
+        "calories": 720,
+        "spiceLevel": 1,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1546964124-0cce460f38ef?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "sk-3",
+        "name": "Tomahawk 1.2kg",
+        "description": "Show-stopping bone-in ribeye carved tableside, for two to share.",
+        "price": 1150,
+        "calories": 2400,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "sk-4",
+        "name": "Chargrilled Sirloin 300g",
+        "description": "Aged sirloin, café de Paris butter, triple-cooked chips.",
+        "price": 345,
+        "calories": 890,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "seafood",
+    "label": "Seafood",
+    "items": [
+      {
+        "id": "sf-1",
+        "name": "Fire-Grilled Kingklip",
+        "description": "Line-caught kingklip, lemon-caper beurre blanc, samphire.",
+        "price": 325,
+        "calories": 540,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "sf-2",
+        "name": "Mozambican Prawn Feast",
+        "description": "Eight queen prawns, peri-peri or lemon-garlic, saffron rice.",
+        "price": 445,
+        "calories": 680,
+        "spiceLevel": 2,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1559742811-822873691df8?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "sf-3",
+        "name": "Charred Norwegian Salmon",
+        "description": "Cedar-plank salmon, miso glaze, sesame greens.",
+        "price": 365,
+        "calories": 610,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "sf-4",
+        "name": "Seafood Fire Platter",
+        "description": "Lobster tail, prawns, calamari and mussels over coals, for two.",
+        "price": 895,
+        "calories": 1250,
+        "spiceLevel": 1,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "chicken",
+    "label": "Chicken",
+    "items": [
+      {
+        "id": "ch-1",
+        "name": "Flame-Roasted Half Chicken",
+        "description": "Free-range chicken, rotisserie-roasted over oak with lemon-herb butter.",
+        "price": 245,
+        "calories": 780,
+        "spiceLevel": 1,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "ch-2",
+        "name": "Peri-Peri Flattie",
+        "description": "Spatchcocked baby chicken, signature peri-peri basting, grilled lime.",
+        "price": 265,
+        "calories": 820,
+        "spiceLevel": 3,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "ch-3",
+        "name": "Stuffed Chicken Supreme",
+        "description": "Chicken breast stuffed with feta and sundried tomato, sage cream.",
+        "price": 235,
+        "calories": 640,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1610057099431-d73a1c9d2f2f?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "ch-4",
+        "name": "Buttermilk Fried Chicken",
+        "description": "48-hour brined thighs, hot-honey drizzle, pickled slaw.",
+        "price": 215,
+        "calories": 910,
+        "spiceLevel": 2,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "burgers",
+    "label": "Burgers",
+    "items": [
+      {
+        "id": "bg-1",
+        "name": "The Flame Burger",
+        "description": "Double-smashed wagyu blend, smoked cheddar, ember onions, secret sauce.",
+        "price": 195,
+        "calories": 1120,
+        "spiceLevel": 1,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "bg-2",
+        "name": "Truffle Mushroom Burger",
+        "description": "Beef patty, truffled mushroom duxelles, gruyère, garlic aioli.",
+        "price": 205,
+        "calories": 980,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "bg-3",
+        "name": "Inferno Chicken Burger",
+        "description": "Crispy chicken thigh, ghost-pepper mayo, charred pineapple.",
+        "price": 175,
+        "calories": 890,
+        "spiceLevel": 3,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1606755962773-d324e0a13086?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "bg-4",
+        "name": "Garden Flame Burger",
+        "description": "Chargrilled halloumi and portobello stack, romesco, basil pesto.",
+        "price": 165,
+        "calories": 720,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1520072959219-c595dc870360?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "pizza",
+    "label": "Pizza",
+    "items": [
+      {
+        "id": "pz-1",
+        "name": "Wood-Fired Margherita",
+        "description": "San Marzano tomato, fior di latte, basil, 48-hour dough.",
+        "price": 145,
+        "calories": 820,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "pz-2",
+        "name": "Diavola Inferno",
+        "description": "Spicy salami, nduja, chilli honey, smoked mozzarella.",
+        "price": 185,
+        "calories": 980,
+        "spiceLevel": 3,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "pz-3",
+        "name": "Prosciutto & Fig",
+        "description": "Parma ham, caramelised fig, gorgonzola cream, rocket.",
+        "price": 195,
+        "calories": 890,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "pz-4",
+        "name": "Braai BBQ Chicken",
+        "description": "Smoked BBQ base, flame chicken, red onion, coriander crema.",
+        "price": 175,
+        "calories": 940,
+        "spiceLevel": 1,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "pasta",
+    "label": "Pasta",
+    "items": [
+      {
+        "id": "pa-1",
+        "name": "Lobster Linguine",
+        "description": "Half lobster tail, bisque butter, confit tomato, fresh linguine.",
+        "price": 385,
+        "calories": 780,
+        "spiceLevel": 1,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "pa-2",
+        "name": "Fire-Smoked Carbonara",
+        "description": "Oak-smoked guanciale, pecorino, cracked pepper, silky egg emulsion.",
+        "price": 215,
+        "calories": 920,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1612874742237-6526221588e3?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "pa-3",
+        "name": "Short Rib Pappardelle",
+        "description": "12-hour braised short rib ragù, parmesan snow, gremolata.",
+        "price": 245,
+        "calories": 860,
+        "spiceLevel": 0,
+        "vegetarian": false,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "pa-4",
+        "name": "Wild Mushroom Tagliatelle",
+        "description": "Porcini cream, truffle oil, crispy sage, aged parmesan.",
+        "price": 195,
+        "calories": 740,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "desserts",
+    "label": "Desserts",
+    "items": [
+      {
+        "id": "ds-1",
+        "name": "Flaming Crème Brûlée",
+        "description": "Vanilla-bean custard torched tableside with Amarula caramel.",
+        "price": 115,
+        "calories": 480,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1470324161839-ce2bb6fa6bc3?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "ds-2",
+        "name": "Molten Gold Fondant",
+        "description": "Dark chocolate fondant, gold leaf, salted caramel ice cream.",
+        "price": 135,
+        "calories": 620,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "ds-3",
+        "name": "Malva Pudding Royale",
+        "description": "Classic malva, rooibos anglaise, brandy-snap tuile.",
+        "price": 105,
+        "calories": 560,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "ds-4",
+        "name": "Ember-Roasted Pineapple",
+        "description": "Coal-roasted pineapple, coconut sorbet, chilli-lime dust.",
+        "price": 95,
+        "calories": 340,
+        "spiceLevel": 1,
+        "vegetarian": true,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "cocktails",
+    "label": "Cocktails",
+    "items": [
+      {
+        "id": "ck-1",
+        "name": "Smoked Gold Old Fashioned",
+        "description": "Bourbon, burnt orange, oak smoke dome, gold sugar rim.",
+        "price": 145,
+        "calories": 220,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "ck-2",
+        "name": "Flame & Passion",
+        "description": "Spiced rum, passion fruit, vanilla, flamed cinnamon finish.",
+        "price": 125,
+        "calories": 240,
+        "spiceLevel": 1,
+        "vegetarian": true,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "ck-3",
+        "name": "Espresso Martini Deluxe",
+        "description": "Cold-brew espresso, vodka, hazelnut, cocoa mist.",
+        "price": 115,
+        "calories": 260,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1545438102-799c3991ffb2?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "ck-4",
+        "name": "Golden Hour Spritz",
+        "description": "Aperol, sparkling MCC, saffron syrup, dehydrated orange.",
+        "price": 105,
+        "calories": 190,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "wine",
+    "label": "Wine",
+    "items": [
+      {
+        "id": "wn-1",
+        "name": "Kanonkop Paul Sauer",
+        "description": "Iconic Stellenbosch Bordeaux blend — dark fruit, cedar, long finish.",
+        "price": 1450,
+        "calories": 625,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": false,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "wn-2",
+        "name": "Hamilton Russell Chardonnay",
+        "description": "Hemel-en-Aarde elegance — citrus, oatmeal, saline minerality.",
+        "price": 895,
+        "calories": 610,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "wn-3",
+        "name": "Graham Beck Brut Rosé",
+        "description": "Méthode Cap Classique — silver berries, fine mousse, celebration in a glass.",
+        "price": 495,
+        "calories": 570,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "wn-4",
+        "name": "House Shiraz by the Glass",
+        "description": "Smoky plum and white pepper — made for our open-flame grills.",
+        "price": 95,
+        "calories": 125,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  },
+  {
+    "id": "hot-drinks",
+    "label": "Hot Drinks",
+    "items": [
+      {
+        "id": "hd-1",
+        "name": "Single-Origin Espresso",
+        "description": "Ethiopian Yirgacheffe, roasted in-house, velvet crema.",
+        "price": 45,
+        "calories": 5,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": true,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "hd-2",
+        "name": "Amarula Dom Pedro",
+        "description": "South Africa's favourite — velvety Amarula over vanilla-bean ice cream.",
+        "price": 95,
+        "calories": 420,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": true,
+        "chefRecommendation": true,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "hd-3",
+        "name": "Spiced Rooibos Latte",
+        "description": "Organic rooibos, cinnamon, honey, oat-milk foam.",
+        "price": 65,
+        "calories": 180,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=1200&auto=format&fit=crop"
+      },
+      {
+        "id": "hd-4",
+        "name": "Molten Hot Chocolate",
+        "description": "70% single-estate chocolate, torched marshmallow, gold dust.",
+        "price": 75,
+        "calories": 380,
+        "spiceLevel": 0,
+        "vegetarian": true,
+        "popular": false,
+        "chefRecommendation": false,
+        "available": true,
+        "image": "https://images.unsplash.com/photo-1517578239113-b03992dcdd25?q=80&w=1200&auto=format&fit=crop"
+      }
+    ]
+  }
+]

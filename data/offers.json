@@ -1,0 +1,50 @@
+[
+  {
+    "id": "of-1",
+    "title": "Steak Tuesdays",
+    "description": "Any 300g cut with a glass of house Shiraz — the carnivore's midweek reset.",
+    "day": "Tuesdays",
+    "highlight": "R295",
+    "icon": "Beef"
+  },
+  {
+    "id": "of-2",
+    "title": "Happy Hour",
+    "description": "All signature cocktails and MCC by the glass, half price at the fire bar.",
+    "day": "Mon – Fri · 16:00 – 18:00",
+    "highlight": "50% Off",
+    "icon": "Martini"
+  },
+  {
+    "id": "of-3",
+    "title": "2-for-1 Cocktails",
+    "description": "Bring your favourite person. Two flame-crafted cocktails, one bill.",
+    "day": "Thursdays",
+    "highlight": "2 for 1",
+    "icon": "Wine"
+  },
+  {
+    "id": "of-4",
+    "title": "Lunch Deals",
+    "description": "Two-course express lunch with coffee, served in under 45 minutes.",
+    "day": "Weekdays · 12:00 – 15:00",
+    "highlight": "R225",
+    "icon": "UtensilsCrossed"
+  },
+  {
+    "id": "of-5",
+    "title": "Kids Eat Free",
+    "description": "One free kids' meal per adult main. Sundays are for the whole family.",
+    "day": "Sundays",
+    "highlight": "Free",
+    "icon": "Baby"
+  },
+  {
+    "id": "of-6",
+    "title": "Weekly Specials",
+    "description": "A rotating chef's plate celebrating the best of the week's market.",
+    "day": "All Week",
+    "highlight": "From R185",
+    "icon": "Flame"
+  }
+]

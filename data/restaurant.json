@@ -1,0 +1,33 @@
+{
+  "name": "Fusion Flame",
+  "tagline": "Where exceptional cuisine meets unforgettable moments.",
+  "phone": "+27 11 555 0199",
+  "whatsapp": "27115550199",
+  "whatsappMessage": "Hi Fusion Flame, I'd like to make a booking.",
+  "email": "reservations@fusionflame.co.za",
+  "address": {
+    "street": "12 Flame Boulevard",
+    "suburb": "Sandton",
+    "city": "Johannesburg",
+    "postalCode": "2196",
+    "country": "South Africa"
+  },
+  "mapQuery": "12 Flame Boulevard, Sandton, Johannesburg",
+  "hours": [
+    { "days": "Monday – Thursday", "open": "12:00", "close": "22:30" },
+    { "days": "Friday – Saturday", "open": "12:00", "close": "00:00" },
+    { "days": "Sunday", "open": "11:00", "close": "21:00" }
+  ],
+  "social": [
+    { "platform": "Instagram", "url": "https://instagram.com/fusionflame" },
+    { "platform": "Facebook", "url": "https://facebook.com/fusionflame" },
+    { "platform": "TikTok", "url": "https://tiktok.com/@fusionflame" },
+    { "platform": "X", "url": "https://x.com/fusionflame" }
+  ],
+  "stats": {
+    "yearsOfExcellence": 12,
+    "guestsServed": 5000,
+    "signatureDishes": 48,
+    "eventsHosted": 320
+  }
+}

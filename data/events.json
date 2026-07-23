@@ -1,0 +1,84 @@
+[
+  {
+    "slug": "live-music-fridays",
+    "title": "Live Music Fridays",
+    "description": "Ignite your weekend with live sets from Johannesburg's finest bands, flame-grilled specials and a bar that never sleeps.",
+    "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1600&auto=format&fit=crop",
+    "date": "2026-07-31",
+    "time": "19:00 – 23:30",
+    "price": 250,
+    "availableSeats": 84,
+    "recurring": "Every Friday"
+  },
+  {
+    "slug": "jazz-nights",
+    "title": "Jazz Nights",
+    "description": "An intimate evening of smoky standards and smooth improvisation, paired with a curated three-course tasting menu.",
+    "image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1600&auto=format&fit=crop",
+    "date": "2026-08-06",
+    "time": "19:30 – 22:30",
+    "price": 450,
+    "availableSeats": 46,
+    "recurring": "First Thursday monthly"
+  },
+  {
+    "slug": "comedy-night",
+    "title": "Comedy Night",
+    "description": "South Africa's sharpest comics take the Fusion Flame stage. Dinner, drinks and belly laughs — the perfect mid-week escape.",
+    "image": "https://images.unsplash.com/photo-1585699324551-f6c309eedeca?q=80&w=1600&auto=format&fit=crop",
+    "date": "2026-08-12",
+    "time": "20:00 – 22:00",
+    "price": 300,
+    "availableSeats": 92
+  },
+  {
+    "slug": "wine-tasting",
+    "title": "Cape Winelands Tasting",
+    "description": "Our sommelier walks you through eight estate wines from Stellenbosch and Franschhoek, matched with fire-kissed canapés.",
+    "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1600&auto=format&fit=crop",
+    "date": "2026-08-20",
+    "time": "18:30 – 21:00",
+    "price": 550,
+    "availableSeats": 30
+  },
+  {
+    "slug": "steak-festival",
+    "title": "Steak Festival",
+    "description": "A carnivore's dream: dry-aged cuts, rare breeds and open-flame masterclasses from Chef Laurent and his brigade.",
+    "image": "https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1600&auto=format&fit=crop",
+    "date": "2026-09-05",
+    "time": "12:00 – 22:00",
+    "price": 650,
+    "availableSeats": 120
+  },
+  {
+    "slug": "valentines-dinner",
+    "title": "Valentine's Dinner",
+    "description": "A candle-lit five-course affair with champagne on arrival, live strings and a rose for every table.",
+    "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1600&auto=format&fit=crop",
+    "date": "2027-02-14",
+    "time": "18:00 – 23:00",
+    "price": 1250,
+    "availableSeats": 60
+  },
+  {
+    "slug": "christmas-dinner",
+    "title": "Christmas Dinner",
+    "description": "Celebrate the season in golden style — a festive feast of flame-roasted gammon, glazed duck and decadent desserts.",
+    "image": "https://images.unsplash.com/photo-1482275548304-a58859dc31b7?q=80&w=1600&auto=format&fit=crop",
+    "date": "2026-12-25",
+    "time": "12:00 – 17:00",
+    "price": 950,
+    "availableSeats": 110
+  },
+  {
+    "slug": "new-years-gala",
+    "title": "New Year's Gala",
+    "description": "Ring in the new year with a black-tie gala: seven courses, free-flowing bubbly, live band and a midnight fire show.",
+    "image": "https://images.unsplash.com/photo-1467810563316-b5476525c0f9?q=80&w=1600&auto=format&fit=crop",
+    "date": "2026-12-31",
+    "time": "19:00 – 02:00",
+    "price": 1850,
+    "availableSeats": 150
+  }
+]
