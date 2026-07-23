@@ -156,6 +156,14 @@ body {
   color: transparent;
 }
 
+/* Red flame lettering — matches the "FLAME" word in the logo */
+@utility text-red-gradient {
+  background: linear-gradient(180deg, #fb5a1e 0%, #f91304 48%, #a30102 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* Animated shimmering gold text */
 @utility text-gold-shimmer {
   background: linear-gradient(

@@ -38,8 +38,9 @@ export function Footer() {
                 height={64}
                 className="mix-blend-screen"
               />
-              <span className="font-heading text-xl text-gold-gradient">
-                Fusion Flame
+              <span className="font-heading text-xl">
+                <span className="text-gold-gradient">Fusion</span>{" "}
+                <span className="text-red-gradient">Flame</span>
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">

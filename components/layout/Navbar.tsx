@@ -64,8 +64,9 @@ export function Navbar({ phone }: { phone: string }) {
             priority
             className="mix-blend-screen transition-transform duration-500 hover:scale-105"
           />
-          <span className="font-heading text-lg tracking-wide text-gold-gradient md:text-xl">
-            Fusion Flame
+          <span className="font-heading text-lg tracking-wide md:text-xl">
+            <span className="text-gold-gradient">Fusion</span>{" "}
+            <span className="text-red-gradient">Flame</span>
           </span>
         </Link>
 
