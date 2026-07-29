@@ -2,10 +2,11 @@ import type { MetadataRoute } from "next";
 import { getEvents } from "@/services/content";
 import { getSiteUrl } from "@/lib/paystack";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
 
-  const eventUrls: MetadataRoute.Sitemap = getEvents().map((event) => ({
+  const events = await getEvents();
+  const eventUrls: MetadataRoute.Sitemap = events.map((event) => ({
     url: `${siteUrl}/events/${event.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",

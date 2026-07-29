@@ -15,7 +15,7 @@ export async function GET(request: Request) {
 
   // Demo mode ticket — used when Paystack keys are not configured yet.
   if (searchParams.get("mock") === "1" || !isPaystackConfigured()) {
-    const event = getEvent(searchParams.get("event") ?? "");
+    const event = await getEvent(searchParams.get("event") ?? "");
     if (!event) {
       return NextResponse.json({ error: "Event not found" }, { status: 404 });
     }
@@ -43,7 +43,7 @@ export async function GET(request: Request) {
       quantity?: number;
       purchaser?: string;
     };
-    const event = getEvent(meta.eventSlug ?? "");
+    const event = await getEvent(meta.eventSlug ?? "");
 
     const ticket: DigitalTicket = {
       reference: verified.reference,

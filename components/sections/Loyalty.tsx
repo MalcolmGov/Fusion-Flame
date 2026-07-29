@@ -37,8 +37,8 @@ const BENEFITS = [
   },
 ];
 
-export function Loyalty() {
-  const joinHref = getWhatsAppLink(
+export async function Loyalty() {
+  const joinHref = await getWhatsAppLink(
     "Hi Fusion Flame, I'd like to join the Flame Points loyalty programme.",
   );
 

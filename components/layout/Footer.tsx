@@ -17,8 +17,8 @@ const SOCIAL_ICONS: Record<string, typeof InstagramIcon> = {
   TikTok: TikTokIcon,
 };
 
-export function Footer() {
-  const restaurant = getRestaurant();
+export async function Footer() {
+  const restaurant = await getRestaurant();
 
   return (
     <footer className="relative border-t border-white/5 bg-surface/60">

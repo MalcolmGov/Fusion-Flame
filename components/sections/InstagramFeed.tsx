@@ -4,10 +4,13 @@ import { Reveal } from "@/components/effects/Reveal";
 import { SectionHeading } from "@/components/effects/SectionHeading";
 import { getInstagramFeed, getRestaurant } from "@/services/content";
 
-export function InstagramFeed() {
-  const feed = getInstagramFeed();
+export async function InstagramFeed() {
+  const [feed, restaurant] = await Promise.all([
+    getInstagramFeed(),
+    getRestaurant(),
+  ]);
   const instagramUrl =
-    getRestaurant().social.find((s) => s.platform === "Instagram")?.url ??
+    restaurant.social.find((s) => s.platform === "Instagram")?.url ??
     "https://instagram.com";
 
   return (

@@ -10,8 +10,8 @@ const ABOUT_IMAGES = {
     "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1200&auto=format&fit=crop",
 };
 
-export function About() {
-  const { stats } = getRestaurant();
+export async function About() {
+  const { stats } = await getRestaurant();
 
   const counters = [
     { label: "Years of Excellence", value: stats.yearsOfExcellence, suffix: "" },

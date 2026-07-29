@@ -5,9 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, Flame, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import type { Announcement } from "@/types";
 
 const NAV_LINKS = [
   { label: "About", href: "/#about" },
@@ -18,10 +19,20 @@ const NAV_LINKS = [
   { label: "Contact", href: "/#contact" },
 ];
 
-export function Navbar({ phone }: { phone: string }) {
+export function Navbar({
+  phone,
+  announcement,
+}: {
+  phone: string;
+  announcement?: Announcement;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
   const pathname = usePathname();
+  const showBanner = Boolean(
+    announcement?.enabled && announcement.message && !bannerDismissed,
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -50,6 +61,44 @@ export function Navbar({ phone }: { phone: string }) {
           : "bg-gradient-to-b from-black/70 to-transparent py-4",
       )}
     >
+      {/* Announcement / promo bar — managed from the admin panel */}
+      <AnimatePresence initial={false}>
+        {showBanner && announcement && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="-mt-2 mb-2 overflow-hidden border-b border-gold/20 bg-[linear-gradient(90deg,rgba(221,169,67,0.16),rgba(249,19,4,0.12))]"
+            role="region"
+            aria-label="Announcement"
+          >
+            <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-10 py-2 text-center">
+              <Flame className="hidden size-3.5 shrink-0 text-flame-orange sm:block" aria-hidden />
+              <p className="text-xs text-foreground/90 md:text-[13px]">
+                {announcement.message}
+                {announcement.linkHref && announcement.linkLabel ? (
+                  <Link
+                    href={announcement.linkHref}
+                    className="ml-2 inline-flex items-center gap-1 font-semibold text-gold-light underline-offset-4 hover:underline"
+                  >
+                    {announcement.linkLabel}
+                    <ArrowRight className="size-3" aria-hidden />
+                  </Link>
+                ) : null}
+              </p>
+              <button
+                type="button"
+                onClick={() => setBannerDismissed(true)}
+                aria-label="Dismiss announcement"
+                className="absolute right-3 rounded-full p-1 text-muted transition-colors hover:text-foreground"
+              >
+                <X className="size-3.5" aria-hidden />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 md:px-8">
         <Link
           href="/"

@@ -9,20 +9,22 @@ import { TicketCheckout } from "@/features/tickets/TicketCheckout";
 import { getEvent, getEvents, getRestaurant } from "@/services/content";
 import { formatEventDate, formatZAR } from "@/lib/utils";
 import { getSiteUrl } from "@/lib/paystack";
+import type { RestaurantEvent, RestaurantInfo } from "@/types";
 
 interface EventPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams() {
-  return getEvents().map((event) => ({ slug: event.slug }));
+export async function generateStaticParams() {
+  const events = await getEvents();
+  return events.map((event) => ({ slug: event.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: EventPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const event = getEvent(slug);
+  const event = await getEvent(slug);
   if (!event) return { title: "Event Not Found" };
   return {
     title: `${event.title} — Tickets`,
@@ -36,10 +38,13 @@ export async function generateMetadata({
   };
 }
 
-function EventJsonLd({ slug }: { slug: string }) {
-  const event = getEvent(slug);
-  const r = getRestaurant();
-  if (!event) return null;
+function EventJsonLd({
+  event,
+  r,
+}: {
+  event: RestaurantEvent;
+  r: RestaurantInfo;
+}) {
   const data = {
     "@context": "https://schema.org",
     "@type": "Event",
@@ -82,14 +87,15 @@ function EventJsonLd({ slug }: { slug: string }) {
 
 export default async function EventPage({ params }: EventPageProps) {
   const { slug } = await params;
-  const event = getEvent(slug);
+  const [event, restaurant] = await Promise.all([
+    getEvent(slug),
+    getRestaurant(),
+  ]);
   if (!event) notFound();
-
-  const restaurant = getRestaurant();
 
   return (
     <div className="relative pt-24 md:pt-28">
-      <EventJsonLd slug={slug} />
+      <EventJsonLd event={event} r={restaurant} />
 
       {/* Hero banner */}
       <section className="relative h-[46vh] min-h-80 overflow-hidden md:h-[56vh]">

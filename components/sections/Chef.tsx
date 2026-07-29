@@ -4,8 +4,8 @@ import { Reveal } from "@/components/effects/Reveal";
 import { SectionHeading } from "@/components/effects/SectionHeading";
 import { getChef } from "@/services/content";
 
-export function Chef() {
-  const chef = getChef();
+export async function Chef() {
+  const chef = await getChef();
 
   return (
     <section id="chef" className="relative scroll-mt-24 py-24 md:py-36">

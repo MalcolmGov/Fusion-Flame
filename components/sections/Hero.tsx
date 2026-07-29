@@ -12,10 +12,10 @@ import { Embers } from "@/components/effects/Embers";
 
 gsap.registerPlugin(useGSAP);
 
-const HERO_IMAGE =
+const DEFAULT_HERO_IMAGE =
   "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=2600&auto=format&fit=crop";
 
-export function Hero() {
+export function Hero({ backgroundImage }: { backgroundImage?: string }) {
   const container = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -94,7 +94,7 @@ export function Hero() {
         className="absolute inset-0 -bottom-32"
       >
         <Image
-          src={HERO_IMAGE}
+          src={backgroundImage || DEFAULT_HERO_IMAGE}
           alt="Moody, candle-lit dining room at Fusion Flame"
           fill
           priority

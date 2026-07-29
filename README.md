@@ -39,12 +39,30 @@ https://<your-domain>/api/paystack/webhook
 Supported: ticket payments, secure server-side verification, webhook signature
 validation, refunds (`lib/paystack.ts → refundTransaction`).
 
-## Content Management (CMS-ready)
+## Admin Panel (built-in CMS)
 
-All content lives in `data/*.json` and is accessed exclusively through
-`services/content.ts`. Menus, events, gallery, testimonials, chef, offers,
-hours and restaurant details can be changed without touching components — and a
-future CMS only needs to replace the accessors in `services/content.ts`.
+Everything on the site is managed from **`/admin`** — no code changes or
+redeploys needed:
+
+- **Menu & Pricing** — categories, dishes, prices, badges, availability
+- **Events & Tickets** — dates, ticket prices, seats
+- **Announcements & Ads** — the promo banner at the top of every page
+- Signature dishes, gallery, offers, testimonials, private events, chef
+  profile, FAQ, Instagram grid, restaurant details (hours, contacts, hero image)
+
+Setup:
+
+1. Set `ADMIN_PASSWORD` in Vercel (dev falls back to password `admin`).
+2. Add a **Blob store** to the Vercel project (Storage → Create → Blob) —
+   published content is stored there and served instantly via tag
+   revalidation. Locally, edits write straight to `data/*.json`.
+3. Sign in at `/admin`. Every editor has a **Publish** button; changes are
+   live immediately. Image fields support direct upload (to Blob) or pasted
+   Unsplash/Pexels URLs.
+
+The bundled `data/*.json` files act as defaults until content is first
+published, and everything flows through `services/content.ts`, so swapping in
+an external CMS later remains a one-file change.
 
 ## Structure
 

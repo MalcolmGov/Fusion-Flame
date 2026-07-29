@@ -22,8 +22,8 @@ const ICONS: Record<string, LucideIcon> = {
   Flame,
 };
 
-export function Offers() {
-  const offers = getOffers();
+export async function Offers() {
+  const offers = await getOffers();
 
   return (
     <section

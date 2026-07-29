@@ -4,9 +4,8 @@ import { Reveal } from "@/components/effects/Reveal";
 import { SectionHeading } from "@/components/effects/SectionHeading";
 import { getFaq, getRestaurant } from "@/services/content";
 
-export function Contact() {
-  const restaurant = getRestaurant();
-  const faq = getFaq();
+export async function Contact() {
+  const [restaurant, faq] = await Promise.all([getRestaurant(), getFaq()]);
   const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(restaurant.mapQuery)}`;
   const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(restaurant.mapQuery)}&output=embed`;
 

@@ -18,23 +18,34 @@ import {
   getEvents,
   getGallery,
   getMenu,
+  getRestaurant,
   getSignatureDishes,
   getTestimonials,
 } from "@/services/content";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [menu, signatureDishes, gallery, events, testimonials, restaurant] =
+    await Promise.all([
+      getMenu(),
+      getSignatureDishes(),
+      getGallery(),
+      getEvents(),
+      getTestimonials(),
+      getRestaurant(),
+    ]);
+
   return (
     <>
       <LoadingScreen />
-      <Hero />
+      <Hero backgroundImage={restaurant.heroImage} />
       <About />
-      <MenuSection categories={getMenu()} />
-      <SignatureCarousel dishes={getSignatureDishes()} />
-      <GallerySection images={getGallery()} />
-      <EventsSection events={getEvents()} />
+      <MenuSection categories={menu} />
+      <SignatureCarousel dishes={signatureDishes} />
+      <GallerySection images={gallery} />
+      <EventsSection events={events} />
       <Reservations />
       <PrivateEvents />
-      <Testimonials testimonials={getTestimonials()} />
+      <Testimonials testimonials={testimonials} />
       <Chef />
       <Offers />
       <Loyalty />

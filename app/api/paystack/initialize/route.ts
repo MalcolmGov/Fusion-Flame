@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   }
 
   const order = parsed.data;
-  const event = getEvent(order.eventSlug);
+  const event = await getEvent(order.eventSlug);
   if (!event) {
     return NextResponse.json({ error: "Event not found" }, { status: 404 });
   }

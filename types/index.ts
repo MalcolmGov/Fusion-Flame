@@ -89,9 +89,18 @@ export interface ChefProfile {
   awards: string[];
 }
 
+export interface Announcement {
+  enabled: boolean;
+  message: string;
+  linkLabel?: string;
+  linkHref?: string;
+}
+
 export interface RestaurantInfo {
   name: string;
   tagline: string;
+  /** Homepage hero background — managed from the admin panel. */
+  heroImage?: string;
   phone: string;
   whatsapp: string;
   whatsappMessage: string;

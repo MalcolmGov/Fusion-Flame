@@ -1,19 +1,11 @@
-/** Typed content accessors. Today these read from JSON files in data/;
- *  a future CMS only needs to swap the implementation of this module. */
+/** Typed content accessors — the CMS seam.
+ *
+ *  All reads go through lib/content-store.ts, so content edited in the
+ *  /admin panel is served at runtime (no code changes, no redeploys). */
 
-import menuData from "@/data/menu.json";
-import signatureData from "@/data/signature-dishes.json";
-import eventsData from "@/data/events.json";
-import testimonialsData from "@/data/testimonials.json";
-import galleryData from "@/data/gallery.json";
-import offersData from "@/data/offers.json";
-import privateEventsData from "@/data/private-events.json";
-import chefData from "@/data/chef.json";
-import restaurantData from "@/data/restaurant.json";
-import instagramData from "@/data/instagram.json";
-import faqData from "@/data/faq.json";
-
+import { readCollection } from "@/lib/content-store";
 import type {
+  Announcement,
   ChefProfile,
   GalleryImage,
   MenuCategory,
@@ -25,61 +17,72 @@ import type {
   Testimonial,
 } from "@/types";
 
-export function getMenu(): MenuCategory[] {
-  return (menuData as MenuCategory[]).map((category) => ({
+export async function getMenu(): Promise<MenuCategory[]> {
+  const menu = await readCollection<MenuCategory[]>("menu");
+  return menu.map((category) => ({
     ...category,
     items: category.items.filter((item) => item.available),
   }));
 }
 
-export function getSignatureDishes(): SignatureDish[] {
-  return signatureData as SignatureDish[];
+export function getSignatureDishes(): Promise<SignatureDish[]> {
+  return readCollection<SignatureDish[]>("signature-dishes");
 }
 
-export function getEvents(): RestaurantEvent[] {
-  return [...(eventsData as RestaurantEvent[])].sort(
+export async function getEvents(): Promise<RestaurantEvent[]> {
+  const events = await readCollection<RestaurantEvent[]>("events");
+  return [...events].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   );
 }
 
-export function getEvent(slug: string): RestaurantEvent | undefined {
-  return (eventsData as RestaurantEvent[]).find((e) => e.slug === slug);
+export async function getEvent(
+  slug: string,
+): Promise<RestaurantEvent | undefined> {
+  const events = await readCollection<RestaurantEvent[]>("events");
+  return events.find((e) => e.slug === slug);
 }
 
-export function getTestimonials(): Testimonial[] {
-  return testimonialsData as Testimonial[];
+export function getTestimonials(): Promise<Testimonial[]> {
+  return readCollection<Testimonial[]>("testimonials");
 }
 
-export function getGallery(): GalleryImage[] {
-  return galleryData as GalleryImage[];
+export function getGallery(): Promise<GalleryImage[]> {
+  return readCollection<GalleryImage[]>("gallery");
 }
 
-export function getOffers(): SpecialOffer[] {
-  return offersData as SpecialOffer[];
+export function getOffers(): Promise<SpecialOffer[]> {
+  return readCollection<SpecialOffer[]>("offers");
 }
 
-export function getPrivateEventTypes(): PrivateEventType[] {
-  return privateEventsData as PrivateEventType[];
+export function getPrivateEventTypes(): Promise<PrivateEventType[]> {
+  return readCollection<PrivateEventType[]>("private-events");
 }
 
-export function getChef(): ChefProfile {
-  return chefData as ChefProfile;
+export function getChef(): Promise<ChefProfile> {
+  return readCollection<ChefProfile>("chef");
 }
 
-export function getRestaurant(): RestaurantInfo {
-  return restaurantData as RestaurantInfo;
+export function getRestaurant(): Promise<RestaurantInfo> {
+  return readCollection<RestaurantInfo>("restaurant");
 }
 
 export function getInstagramFeed() {
-  return instagramData as { id: string; src: string; alt: string }[];
+  return readCollection<{ id: string; src: string; alt: string }[]>(
+    "instagram",
+  );
 }
 
 export function getFaq() {
-  return faqData as { q: string; a: string }[];
+  return readCollection<{ q: string; a: string }[]>("faq");
 }
 
-export function getWhatsAppLink(customMessage?: string) {
-  const { whatsapp, whatsappMessage } = getRestaurant();
+export function getAnnouncement(): Promise<Announcement> {
+  return readCollection<Announcement>("announcement");
+}
+
+export async function getWhatsAppLink(customMessage?: string) {
+  const { whatsapp, whatsappMessage } = await getRestaurant();
   const text = encodeURIComponent(customMessage ?? whatsappMessage);
   return `https://wa.me/${whatsapp}?text=${text}`;
 }

@@ -5,11 +5,13 @@ import { Reveal } from "@/components/effects/Reveal";
 import { SectionHeading } from "@/components/effects/SectionHeading";
 import { getPrivateEventTypes, getWhatsAppLink } from "@/services/content";
 
-export function PrivateEvents() {
-  const types = getPrivateEventTypes();
-  const quoteHref = getWhatsAppLink(
-    "Hi Fusion Flame, I'd like to request a quote for a private event.",
-  );
+export async function PrivateEvents() {
+  const [types, quoteHref] = await Promise.all([
+    getPrivateEventTypes(),
+    getWhatsAppLink(
+      "Hi Fusion Flame, I'd like to request a quote for a private event.",
+    ),
+  ]);
 
   return (
     <section
