@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { capitecOrderSchema } from "@/lib/validation";
-import { getEvent } from "@/services/content";
+import { getEvent, isEventPast } from "@/services/content";
 import {
   capitecCharge,
   generateReference,
@@ -32,6 +32,12 @@ export async function POST(request: Request) {
   const event = await getEvent(order.eventSlug);
   if (!event) {
     return NextResponse.json({ error: "Event not found" }, { status: 404 });
+  }
+  if (isEventPast(event)) {
+    return NextResponse.json(
+      { error: "This event has already taken place" },
+      { status: 410 },
+    );
   }
   if (order.quantity > event.availableSeats) {
     return NextResponse.json(

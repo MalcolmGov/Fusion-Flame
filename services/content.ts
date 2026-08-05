@@ -29,18 +29,47 @@ export function getSignatureDishes(): Promise<SignatureDish[]> {
   return readCollection<SignatureDish[]>("signature-dishes");
 }
 
+/* ── Event date handling ─────────────────────────────────────
+ * Recurring events roll forward in 7-day steps (same weekday) so they never
+ * go stale; past one-off events are hidden from listings and blocked from
+ * purchase (see isEventPast checks in the payment routes). Dates compare
+ * against "today" in South Africa (UTC+2). */
+
+function todaySAST(): Date {
+  const now = new Date(Date.now() + 2 * 60 * 60 * 1000);
+  return new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()),
+  );
+}
+
+function resolveEventDate(event: RestaurantEvent): RestaurantEvent {
+  if (!event.recurring) return event;
+  const date = new Date(`${event.date}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return event;
+  const today = todaySAST();
+  while (date < today) date.setUTCDate(date.getUTCDate() + 7);
+  return { ...event, date: date.toISOString().slice(0, 10) };
+}
+
+export function isEventPast(event: RestaurantEvent): boolean {
+  const date = new Date(`${event.date}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date < todaySAST();
+}
+
 export async function getEvents(): Promise<RestaurantEvent[]> {
   const events = await readCollection<RestaurantEvent[]>("events");
-  return [...events].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-  );
+  return events
+    .map(resolveEventDate)
+    .filter((e) => !isEventPast(e))
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 }
 
 export async function getEvent(
   slug: string,
 ): Promise<RestaurantEvent | undefined> {
   const events = await readCollection<RestaurantEvent[]>("events");
-  return events.find((e) => e.slug === slug);
+  const event = events.find((e) => e.slug === slug);
+  return event ? resolveEventDate(event) : undefined;
 }
 
 export function getTestimonials(): Promise<Testimonial[]> {

@@ -4,9 +4,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarDays, Clock, MapPin, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/effects/Reveal";
 import { TicketCheckout } from "@/features/tickets/TicketCheckout";
-import { getEvent, getEvents, getRestaurant } from "@/services/content";
+import {
+  getEvent,
+  getEvents,
+  getRestaurant,
+  isEventPast,
+} from "@/services/content";
 import { formatEventDate, formatZAR } from "@/lib/utils";
 import { getSiteUrl } from "@/lib/paystack";
 import type { RestaurantEvent, RestaurantInfo } from "@/types";
@@ -92,6 +98,7 @@ export default async function EventPage({ params }: EventPageProps) {
     getRestaurant(),
   ]);
   if (!event) notFound();
+  const past = isEventPast(event);
 
   return (
     <div className="relative pt-24 md:pt-28">
@@ -185,6 +192,21 @@ export default async function EventPage({ params }: EventPageProps) {
           </Reveal>
 
           <Reveal from="right" delay={0.1} className="lg:col-span-2">
+            {past ? (
+              <div className="glass rounded-3xl p-8 text-center lg:sticky lg:top-28">
+                <CalendarDays className="mx-auto size-8 text-muted" aria-hidden />
+                <h2 className="font-heading mt-4 text-2xl text-foreground">
+                  This Event Has Passed
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted">
+                  Tickets are no longer available. Browse our upcoming events —
+                  there's always another evening worth dressing up for.
+                </p>
+                <Button asChild className="mt-6">
+                  <Link href="/#events">See Upcoming Events</Link>
+                </Button>
+              </div>
+            ) : (
             <div className="lg:sticky lg:top-28">
               <p className="mb-4 text-center font-heading text-3xl text-gold-gradient lg:text-left">
                 {formatZAR(event.price)}
@@ -194,6 +216,7 @@ export default async function EventPage({ params }: EventPageProps) {
               </p>
               <TicketCheckout event={event} />
             </div>
+            )}
           </Reveal>
         </div>
       </section>
