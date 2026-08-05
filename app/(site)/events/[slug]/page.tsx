@@ -199,8 +199,8 @@ export default async function EventPage({ params }: EventPageProps) {
                   This Event Has Passed
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted">
-                  Tickets are no longer available. Browse our upcoming events —
-                  there's always another evening worth dressing up for.
+                  Tickets are no longer available. Browse our upcoming events
+                  — there&rsquo;s always another evening worth dressing up for.
                 </p>
                 <Button asChild className="mt-6">
                   <Link href="/#events">See Upcoming Events</Link>
