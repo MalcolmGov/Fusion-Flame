@@ -43,6 +43,8 @@ export interface RestaurantEvent {
   price: number;
   availableSeats: number;
   recurring?: string;
+  /** Theme / dress code, e.g. "Black Tie" or "All-White Party" */
+  dressCode?: string;
 }
 
 export interface Testimonial {

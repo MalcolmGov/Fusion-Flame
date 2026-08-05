@@ -8,7 +8,8 @@
     "time": "19:00 – 23:30",
     "price": 250,
     "availableSeats": 84,
-    "recurring": "Every Friday"
+    "recurring": "Every Friday",
+    "dressCode": "Smart Casual"
   },
   {
     "slug": "jazz-nights",
@@ -19,7 +20,8 @@
     "time": "19:30 – 22:30",
     "price": 450,
     "availableSeats": 46,
-    "recurring": "First Thursday monthly"
+    "recurring": "First Thursday monthly",
+    "dressCode": "Cocktail Chic"
   },
   {
     "slug": "comedy-night",
@@ -29,7 +31,8 @@
     "date": "2026-08-12",
     "time": "20:00 – 22:00",
     "price": 300,
-    "availableSeats": 92
+    "availableSeats": 92,
+    "dressCode": "Casual & Comfortable"
   },
   {
     "slug": "wine-tasting",
@@ -39,7 +42,8 @@
     "date": "2026-08-20",
     "time": "18:30 – 21:00",
     "price": 550,
-    "availableSeats": 30
+    "availableSeats": 30,
+    "dressCode": "Smart Casual"
   },
   {
     "slug": "steak-festival",
@@ -49,7 +53,8 @@
     "date": "2026-09-05",
     "time": "12:00 – 22:00",
     "price": 650,
-    "availableSeats": 120
+    "availableSeats": 120,
+    "dressCode": "Casual — come hungry"
   },
   {
     "slug": "valentines-dinner",
@@ -59,7 +64,8 @@
     "date": "2027-02-14",
     "time": "18:00 – 23:00",
     "price": 1250,
-    "availableSeats": 60
+    "availableSeats": 60,
+    "dressCode": "Formal, with a touch of red"
   },
   {
     "slug": "christmas-dinner",
@@ -69,7 +75,8 @@
     "date": "2026-12-25",
     "time": "12:00 – 17:00",
     "price": 950,
-    "availableSeats": 110
+    "availableSeats": 110,
+    "dressCode": "Festive Elegant"
   },
   {
     "slug": "new-years-gala",
@@ -79,6 +86,7 @@
     "date": "2026-12-31",
     "time": "19:00 – 02:00",
     "price": 1850,
-    "availableSeats": 150
+    "availableSeats": 150,
+    "dressCode": "Black Tie"
   }
 ]

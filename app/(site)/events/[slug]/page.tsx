@@ -2,7 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CalendarDays, Clock, MapPin, Users } from "lucide-react";
+import {
+  ArrowLeft,
+  CalendarDays,
+  Clock,
+  MapPin,
+  Shirt,
+  Users,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/effects/Reveal";
@@ -165,6 +172,15 @@ export default async function EventPage({ params }: EventPageProps) {
                   label: "Venue",
                   value: `${restaurant.name}, ${restaurant.address.suburb}`,
                 },
+                ...(event.dressCode
+                  ? [
+                      {
+                        icon: Shirt,
+                        label: "Theme / Dress Code",
+                        value: event.dressCode,
+                      },
+                    ]
+                  : []),
               ].map((row) => (
                 <div key={row.label} className="glass flex items-center gap-4 rounded-2xl p-5">
                   <row.icon className="size-5 shrink-0 text-gold" aria-hidden />
@@ -186,7 +202,11 @@ export default async function EventPage({ params }: EventPageProps) {
                 <li>Ticket price includes welcome drink on arrival.</li>
                 <li>Dinner menu available à la carte throughout the event.</li>
                 <li>Tickets are refundable up to 48 hours before the event.</li>
-                <li>Smart casual dress code applies.</li>
+                <li>
+                  {event.dressCode
+                    ? `Theme / dress code: ${event.dressCode}.`
+                    : "Smart casual dress code applies."}
+                </li>
               </ul>
             </div>
           </Reveal>

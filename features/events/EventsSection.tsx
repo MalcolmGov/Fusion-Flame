@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, Clock, Ticket, Users } from "lucide-react";
+import { CalendarDays, Clock, Shirt, Ticket, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/effects/Reveal";
@@ -21,9 +21,15 @@ export function EventsSection({ events }: { events: RestaurantEvent[] }) {
           description="Live music, jazz, comedy and once-a-year galas — secure your seat before the room fills."
         />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
+        {/* flex-wrap + justify-center keeps 1–3 cards centred while a full
+            row still lays out as a 4-up grid */}
+        <div className="flex flex-wrap justify-center gap-6 lg:gap-7">
           {events.map((event, i) => (
-            <Reveal key={event.slug} delay={(i % 4) * 0.08}>
+            <Reveal
+              key={event.slug}
+              delay={(i % 4) * 0.08}
+              className="w-full max-w-sm sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.3125rem)]"
+            >
               <article className="group gold-ring flex h-full flex-col overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-1.5 hover:shadow-glow-fire">
                 <div className="img-zoom relative aspect-[16/10]">
                   <Image
@@ -68,6 +74,13 @@ export function EventsSection({ events }: { events: RestaurantEvent[] }) {
                       <dt className="sr-only">Availability</dt>
                       <dd>{event.availableSeats} seats available</dd>
                     </div>
+                    {event.dressCode ? (
+                      <div className="flex items-center gap-2">
+                        <Shirt className="size-3.5 text-gold" aria-hidden />
+                        <dt className="sr-only">Theme / dress code</dt>
+                        <dd>{event.dressCode}</dd>
+                      </div>
+                    ) : null}
                   </dl>
 
                   <div className="mt-5 flex items-center justify-between border-t border-white/5 pt-4">

@@ -112,6 +112,12 @@ export const ADMIN_COLLECTIONS: CollectionDef[] = [
       { name: "image", label: "Image", type: "image" },
       { name: "date", label: "Date", type: "date" },
       { name: "time", label: "Time", type: "text", help: "e.g. 19:00 – 23:30" },
+      {
+        name: "dressCode",
+        label: "Theme / Dress Code",
+        type: "text",
+        help: "e.g. Black Tie, Smart Casual, All-White Party — shown on the event card and page",
+      },
       { name: "price", label: "Ticket Price (R)", type: "number", min: 0 },
       { name: "availableSeats", label: "Available Seats", type: "number", min: 0 },
       {
