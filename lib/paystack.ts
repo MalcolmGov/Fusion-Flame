@@ -67,6 +67,56 @@ export async function initializeTransaction({
   };
 }
 
+interface CapitecChargeArgs {
+  email: string;
+  /** Amount in Rands — converted to cents internally. */
+  amountZar: number;
+  reference: string;
+  /** Capitec-registered SA cellphone number, e.g. 0812345678 */
+  cellphone: string;
+  metadata?: Record<string, unknown>;
+}
+
+/** Initiate a Capitec Pay charge. The customer approves the payment via a
+ *  push notification in their Capitec banking app; final status arrives via
+ *  the charge.success webhook and/or transaction verification. */
+export async function capitecCharge({
+  email,
+  amountZar,
+  reference,
+  cellphone,
+  metadata,
+}: CapitecChargeArgs): Promise<{ reference: string; status: string }> {
+  const res = await fetch(`${PAYSTACK_BASE}/charge`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      amount: Math.round(amountZar * 100),
+      currency: "ZAR",
+      reference,
+      metadata,
+      capitec_pay: {
+        identifier_key: "CELLPHONE",
+        identifier_value: cellphone,
+      },
+    }),
+    cache: "no-store",
+  });
+
+  const json = await res.json();
+  if (!res.ok || !json.status) {
+    throw new Error(json.message ?? "Capitec Pay charge failed");
+  }
+  return {
+    reference: json.data?.reference ?? reference,
+    status: json.data?.status ?? "pending",
+  };
+}
+
 export interface VerifiedTransaction {
   status: "success" | "failed" | "abandoned" | string;
   reference: string;

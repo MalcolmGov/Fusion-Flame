@@ -43,6 +43,34 @@ export const ticketOrderSchema = z.object({
 
 export type TicketOrderFormValues = z.infer<typeof ticketOrderSchema>;
 
+/** Capitec Pay: the customer's Capitec-registered SA cellphone number. */
+export const capitecPhoneSchema = z
+  .string()
+  .transform((v) => v.replace(/[\s()-]/g, ""))
+  .pipe(
+    z
+      .string()
+      .regex(
+        /^(0|\+?27)\d{9}$/,
+        "Enter the SA cellphone number linked to your Capitec account",
+      ),
+  )
+  .transform((v) => v.replace(/^\+?27/, "0"));
+
+/** Strict schema for the Capitec charge API. */
+export const capitecOrderSchema = ticketOrderSchema.extend({
+  capitecPhone: capitecPhoneSchema,
+});
+
+/** Lenient form schema — the Capitec number is validated in the submit
+ *  handler only when Capitec Pay is the selected method, so card payments
+ *  aren't blocked by an empty field. */
+export const ticketCheckoutFormSchema = ticketOrderSchema.extend({
+  capitecPhone: z.string().optional(),
+});
+
+export type CapitecOrderFormValues = z.input<typeof ticketCheckoutFormSchema>;
+
 export const newsletterSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
 });

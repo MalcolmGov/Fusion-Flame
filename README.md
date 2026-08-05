@@ -26,6 +26,23 @@ npm run dev
 
 Open http://localhost:3000.
 
+## Payments — Capitec Pay + Paystack
+
+**Capitec Pay** is the primary checkout method: the customer enters their
+Capitec-registered cellphone number and approves a push notification in the
+Capitec banking app (no card details). Capitec Pay is delivered through
+payment providers — on this site via Paystack's Capitec Pay channel, so one
+set of Paystack keys powers both Capitec Pay and Card/EFT.
+
+- Charge: `POST /api/payments/capitec/charge` (amount computed server-side)
+- Approval polling: `GET /api/payments/capitec/status?reference=…`
+- Confirmation: existing verify endpoint + `charge.success` webhook
+- **Sandbox**: with no `PAYSTACK_SECRET_KEY`, references are prefixed `FFC-`
+  and the approve-in-app flow simulates success after ~8s — the full journey
+  is testable with zero keys.
+- Provider seam: if the business later onboards with a different Capitec Pay
+  provider, only `lib/paystack.ts → capitecCharge` and the status route swap.
+
 ## Paystack
 
 Set `PAYSTACK_SECRET_KEY` (and optionally `NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY`).
