@@ -1,78 +1,78 @@
 [
   {
     "id": "g1",
-    "src": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Elegant plated fine-dining dish under warm light",
-    "category": "Food",
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/chilli-crab.jpg",
+    "alt": "Chilli crab in our signature fire sauce",
+    "category": "Seafood",
     "tall": true
   },
   {
     "id": "g2",
-    "src": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Fusion Flame dining room with moody lighting",
-    "category": "Interior"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/lamb-spit-roast.jpg",
+    "alt": "Whole lamb turning on the spit",
+    "category": "Grill"
   },
   {
     "id": "g3",
-    "src": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Signature cocktails glowing at the bar",
-    "category": "Cocktails"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/savoury-platter-blooms.jpg",
+    "alt": "Savoury platter dressed with edible blooms",
+    "category": "Platters"
   },
   {
     "id": "g4",
-    "src": "https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Molten chocolate dessert with gold leaf",
-    "category": "Desserts",
-    "tall": true
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/soji-dessert-trays.jpg",
+    "alt": "Traditional soji finished with nuts",
+    "category": "Desserts"
   },
   {
     "id": "g5",
-    "src": "https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Outdoor terrace seating at golden hour",
-    "category": "Outdoor"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/chicken-sosaties.jpg",
+    "alt": "Chicken sosaties fresh off the flame",
+    "category": "Grill",
+    "tall": true
   },
   {
     "id": "g6",
-    "src": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Private dining room set for a celebration",
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/slider-platter.jpg",
+    "alt": "Sesame slider platters for private events",
     "category": "Private Dining"
   },
   {
     "id": "g7",
-    "src": "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Chef plating a dish in the open kitchen",
-    "category": "Chef",
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/durban-fish-curry.jpg",
+    "alt": "Durban-style fish curry",
+    "category": "Curries",
     "tall": true
   },
   {
     "id": "g8",
-    "src": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Flame-grilled meat platter over coals",
-    "category": "Food"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/biryani-tray.jpg",
+    "alt": "Fragrant biryani by the tray",
+    "category": "Curries"
   },
   {
     "id": "g9",
-    "src": "https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Old fashioned cocktail with orange twist",
-    "category": "Cocktails"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/chilli-prawns.jpg",
+    "alt": "Chilli prawns in fire butter",
+    "category": "Seafood"
   },
   {
     "id": "g10",
-    "src": "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Guests dining in the warm glow of the restaurant",
-    "category": "Interior",
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/roast-lamb-tray.jpg",
+    "alt": "Slow-roasted lamb off the coals",
+    "category": "Grill",
     "tall": true
   },
   {
     "id": "g11",
-    "src": "https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Dry-aged steak on the grill",
-    "category": "Food"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/samoosa-chip-platter.jpg",
+    "alt": "Golden samoosas and savoury bites",
+    "category": "Platters"
   },
   {
     "id": "g12",
-    "src": "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1400&auto=format&fit=crop",
-    "alt": "Candlelit table setting with wine",
-    "category": "Interior"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/steak-chips.jpg",
+    "alt": "Flame-grilled steak with hand-cut chips",
+    "category": "Food"
   }
 ]

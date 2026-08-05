@@ -1,32 +1,32 @@
 [
   {
     "id": "ig1",
-    "src": "https://images.unsplash.com/photo-1546964124-0cce460f38ef?q=80&w=800&auto=format&fit=crop",
-    "alt": "Seared fillet with peppercorn sauce"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/bunny-chow.jpg",
+    "alt": "The classic bunny chow"
   },
   {
     "id": "ig2",
-    "src": "https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=800&auto=format&fit=crop",
-    "alt": "Golden spritz cocktail"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/grilled-prawns-platter.jpg",
+    "alt": "Grilled prawn platter"
   },
   {
     "id": "ig3",
-    "src": "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800&auto=format&fit=crop",
-    "alt": "Wood-fired pizza fresh from the oven"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/bhajia-savoury-platter.jpg",
+    "alt": "Bhajia and savoury platter"
   },
   {
     "id": "ig4",
-    "src": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=800&auto=format&fit=crop",
-    "alt": "Dessert with berries and cream"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/celebration-cake.jpg",
+    "alt": "Celebration cake with berries"
   },
   {
     "id": "ig5",
-    "src": "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800&auto=format&fit=crop",
-    "alt": "Guests enjoying dinner"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/braai-lamb-chops.jpg",
+    "alt": "Braai lamb chops in the chafing dish"
   },
   {
     "id": "ig6",
-    "src": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop",
-    "alt": "Barista pouring coffee"
+    "src": "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/creamy-alfredo.jpg",
+    "alt": "Creamy mushroom alfredo"
   }
 ]

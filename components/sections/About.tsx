@@ -5,9 +5,9 @@ import { SectionHeading } from "@/components/effects/SectionHeading";
 import { getRestaurant } from "@/services/content";
 
 const ABOUT_IMAGES = {
-  main: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1600&auto=format&fit=crop",
+  main: "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/grilled-prawns-platter.jpg",
   accent:
-    "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1200&auto=format&fit=crop",
+    "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/savoury-platter-blooms.jpg",
 };
 
 export async function About() {
@@ -34,7 +34,7 @@ export async function About() {
             <div className="img-zoom gold-ring relative aspect-[4/5] overflow-hidden rounded-3xl">
               <Image
                 src={ABOUT_IMAGES.main}
-                alt="A beautifully plated signature dish at Fusion Flame"
+                alt="Grilled prawn platter finished with fresh herbs at Fusion Flame"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
                 className="object-cover"
@@ -43,7 +43,7 @@ export async function About() {
             <div className="img-zoom absolute -bottom-10 -right-4 hidden w-56 overflow-hidden rounded-2xl border border-white/10 shadow-luxe md:block lg:-right-10 lg:w-64">
               <Image
                 src={ABOUT_IMAGES.accent}
-                alt="Guests enjoying the warm glow of the Fusion Flame dining room"
+                alt="Savoury platter dressed with edible blooms"
                 width={512}
                 height={384}
                 className="aspect-[4/3] object-cover"
