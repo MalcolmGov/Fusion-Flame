@@ -21,10 +21,13 @@ import {
   getRestaurant,
   getSignatureDishes,
   getTestimonials,
+  getWhatsAppLink,
 } from "@/services/content";
 
+const ORDER_MESSAGE = "Hi Fusion Flame, I'd like to place an order.";
+
 export default async function HomePage() {
-  const [menu, signatureDishes, gallery, events, testimonials, restaurant] =
+  const [menu, signatureDishes, gallery, events, testimonials, restaurant, orderHref] =
     await Promise.all([
       getMenu(),
       getSignatureDishes(),
@@ -32,14 +35,15 @@ export default async function HomePage() {
       getEvents(),
       getTestimonials(),
       getRestaurant(),
+      getWhatsAppLink(ORDER_MESSAGE),
     ]);
 
   return (
     <>
       <LoadingScreen />
-      <Hero backgroundImage={restaurant.heroImage} />
+      <Hero backgroundImage={restaurant.heroImage} orderHref={orderHref} />
       <About />
-      <MenuSection categories={menu} />
+      <MenuSection categories={menu} orderHref={orderHref} />
       <SignatureCarousel dishes={signatureDishes} />
       <GallerySection images={gallery} />
       <EventsSection events={events} />

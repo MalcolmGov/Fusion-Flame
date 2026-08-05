@@ -6,7 +6,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Star, ChevronDown, Music, Clock } from "lucide-react";
+import { Star, ChevronDown, Music, Clock, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Embers } from "@/components/effects/Embers";
 
@@ -15,7 +15,13 @@ gsap.registerPlugin(useGSAP);
 const DEFAULT_HERO_IMAGE =
   "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=2600&auto=format&fit=crop";
 
-export function Hero({ backgroundImage }: { backgroundImage?: string }) {
+export function Hero({
+  backgroundImage,
+  orderHref,
+}: {
+  backgroundImage?: string;
+  orderHref: string;
+}) {
   const container = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -124,7 +130,7 @@ export function Hero({ backgroundImage }: { backgroundImage?: string }) {
           data-hero-reveal="eyebrow"
           className="eyebrow mb-6 opacity-0 md:text-sm"
         >
-          Premium Contemporary Dining · Sandton
+          Premium Contemporary Dining · Edenvale
         </p>
 
         <h1 className="font-heading text-5xl leading-[1.05] sm:text-6xl md:text-7xl lg:text-8xl">
@@ -153,6 +159,18 @@ export function Hero({ backgroundImage }: { backgroundImage?: string }) {
           <div data-hero-reveal="cta" className="opacity-0">
             <Button asChild size="lg" variant="outline">
               <Link href="/#menu">View Menu</Link>
+            </Button>
+          </div>
+          <div data-hero-reveal="cta" className="opacity-0">
+            <Button
+              asChild
+              size="lg"
+              className="bg-[linear-gradient(120deg,#4ae387,#25d366_50%,#128c7e)] text-[#03150b] shadow-[0_0_36px_-8px_rgba(37,211,102,0.75)] hover:brightness-110"
+            >
+              <a href={orderHref} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="size-4" aria-hidden />
+                Order via WhatsApp
+              </a>
             </Button>
           </div>
         </div>

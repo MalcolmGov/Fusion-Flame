@@ -33,15 +33,15 @@ export const metadata: Metadata = {
     template: "%s | Fusion Flame",
   },
   description:
-    "Ignite your taste experience at Fusion Flame — premium flame-grilled cuisine, signature cocktails, live entertainment and unforgettable moments in Sandton, Johannesburg.",
+    "Ignite your taste experience at Fusion Flame — premium flame-grilled cuisine, signature cocktails, live entertainment and unforgettable moments in Edenvale, Johannesburg.",
   keywords: [
     "Fusion Flame",
     "premium restaurant Johannesburg",
-    "fine dining Sandton",
+    "fine dining Edenvale",
     "steakhouse Johannesburg",
     "flame grill restaurant",
     "private dining Johannesburg",
-    "restaurant events Sandton",
+    "restaurant events Edenvale",
   ],
   openGraph: {
     type: "website",
@@ -50,14 +50,14 @@ export const metadata: Metadata = {
     siteName: "Fusion Flame",
     title: "Fusion Flame — Ignite Your Taste Experience",
     description:
-      "Where exceptional cuisine meets unforgettable moments. Premium flame-grilled dining, cocktails and live entertainment in Sandton.",
+      "Where exceptional cuisine meets unforgettable moments. Premium flame-grilled dining, cocktails and live entertainment in Edenvale.",
     images: [{ url: "/logo.jpeg", width: 1254, height: 1254, alt: "Fusion Flame" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Fusion Flame — Ignite Your Taste Experience",
     description:
-      "Premium flame-grilled dining, cocktails and live entertainment in Sandton, Johannesburg.",
+      "Premium flame-grilled dining, cocktails and live entertainment in Edenvale, Johannesburg.",
     images: ["/logo.jpeg"],
   },
   alternates: { canonical: "/" },

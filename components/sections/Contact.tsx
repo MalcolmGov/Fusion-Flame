@@ -18,7 +18,7 @@ export async function Contact() {
         <SectionHeading
           eyebrow="Find Us"
           title="Visit Fusion Flame"
-          description="In the golden heart of Sandton — valet at the door, fire at the hearth."
+          description="Find us in Eden Glen, Edenvale — easy parking at the door, fire at the hearth."
         />
 
         <div className="grid gap-10 lg:grid-cols-2">

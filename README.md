@@ -1,7 +1,7 @@
 # Fusion Flame — Premium Restaurant Website
 
 A flagship digital experience for **Fusion Flame**, a premium contemporary
-restaurant in Sandton, Johannesburg. Built with Next.js 15, React 19,
+restaurant in Edenvale, Johannesburg. Built with Next.js 15, React 19,
 Tailwind CSS v4, Framer Motion, GSAP, Lenis and Paystack.
 
 ## Features

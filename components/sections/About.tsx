@@ -67,7 +67,7 @@ export async function About() {
               <p className="mt-6 leading-relaxed text-muted">
                 Fusion Flame began with a single conviction: that fire is not
                 merely a way of cooking, but a way of gathering. In the heart of
-                Sandton, our custom-built open hearth anchors a dining room of
+                Edenvale, our custom-built open hearth anchors a dining room of
                 smoked glass, brushed gold and candlelight — a stage where every
                 evening becomes theatre.
               </p>

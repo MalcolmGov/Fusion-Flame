@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Flame, Leaf, Sparkles, TrendingUp } from "lucide-react";
+import { Flame, Leaf, MessageCircle, Sparkles, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/effects/SectionHeading";
 import { cn, formatZAR } from "@/lib/utils";
@@ -92,7 +93,13 @@ function MenuCard({ item, index }: { item: MenuItem; index: number }) {
   );
 }
 
-export function MenuSection({ categories }: { categories: MenuCategory[] }) {
+export function MenuSection({
+  categories,
+  orderHref,
+}: {
+  categories: MenuCategory[];
+  orderHref: string;
+}) {
   const [active, setActive] = useState(categories[0]?.id);
   const activeCategory = categories.find((c) => c.id === active) ?? categories[0];
 
@@ -158,6 +165,24 @@ export function MenuSection({ categories }: { categories: MenuCategory[] }) {
               ))}
             </motion.div>
           </AnimatePresence>
+        </div>
+
+        {/* Order CTA */}
+        <div className="mt-14 text-center">
+          <Button
+            asChild
+            size="lg"
+            className="bg-[linear-gradient(120deg,#4ae387,#25d366_50%,#128c7e)] text-[#03150b] shadow-[0_0_36px_-8px_rgba(37,211,102,0.75)] hover:brightness-110"
+          >
+            <a href={orderHref} target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="size-4" aria-hidden />
+              Order via WhatsApp
+            </a>
+          </Button>
+          <p className="mt-4 text-sm text-muted">
+            Send us your order — we'll confirm collection or delivery right in
+            the chat.
+          </p>
         </div>
       </div>
     </section>
