@@ -6,10 +6,6 @@ import { SignatureCarousel } from "@/features/menu/SignatureCarousel";
 import { GallerySection } from "@/features/gallery/GallerySection";
 import { EventsSection } from "@/features/events/EventsSection";
 import { PrivateEvents } from "@/components/sections/PrivateEvents";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { Chef } from "@/components/sections/Chef";
-import { Offers } from "@/components/sections/Offers";
-import { Loyalty } from "@/components/sections/Loyalty";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
 import { Newsletter } from "@/components/sections/Newsletter";
 import { Reservations } from "@/components/sections/Reservations";
@@ -20,20 +16,18 @@ import {
   getMenu,
   getRestaurant,
   getSignatureDishes,
-  getTestimonials,
   getWhatsAppLink,
 } from "@/services/content";
 
 const ORDER_MESSAGE = "Hi Fusion Flame, I'd like to place an order.";
 
 export default async function HomePage() {
-  const [menu, signatureDishes, gallery, events, testimonials, restaurant, orderHref] =
+  const [menu, signatureDishes, gallery, events, restaurant, orderHref] =
     await Promise.all([
       getMenu(),
       getSignatureDishes(),
       getGallery(),
       getEvents(),
-      getTestimonials(),
       getRestaurant(),
       getWhatsAppLink(ORDER_MESSAGE),
     ]);
@@ -49,10 +43,6 @@ export default async function HomePage() {
       <EventsSection events={events} />
       <Reservations />
       <PrivateEvents />
-      <Testimonials testimonials={testimonials} />
-      <Chef />
-      <Offers />
-      <Loyalty />
       <InstagramFeed />
       <Newsletter />
       <Contact />
