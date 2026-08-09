@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import { getSiteUrl } from "@/lib/paystack";
+import { getSiteUrl } from "@/lib/site";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",

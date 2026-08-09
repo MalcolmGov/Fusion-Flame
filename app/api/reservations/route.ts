@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { after } from "next/server";
 import { reservationSchema } from "@/lib/validation";
-import { generateReference } from "@/lib/paystack";
+import { generateReference } from "@/lib/site";
 import { sendEmail } from "@/lib/email";
 import { getRestaurant } from "@/services/content";
 

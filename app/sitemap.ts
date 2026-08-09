@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getEvents } from "@/services/content";
-import { getSiteUrl } from "@/lib/paystack";
+import { getSiteUrl } from "@/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();

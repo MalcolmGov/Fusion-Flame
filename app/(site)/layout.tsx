@@ -7,7 +7,7 @@ import {
   getRestaurant,
   getWhatsAppLink,
 } from "@/services/content";
-import { getSiteUrl } from "@/lib/paystack";
+import { getSiteUrl } from "@/lib/site";
 
 async function RestaurantJsonLd() {
   const r = await getRestaurant();

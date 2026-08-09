@@ -154,10 +154,10 @@ export interface TicketOrderRequest {
   phone: string;
 }
 
-export interface PaystackInitResponse {
-  authorizationUrl: string;
+export interface YocoCheckoutResponse {
+  redirectUrl: string;
   reference: string;
-  /** true when no live Paystack key is configured (demo checkout) */
+  /** true when no live Yoco key is configured (sandbox checkout) */
   mock?: boolean;
 }
 

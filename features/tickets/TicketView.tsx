@@ -11,6 +11,7 @@ import {
   Clock,
   Download,
   Home,
+  Loader2,
   Mail,
   TriangleAlert,
   Users,
@@ -20,50 +21,59 @@ import { formatEventDate, formatZAR } from "@/lib/utils";
 import type { DigitalTicket } from "@/types";
 
 async function fetchTicket(query: string): Promise<{ ticket: DigitalTicket }> {
-  const res = await fetch(`/api/paystack/verify?${query}`);
+  const res = await fetch(`/api/payments/yoco/status?${query}`);
   const body = await res.json();
   if (!res.ok) throw new Error(body?.error ?? "Verification failed");
   return body;
 }
 
-function TicketSkeleton() {
+function TicketSkeleton({ label }: { label: string }) {
   return (
-    <div className="mx-auto max-w-lg space-y-4" aria-label="Verifying payment">
-      <div className="skeleton h-10 w-2/3 rounded-xl" />
-      <div className="skeleton h-72 rounded-3xl" />
-      <div className="skeleton h-12 rounded-xl" />
+    <div className="mx-auto max-w-lg space-y-4 text-center" role="status">
+      <Loader2 className="mx-auto size-8 animate-spin text-gold" aria-hidden />
+      <p className="text-sm text-muted">{label}</p>
+      <div className="skeleton h-72 rounded-3xl" aria-hidden />
     </div>
   );
 }
 
 export function TicketView() {
   const searchParams = useSearchParams();
-  // Paystack appends ?reference=&trxref= — mock mode adds its own params.
-  const reference =
-    searchParams.get("reference") ?? searchParams.get("trxref") ?? "";
+  // Yoco appends ?token=... on success; sandbox mode adds ?mock=1&...
+  const hasReference = Boolean(
+    searchParams.get("token") || searchParams.get("mock"),
+  );
 
   const query = useQuery({
     queryKey: ["ticket", searchParams.toString()],
     queryFn: () => fetchTicket(searchParams.toString()),
-    enabled: Boolean(reference),
+    enabled: hasReference,
     retry: 1,
+    refetchInterval: (q) =>
+      q.state.data?.ticket.status === "pending" ? 2500 : false,
   });
 
-  if (!reference) {
+  if (!hasReference) {
     return (
       <ErrorState message="No payment reference found. If you completed a payment, please contact us with your proof of payment." />
     );
   }
-  if (query.isPending) return <TicketSkeleton />;
-  if (query.isError || query.data.ticket.status !== "paid") {
+  if (query.isPending) {
+    return <TicketSkeleton label="Loading your ticket…" />;
+  }
+  if (query.isError) {
     return (
-      <ErrorState
-        message={
-          query.isError
-            ? "We could not verify this payment. If you were charged, our team will confirm your ticket by email shortly."
-            : "This payment was not successful. No money has left your account — please try again."
-        }
-      />
+      <ErrorState message="We could not verify this payment. If you were charged, our team will confirm your ticket by email shortly." />
+    );
+  }
+  if (query.data.ticket.status === "pending") {
+    return (
+      <TicketSkeleton label="Confirming your payment — this only takes a few seconds…" />
+    );
+  }
+  if (query.data.ticket.status !== "paid") {
+    return (
+      <ErrorState message="This payment was not successful. No money has left your account — please try again." />
     );
   }
 

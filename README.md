@@ -2,16 +2,16 @@
 
 A flagship digital experience for **Fusion Flame**, a premium contemporary
 restaurant in Edenvale, Johannesburg. Built with Next.js 15, React 19,
-Tailwind CSS v4, Framer Motion, GSAP, Lenis and Paystack.
+Tailwind CSS v4, Framer Motion, GSAP, Lenis and Yoco.
 
 ## Features
 
 - Cinematic GSAP hero with parallax, floating embers and animated stats
 - 12-category interactive signature menu with spice / veg / chef badges
 - Signature-dish carousel (Embla, autoplay) and masonry gallery with fullscreen viewer
-- Event listings with full **Paystack ticket purchasing** → QR-coded digital tickets
+- Event listings with full **Yoco ticket checkout** → QR-coded digital tickets
 - Luxury reservation flow (React Hook Form + Zod, confirmation screen, admin-ready API)
-- Private events, testimonials, chef profile, weekly specials, Flame Points loyalty
+- Private events, gallery, weekly specials
 - WhatsApp floating support button + mobile sticky action bar (Reserve / WhatsApp / Call)
 - SEO: Restaurant + Event JSON-LD, Open Graph, Twitter cards, dynamic sitemap, robots
 - Accessible: keyboard navigation, ARIA labels, focus states, reduced-motion support
@@ -20,41 +20,47 @@ Tailwind CSS v4, Framer Motion, GSAP, Lenis and Paystack.
 
 ```bash
 npm install
-cp .env.example .env.local   # add Paystack keys when ready
+cp .env.example .env.local   # add Yoco keys when ready
 npm run dev
 ```
 
 Open http://localhost:3000.
 
-## Payments — Capitec Pay + Paystack
+## Payments — Yoco
 
-**Capitec Pay** is the primary checkout method: the customer enters their
-Capitec-registered cellphone number and approves a push notification in the
-Capitec banking app (no card details). Capitec Pay is delivered through
-payment providers — on this site via Paystack's Capitec Pay channel, so one
-set of Paystack keys powers both Capitec Pay and Card/EFT.
+Event tickets are sold through **Yoco Checkout** — the customer is redirected
+to Yoco's hosted payment page (cards, Apple Pay, Google Pay) and back.
 
-- Charge: `POST /api/payments/capitec/charge` (amount computed server-side)
-- Approval polling: `GET /api/payments/capitec/status?reference=…`
-- Confirmation: existing verify endpoint + `charge.success` webhook
-- **Sandbox**: with no `PAYSTACK_SECRET_KEY`, references are prefixed `FFC-`
-  and the approve-in-app flow simulates success after ~8s — the full journey
-  is testable with zero keys.
-- Provider seam: if the business later onboards with a different Capitec Pay
-  provider, only `lib/paystack.ts → capitecCharge` and the status route swap.
+- Start checkout: `POST /api/payments/yoco/checkout` (amount always computed
+  server-side from the event's price × quantity, never trusted from the client)
+- Webhook (source of truth for payment success — **never** the redirect URL,
+  per Yoco's own guidance): `POST /api/payments/yoco/webhook`, HMAC-SHA256
+  signature verified (`lib/yoco.ts`)
+- Ticket status: `GET /api/payments/yoco/status?token=…` — the success page
+  polls this against our own webhook-updated payment record
+  (`lib/payments.ts`, stored in Vercel Blob keyed by an unguessable token —
+  never the redirect URL alone), so a slow webhook just shows a brief
+  "confirming your payment" state rather than a false negative
+- **Sandbox**: with no `YOCO_SECRET_KEY`, checkout completes instantly with a
+  synthesized ticket — no Blob, no webhook, the full journey is testable with
+  zero keys
 
-## Paystack
+### Going live
 
-Set `PAYSTACK_SECRET_KEY` (and optionally `NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY`).
-Without keys the ticket checkout runs in **demo mode** so the full flow can be
-tested end-to-end. Configure the webhook in the Paystack dashboard:
-
-```
-https://<your-domain>/api/paystack/webhook
-```
-
-Supported: ticket payments, secure server-side verification, webhook signature
-validation, refunds (`lib/paystack.ts → refundTransaction`).
+1. In the Yoco Business Portal → Developers → API keys, copy the **test**
+   secret key first to prove the flow, then the **live** key once the
+   business is verified. Set `YOCO_SECRET_KEY` in Vercel.
+2. Register the webhook once (needs the secret key you just set):
+   ```bash
+   curl -X POST https://payments.yoco.com/api/webhooks \
+     -H "Authorization: Bearer $YOCO_SECRET_KEY" \
+     -H "Content-Type: application/json" \
+     -d '{"name":"fusion-flame","url":"https://www.fusionflame.co.za/api/payments/yoco/webhook"}'
+   ```
+   The response's `secret` (a `whsec_...` value, shown only once) becomes
+   `YOCO_WEBHOOK_SECRET` in Vercel.
+3. Repeat step 2 with the live key when going live (test and live mode each
+   need their own webhook registration).
 
 ## Admin Panel (built-in CMS)
 
@@ -62,10 +68,10 @@ Everything on the site is managed from **`/admin`** — no code changes or
 redeploys needed:
 
 - **Menu & Pricing** — categories, dishes, prices, badges, availability
-- **Events & Tickets** — dates, ticket prices, seats
+- **Events & Tickets** — dates, ticket prices, seats, theme/dress code
 - **Announcements & Ads** — the promo banner at the top of every page
-- Signature dishes, gallery, offers, testimonials, private events, chef
-  profile, FAQ, Instagram grid, restaurant details (hours, contacts, hero image)
+- Signature dishes, gallery, private events, FAQ, Instagram grid, restaurant
+  details (hours, contacts, hero image)
 
 Setup:
 
@@ -84,10 +90,10 @@ an external CMS later remains a one-file change.
 ## Structure
 
 ```
-app/          App Router pages + API routes (reservations, paystack, newsletter)
+app/          App Router pages + API routes (reservations, payments, newsletter)
 components/   ui primitives, layout chrome, homepage sections, effects
 features/     menu, bookings, events, tickets, gallery
-lib/          utils, zod validation, Paystack helpers
+lib/          utils, zod validation, Yoco + email + payment-ledger helpers
 services/     typed content accessors (CMS seam)
 data/         placeholder JSON content
 types/        shared domain types
@@ -97,6 +103,6 @@ types/        shared domain types
 
 1. Import the repo at vercel.com/new (or `vercel link`).
 2. Set the env vars from `.env.example` in Project → Settings → Environment
-   Variables (`PAYSTACK_SECRET_KEY` as a sensitive/production secret,
-   `NEXT_PUBLIC_SITE_URL` to the production domain).
+   Variables (`YOCO_SECRET_KEY` + `YOCO_WEBHOOK_SECRET` as sensitive/production
+   secrets, `NEXT_PUBLIC_SITE_URL` to the production domain).
 3. Push to `main` — Vercel builds and deploys automatically.
