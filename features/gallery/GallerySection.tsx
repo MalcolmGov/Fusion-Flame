@@ -1,14 +1,35 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ArrowLeft, ArrowRight, Expand } from "lucide-react";
-import { Reveal } from "@/components/effects/Reveal";
 import { SectionHeading } from "@/components/effects/SectionHeading";
+import { cn } from "@/lib/utils";
 import type { GalleryImage } from "@/types";
 
+const ALL = "All";
+
+/** Bento sizing is derived from position, not hardcoded per photo, so the
+ *  layout stays intentional-looking no matter how the admin edits the set:
+ *  the first tile in any filtered view is the hero cell, and any photo
+ *  flagged "tall" in the admin gets extra vertical room. */
+function cellClass(index: number, tall?: boolean) {
+  if (index === 0) return tall ? "col-span-2 row-span-2" : "col-span-2";
+  return tall ? "row-span-2" : "";
+}
+
 export function GallerySection({ images }: { images: GalleryImage[] }) {
+  const categories = useMemo(
+    () => [ALL, ...Array.from(new Set(images.map((img) => img.category)))],
+    [images],
+  );
+  const [active, setActive] = useState(ALL);
+  const filtered = useMemo(
+    () => (active === ALL ? images : images.filter((img) => img.category === active)),
+    [images, active],
+  );
+
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const close = useCallback(() => setLightbox(null), []);
@@ -17,10 +38,14 @@ export function GallerySection({ images }: { images: GalleryImage[] }) {
       setLightbox((current) =>
         current === null
           ? null
-          : (current + dir + images.length) % images.length,
+          : (current + dir + filtered.length) % filtered.length,
       ),
-    [images.length],
+    [filtered.length],
   );
+
+  useEffect(() => {
+    setLightbox(null);
+  }, [active]);
 
   useEffect(() => {
     if (lightbox === null) return;
@@ -43,40 +68,89 @@ export function GallerySection({ images }: { images: GalleryImage[] }) {
         <SectionHeading
           eyebrow="The Experience"
           title="Moments in the Glow"
-          description="Fire, gold and celebration — glimpses of evenings at Fusion Flame."
+          description="Fire, gold and celebration — a taste of what leaves our kitchen."
         />
 
-        {/* Masonry */}
-        <div className="columns-2 gap-4 md:columns-3 lg:columns-4 [&>*]:mb-4">
-          {images.map((img, i) => (
-            <Reveal key={img.id} delay={(i % 4) * 0.08}>
+        {/* Category filter */}
+        <div
+          role="tablist"
+          aria-label="Gallery categories"
+          className="scrollbar-none -mx-5 mb-10 flex gap-2 overflow-x-auto px-5 pb-2 md:mx-0 md:flex-wrap md:justify-center md:overflow-visible md:px-0"
+        >
+          {categories.map((category) => {
+            const selected = category === active;
+            return (
               <button
+                key={category}
+                role="tab"
+                aria-selected={selected}
+                onClick={() => setActive(category)}
+                className={cn(
+                  "relative shrink-0 cursor-pointer rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all duration-400",
+                  selected
+                    ? "text-[#1a1104]"
+                    : "glass text-muted hover:border-gold/30 hover:text-gold-light",
+                )}
+              >
+                {selected && (
+                  <motion.span
+                    layoutId="gallery-tab-pill"
+                    aria-hidden
+                    transition={{ type: "spring", stiffness: 380, damping: 34 }}
+                    className="absolute inset-0 rounded-full bg-[linear-gradient(120deg,#f2d26d,#dda943_45%,#fa6906)] shadow-glow-gold"
+                  />
+                )}
+                <span className="relative z-10">{category}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Bento grid */}
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={active}
+            className="grid auto-rows-[140px] grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 sm:[grid-auto-rows:170px] lg:grid-cols-4 lg:[grid-auto-rows:200px]"
+          >
+            {filtered.map((img, i) => (
+              <motion.button
+                key={img.id}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.4, delay: (i % 8) * 0.05, ease: [0.16, 1, 0.3, 1] }}
                 type="button"
                 onClick={() => setLightbox(i)}
                 aria-label={`View larger: ${img.alt}`}
-                className="img-zoom group relative block w-full cursor-pointer overflow-hidden rounded-2xl border border-white/5 transition-all duration-500 hover:border-gold/30 hover:shadow-glow-gold"
+                className={cn(
+                  "img-zoom group relative block h-full w-full cursor-pointer overflow-hidden rounded-2xl border border-white/5 transition-all duration-500 hover:border-gold/30 hover:shadow-glow-gold",
+                  cellClass(i, img.tall),
+                )}
               >
                 <Image
                   src={img.src}
                   alt={img.alt}
-                  width={800}
-                  height={img.tall ? 1100 : 700}
-                  sizes="(min-width: 1024px) 24vw, (min-width: 768px) 32vw, 46vw"
-                  className={`w-full object-cover ${img.tall ? "aspect-[3/4]" : "aspect-[4/3]"}`}
+                  fill
+                  sizes="(min-width: 1024px) 24vw, (min-width: 640px) 33vw, 50vw"
+                  className="object-cover"
                 />
                 <div
                   aria-hidden
-                  className="absolute inset-0 flex items-end justify-between bg-gradient-to-t from-black/70 via-transparent to-transparent p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  className="absolute inset-0 flex items-end justify-between bg-gradient-to-t from-black/75 via-black/10 to-transparent p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 >
-                  <span className="text-xs font-medium uppercase tracking-[0.18em] text-gold-light">
-                    {img.category}
-                  </span>
-                  <Expand className="size-4 text-white/80" />
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-gold-light">
+                      {img.category}
+                    </span>
+                    <p className="mt-0.5 truncate text-xs text-white/80">{img.alt}</p>
+                  </div>
+                  <Expand className="size-4 shrink-0 text-white/80" />
                 </div>
-              </button>
-            </Reveal>
-          ))}
-        </div>
+              </motion.button>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Fullscreen viewer */}
@@ -85,7 +159,7 @@ export function GallerySection({ images }: { images: GalleryImage[] }) {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label={images[lightbox].alt}
+            aria-label={filtered[lightbox].alt}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -101,8 +175,8 @@ export function GallerySection({ images }: { images: GalleryImage[] }) {
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={images[lightbox].src}
-                alt={images[lightbox].alt}
+                src={filtered[lightbox].src}
+                alt={filtered[lightbox].alt}
                 width={1600}
                 height={1100}
                 sizes="94vw"
@@ -110,7 +184,7 @@ export function GallerySection({ images }: { images: GalleryImage[] }) {
                 priority
               />
               <p className="mt-4 text-center text-sm text-muted">
-                {images[lightbox].alt}
+                {filtered[lightbox].alt}
               </p>
             </motion.div>
 
