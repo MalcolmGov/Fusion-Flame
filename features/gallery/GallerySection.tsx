@@ -1,34 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ArrowLeft, ArrowRight, Expand } from "lucide-react";
 import { SectionHeading } from "@/components/effects/SectionHeading";
 import { cn } from "@/lib/utils";
 import type { GalleryImage } from "@/types";
 
-const ALL = "All";
-
-/** Bento sizing is derived from position, not hardcoded per photo, so the
- *  layout stays intentional-looking no matter how the admin edits the set:
- *  the first tile in any filtered view is the hero cell, and any photo
- *  flagged "tall" in the admin gets extra vertical room. */
-function cellClass(index: number, tall?: boolean) {
-  if (index === 0) return tall ? "col-span-2 row-span-2" : "col-span-2";
-  return tall ? "row-span-2" : "";
+/** Three gentle elevation tiers so cards read as floating at different
+ *  heights rather than sitting in a rigid row — applied on the outer
+ *  wrapper so it composes with the independent bob animation inside. */
+function tierClass(index: number) {
+  switch (index % 3) {
+    case 0:
+      return "md:-translate-y-5";
+    case 2:
+      return "md:translate-y-5";
+    default:
+      return "";
+  }
 }
 
 export function GallerySection({ images }: { images: GalleryImage[] }) {
-  const categories = useMemo(
-    () => [ALL, ...Array.from(new Set(images.map((img) => img.category)))],
-    [images],
-  );
-  const [active, setActive] = useState(ALL);
-  const filtered = useMemo(
-    () => (active === ALL ? images : images.filter((img) => img.category === active)),
-    [images, active],
-  );
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [
+    Autoplay({ delay: 2800, stopOnInteraction: false, stopOnMouseEnter: true }),
+  ]);
 
   const [lightbox, setLightbox] = useState<number | null>(null);
 
@@ -36,16 +35,10 @@ export function GallerySection({ images }: { images: GalleryImage[] }) {
   const step = useCallback(
     (dir: 1 | -1) =>
       setLightbox((current) =>
-        current === null
-          ? null
-          : (current + dir + filtered.length) % filtered.length,
+        current === null ? null : (current + dir + images.length) % images.length,
       ),
-    [filtered.length],
+    [images.length],
   );
-
-  useEffect(() => {
-    setLightbox(null);
-  }, [active]);
 
   useEffect(() => {
     if (lightbox === null) return;
@@ -63,81 +56,45 @@ export function GallerySection({ images }: { images: GalleryImage[] }) {
   }, [lightbox, close, step]);
 
   return (
-    <section id="gallery" className="relative scroll-mt-24 py-24 md:py-36">
+    <section id="gallery" className="relative scroll-mt-24 overflow-hidden py-24 md:py-36">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           eyebrow="The Experience"
           title="Moments in the Glow"
-          description="Fire, gold and celebration — a taste of what leaves our kitchen."
+          description="Fire, gold and celebration — a taste of what leaves our kitchen, drifting by."
         />
+      </div>
 
-        {/* Category filter */}
-        <div
-          role="tablist"
-          aria-label="Gallery categories"
-          className="scrollbar-none -mx-5 mb-10 flex gap-2 overflow-x-auto px-5 pb-2 md:mx-0 md:flex-wrap md:justify-center md:overflow-visible md:px-0"
-        >
-          {categories.map((category) => {
-            const selected = category === active;
-            return (
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex touch-pan-y py-8 md:py-12">
+          {images.map((img, i) => (
+            <div
+              key={img.id}
+              className={cn(
+                "min-w-0 shrink-0 basis-[62%] px-3 transition-transform duration-700 sm:basis-[38%] md:basis-[28%] lg:basis-[21%]",
+                tierClass(i),
+              )}
+            >
               <button
-                key={category}
-                role="tab"
-                aria-selected={selected}
-                onClick={() => setActive(category)}
-                className={cn(
-                  "relative shrink-0 cursor-pointer rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] transition-all duration-400",
-                  selected
-                    ? "text-[#1a1104]"
-                    : "glass text-muted hover:border-gold/30 hover:text-gold-light",
-                )}
-              >
-                {selected && (
-                  <motion.span
-                    layoutId="gallery-tab-pill"
-                    aria-hidden
-                    transition={{ type: "spring", stiffness: 380, damping: 34 }}
-                    className="absolute inset-0 rounded-full bg-[linear-gradient(120deg,#f2d26d,#dda943_45%,#fa6906)] shadow-glow-gold"
-                  />
-                )}
-                <span className="relative z-10">{category}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Bento grid */}
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            key={active}
-            className="grid auto-rows-[140px] grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 sm:[grid-auto-rows:170px] lg:grid-cols-4 lg:[grid-auto-rows:200px]"
-          >
-            {filtered.map((img, i) => (
-              <motion.button
-                key={img.id}
-                layout
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.4, delay: (i % 8) * 0.05, ease: [0.16, 1, 0.3, 1] }}
                 type="button"
                 onClick={() => setLightbox(i)}
                 aria-label={`View larger: ${img.alt}`}
+                style={{ animationDelay: `${(i % 5) * 1.1}s` }}
                 className={cn(
-                  "img-zoom group relative block h-full w-full cursor-pointer overflow-hidden rounded-2xl border border-white/5 transition-all duration-500 hover:border-gold/30 hover:shadow-glow-gold",
-                  cellClass(i, img.tall),
+                  "img-zoom group animate-float relative block w-full cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-card shadow-luxe transition-[border-color,box-shadow] duration-500 hover:border-gold/40 hover:shadow-glow-gold",
+                  img.tall ? "aspect-[3/4]" : "aspect-[4/5]",
                 )}
               >
                 <Image
                   src={img.src}
                   alt={img.alt}
                   fill
-                  sizes="(min-width: 1024px) 24vw, (min-width: 640px) 33vw, 50vw"
+                  sizes="(min-width: 1024px) 21vw, (min-width: 640px) 38vw, 62vw"
                   className="object-cover"
                 />
                 <div
                   aria-hidden
-                  className="absolute inset-0 flex items-end justify-between bg-gradient-to-t from-black/75 via-black/10 to-transparent p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  className="absolute inset-0 flex items-end justify-between bg-gradient-to-t from-black/75 via-black/5 to-transparent p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 >
                   <div className="min-w-0">
                     <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-gold-light">
@@ -147,10 +104,30 @@ export function GallerySection({ images }: { images: GalleryImage[] }) {
                   </div>
                   <Expand className="size-4 shrink-0 text-white/80" />
                 </div>
-              </motion.button>
-            ))}
-          </motion.div>
-        </AnimatePresence>
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Manual controls */}
+      <div className="mt-2 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          aria-label="Slide left"
+          onClick={() => emblaApi?.scrollPrev()}
+          className="glass flex size-11 cursor-pointer items-center justify-center rounded-full text-muted transition-all duration-300 hover:border-gold/40 hover:text-gold-light"
+        >
+          <ArrowLeft className="size-4" aria-hidden />
+        </button>
+        <button
+          type="button"
+          aria-label="Slide right"
+          onClick={() => emblaApi?.scrollNext()}
+          className="glass flex size-11 cursor-pointer items-center justify-center rounded-full text-muted transition-all duration-300 hover:border-gold/40 hover:text-gold-light"
+        >
+          <ArrowRight className="size-4" aria-hidden />
+        </button>
       </div>
 
       {/* Fullscreen viewer */}
@@ -159,7 +136,7 @@ export function GallerySection({ images }: { images: GalleryImage[] }) {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label={filtered[lightbox].alt}
+            aria-label={images[lightbox].alt}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -175,17 +152,15 @@ export function GallerySection({ images }: { images: GalleryImage[] }) {
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={filtered[lightbox].src}
-                alt={filtered[lightbox].alt}
+                src={images[lightbox].src}
+                alt={images[lightbox].alt}
                 width={1600}
                 height={1100}
                 sizes="94vw"
                 className="max-h-[80vh] w-full rounded-2xl object-contain"
                 priority
               />
-              <p className="mt-4 text-center text-sm text-muted">
-                {filtered[lightbox].alt}
-              </p>
+              <p className="mt-4 text-center text-sm text-muted">{images[lightbox].alt}</p>
             </motion.div>
 
             <button
