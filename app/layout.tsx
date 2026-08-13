@@ -51,17 +51,19 @@ export const metadata: Metadata = {
     title: "Fusion Flame — Ignite Your Taste Experience",
     description:
       "Where exceptional cuisine meets unforgettable moments. Premium flame-grilled dining, cocktails and live entertainment in Edenvale.",
-    images: [{ url: "/logo.jpeg", width: 1254, height: 1254, alt: "Fusion Flame" }],
+    // Image comes from app/opengraph-image.tsx (file convention) — a
+    // designed 1200×630 share card, not the raw square logo.
   },
   twitter: {
     card: "summary_large_image",
     title: "Fusion Flame — Ignite Your Taste Experience",
     description:
       "Premium flame-grilled dining, cocktails and live entertainment in Edenvale, Johannesburg.",
-    images: ["/logo.jpeg"],
+    // Falls back to opengraph-image.tsx.
   },
   alternates: { canonical: "/" },
-  icons: { icon: "/logo.jpeg", apple: "/logo.jpeg" },
+  // Favicon/app icons come from app/favicon.ico, app/icon.png and
+  // app/apple-icon.png (file convention) — no manual `icons` needed.
 };
 
 export default function RootLayout({
