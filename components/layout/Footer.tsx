@@ -68,7 +68,7 @@ export async function Footer() {
           {/* Links */}
           <nav aria-label="Footer">
             <h3 className="eyebrow mb-5">Explore</h3>
-            <ul className="space-y-3 text-sm text-muted">
+            <ul className="text-sm text-muted">
               {[
                 ["Our Story", "/#about"],
                 ["Signature Menu", "/#menu"],
@@ -80,7 +80,7 @@ export async function Footer() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="link-underline transition-colors hover:text-gold-light"
+                    className="link-underline inline-block py-2 transition-colors hover:text-gold-light"
                   >
                     {label}
                   </Link>
@@ -111,13 +111,13 @@ export async function Footer() {
               </p>
               <a
                 href={`tel:${restaurant.phone.replace(/\s/g, "")}`}
-                className="block transition-colors hover:text-gold-light"
+                className="-my-2 block py-2 transition-colors hover:text-gold-light"
               >
                 {restaurant.phone}
               </a>
               <a
                 href={`mailto:${restaurant.email}`}
-                className="block transition-colors hover:text-gold-light"
+                className="-my-2 block py-2 transition-colors hover:text-gold-light"
               >
                 {restaurant.email}
               </a>

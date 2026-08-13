@@ -35,7 +35,7 @@ const buttonVariants = cva(
         link: "text-gold underline-offset-4 hover:underline normal-case tracking-normal",
       },
       size: {
-        sm: "h-9 px-4 text-[11px] rounded-full",
+        sm: "h-10 px-4 text-[11px] rounded-full",
         default: "h-12 px-7 text-xs rounded-full",
         lg: "h-14 px-10 text-sm rounded-full",
         icon: "size-12 rounded-full",

@@ -51,7 +51,7 @@ export async function Contact() {
                     </h3>
                     <a
                       href={`tel:${restaurant.phone.replace(/\s/g, "")}`}
-                      className="mt-1 block text-sm text-muted transition-colors hover:text-gold-light"
+                      className="-mb-2 mt-1 block py-2 text-sm text-muted transition-colors hover:text-gold-light"
                     >
                       {restaurant.phone}
                     </a>
@@ -67,7 +67,7 @@ export async function Contact() {
                     </h3>
                     <a
                       href={`mailto:${restaurant.email}`}
-                      className="mt-1 block text-sm text-muted transition-colors hover:text-gold-light"
+                      className="-mb-2 mt-1 block py-2 text-sm text-muted transition-colors hover:text-gold-light"
                     >
                       {restaurant.email}
                     </a>

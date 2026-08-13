@@ -79,7 +79,7 @@ export function Navbar({
                 {announcement.linkHref && announcement.linkLabel ? (
                   <Link
                     href={announcement.linkHref}
-                    className="ml-2 inline-flex items-center gap-1 font-semibold text-gold-light underline-offset-4 hover:underline"
+                    className="ml-2 inline-flex items-center gap-1 py-2.5 font-semibold text-gold-light underline-offset-4 hover:underline"
                   >
                     {announcement.linkLabel}
                     <ArrowRight className="size-3" aria-hidden />
@@ -90,7 +90,7 @@ export function Navbar({
                 type="button"
                 onClick={() => setBannerDismissed(true)}
                 aria-label="Dismiss announcement"
-                className="absolute right-3 rounded-full p-1 text-muted transition-colors hover:text-foreground"
+                className="absolute right-1 flex size-10 items-center justify-center rounded-full text-muted transition-colors hover:text-foreground"
               >
                 <X className="size-3.5" aria-hidden />
               </button>

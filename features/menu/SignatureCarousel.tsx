@@ -108,7 +108,7 @@ export function SignatureCarousel({ dishes }: { dishes: SignatureDish[] }) {
         >
           <ArrowLeft className="size-5" aria-hidden />
         </button>
-        <div className="flex gap-2" role="tablist" aria-label="Dish slides">
+        <div className="flex" role="tablist" aria-label="Dish slides">
           {dishes.map((dish, i) => (
             <button
               key={dish.id}
@@ -116,13 +116,18 @@ export function SignatureCarousel({ dishes }: { dishes: SignatureDish[] }) {
               aria-selected={selected === i}
               aria-label={`Go to ${dish.name}`}
               onClick={() => emblaApi?.scrollTo(i)}
-              className={cn(
-                "h-1.5 rounded-full transition-all duration-500 cursor-pointer",
-                selected === i
-                  ? "w-10 bg-gradient-to-r from-gold to-flame-orange"
-                  : "w-4 bg-white/15 hover:bg-white/30",
-              )}
-            />
+              className="group flex h-10 min-w-10 cursor-pointer items-center justify-center"
+            >
+              <span
+                aria-hidden
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-500",
+                  selected === i
+                    ? "w-10 bg-gradient-to-r from-gold to-flame-orange"
+                    : "w-4 bg-white/15 group-hover:bg-white/30",
+                )}
+              />
+            </button>
           ))}
         </div>
         <button
