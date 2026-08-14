@@ -20,7 +20,7 @@ export function WhatsAppFloat({ href }: WhatsAppFloatProps) {
       transition={{ delay: 1.2, type: "spring", stiffness: 200, damping: 16 }}
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.94 }}
-      className="fixed bottom-24 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-[#25d366] text-[#062b16] shadow-[0_0_34px_-4px_rgba(37,211,102,0.8)] md:bottom-8 md:right-8"
+      className="fixed bottom-24 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-[#25d366] text-[#062b16] shadow-[0_0_34px_-4px_rgba(37,211,102,0.8)] print:hidden md:bottom-8 md:right-8"
     >
       <span
         aria-hidden

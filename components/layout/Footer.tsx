@@ -19,7 +19,7 @@ export async function Footer() {
   const restaurant = await getRestaurant();
 
   return (
-    <footer className="relative border-t border-white/5 bg-surface/60">
+    <footer className="relative border-t border-white/5 bg-surface/60 print:hidden">
       <div
         aria-hidden
         className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent"

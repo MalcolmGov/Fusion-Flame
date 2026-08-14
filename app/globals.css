@@ -286,3 +286,22 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Print: solid ink for gradient-clipped text ──────────────────────
+   The gradient text utilities rely on background-clip:text with
+   color:transparent. Printers strip backgrounds, which would leave the
+   lettering invisible on paper — fall back to solid brand colours. */
+@media print {
+  .text-gold-gradient,
+  .text-gold-shimmer {
+    background: none !important;
+    color: #8a5f1a !important;
+    -webkit-text-fill-color: #8a5f1a !important;
+  }
+  .text-fire-gradient,
+  .text-red-gradient {
+    background: none !important;
+    color: #c20b09 !important;
+    -webkit-text-fill-color: #c20b09 !important;
+  }
+}

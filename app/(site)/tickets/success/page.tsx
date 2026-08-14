@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function TicketSuccessPage() {
   return (
-    <div className="fire-ambience min-h-svh px-5 pb-24 pt-32 md:pt-40">
+    <div className="fire-ambience min-h-svh px-5 pb-24 pt-32 print:min-h-0 print:p-0 md:pt-40">
       <Suspense
         fallback={
           <div className="mx-auto max-w-lg">

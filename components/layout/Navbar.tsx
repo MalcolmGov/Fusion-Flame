@@ -55,7 +55,7 @@ export function Navbar({
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500 print:hidden",
         scrolled
           ? "glass-strong py-2 shadow-luxe"
           : "bg-gradient-to-b from-black/70 to-transparent py-4",

@@ -92,7 +92,7 @@ export function TicketView() {
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className="mx-auto max-w-lg"
     >
-      <div className="text-center">
+      <div className="text-center print:hidden">
         <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-gold/15 text-gold shadow-glow-gold">
           <BadgeCheck className="size-8" aria-hidden />
         </span>
@@ -106,7 +106,7 @@ export function TicketView() {
       </div>
 
       {/* Digital ticket */}
-      <div className="gold-ring relative mt-9 overflow-hidden rounded-3xl print:border print:border-black/20">
+      <div className="gold-ring relative mt-9 overflow-hidden rounded-3xl print:mt-0 print:border print:border-black/20">
         <div className="bg-[linear-gradient(120deg,rgba(221,169,67,0.14),rgba(250,105,6,0.07))] p-7 md:p-8">
           <div className="flex items-center gap-3">
             <Image
@@ -181,7 +181,7 @@ export function TicketView() {
         </div>
       </div>
 
-      <p className="mt-4 text-center text-xs text-muted/70">
+      <p className="mt-4 text-center text-xs text-muted/70 print:text-black/60">
         Present this QR code at the door. Screenshots are welcome.
       </p>
 

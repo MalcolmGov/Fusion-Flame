@@ -11,7 +11,7 @@ export function MobileStickyBar({ phone, whatsappHref }: MobileStickyBarProps) {
   return (
     <nav
       aria-label="Quick actions"
-      className="glass-strong fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-white/10 pb-[env(safe-area-inset-bottom)] md:hidden"
+      className="glass-strong fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-white/10 pb-[env(safe-area-inset-bottom)] print:hidden md:hidden"
     >
       <Link
         href="/#reservations"
