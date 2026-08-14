@@ -129,6 +129,17 @@ export async function Footer() {
           <p className="font-accent text-sm italic text-gold/70">
             Ignite your taste experience.
           </p>
+          <a
+            href="https://www.movedigital.africa/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group transition-opacity hover:opacity-85"
+          >
+            Powered by{" "}
+            <span className="bg-[linear-gradient(100deg,#5eead4_0%,#60a5fa_40%,#a78bfa_72%,#f472b6_100%)] bg-clip-text font-semibold tracking-wide text-transparent">
+              Move Digital
+            </span>
+          </a>
         </div>
       </div>
     </footer>
