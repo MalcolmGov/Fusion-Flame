@@ -114,18 +114,22 @@ export default async function EventPage({ params }: EventPageProps) {
       <EventJsonLd event={event} r={restaurant} />
 
       {/* Hero banner */}
-      <section className="relative h-[46vh] min-h-80 overflow-hidden md:h-[56vh]">
+      <section className="relative h-[32vh] min-h-64 overflow-hidden md:h-[38vh]">
+        {/* Decorative backdrop only — blurred so text-heavy poster uploads
+            never fight the page's own heading. The full poster is shown
+            un-cropped in the content area below. */}
         <Image
           src={event.image}
-          alt={event.title}
+          alt=""
+          aria-hidden
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="scale-110 object-cover blur-xl"
         />
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-background via-black/45 to-black/30"
+          className="absolute inset-0 bg-gradient-to-t from-background via-black/70 to-black/55"
         />
         <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-5 pb-10 md:px-8">
           <nav aria-label="Breadcrumb" className="mb-4">
@@ -152,6 +156,19 @@ export default async function EventPage({ params }: EventPageProps) {
       <section className="mx-auto max-w-7xl px-5 py-14 md:px-8 md:py-20">
         <div className="grid gap-12 lg:grid-cols-5">
           <Reveal from="left" className="lg:col-span-3">
+            {/* Full event poster/image, never cropped */}
+            <div className="gold-ring mb-10 overflow-hidden rounded-3xl bg-black/40">
+              <Image
+                src={event.image}
+                alt={`${event.title} — event poster`}
+                width={1200}
+                height={1500}
+                sizes="(min-width: 1024px) 55vw, 92vw"
+                priority
+                className="h-auto w-full"
+              />
+            </div>
+
             <p className="text-lg leading-relaxed text-muted md:text-xl">
               {event.description}
             </p>
