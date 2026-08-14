@@ -1,5 +1,12 @@
+import Image from "next/image";
 import { Reveal } from "@/components/effects/Reveal";
 import { SectionHeading } from "@/components/effects/SectionHeading";
+
+const ABOUT_IMAGES = {
+  main: "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/grilled-prawns-platter.jpg",
+  accent:
+    "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/savoury-platter-blooms.jpg",
+};
 
 export function About() {
   return (
@@ -7,7 +14,33 @@ export function About() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading eyebrow="Our Story" title="A New Chapter Begins" />
 
-        <div className="mx-auto max-w-3xl">
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          {/* Imagery — the restaurant's own dishes */}
+          <Reveal from="left" className="relative">
+            <div className="img-zoom gold-ring relative aspect-[4/5] overflow-hidden rounded-3xl">
+              <Image
+                src={ABOUT_IMAGES.main}
+                alt="Grilled prawn platter finished with fresh herbs at Fusion Flame"
+                fill
+                sizes="(min-width: 1024px) 45vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="img-zoom absolute -bottom-10 -right-4 hidden w-56 overflow-hidden rounded-2xl border border-white/10 shadow-luxe md:block lg:-right-10 lg:w-64">
+              <Image
+                src={ABOUT_IMAGES.accent}
+                alt="Savoury platter dressed with edible blooms"
+                width={512}
+                height={384}
+                className="aspect-[4/3] object-cover"
+              />
+            </div>
+            <div
+              aria-hidden
+              className="absolute -left-6 -top-6 -z-10 size-40 rounded-full bg-flame-orange/10 blur-3xl"
+            />
+          </Reveal>
+
           {/* Story */}
           <div>
             <Reveal delay={0.1}>
