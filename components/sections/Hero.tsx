@@ -15,9 +15,11 @@ gsap.registerPlugin(useGSAP);
 export function Hero({
   backgroundImage,
   orderHref,
+  hasMenu = true,
 }: {
   backgroundImage?: string;
   orderHref: string;
+  hasMenu?: boolean;
 }) {
   const container = useRef<HTMLElement>(null);
 
@@ -150,11 +152,13 @@ export function Hero({
               <Link href="/#reservations">Reserve a Table</Link>
             </Button>
           </div>
-          <div data-hero-reveal="cta" className="opacity-0">
-            <Button asChild size="lg" variant="outline">
-              <Link href="/#menu">View Menu</Link>
-            </Button>
-          </div>
+          {hasMenu && (
+            <div data-hero-reveal="cta" className="opacity-0">
+              <Button asChild size="lg" variant="outline">
+                <Link href="/#menu">View Menu</Link>
+              </Button>
+            </div>
+          )}
           <div data-hero-reveal="cta" className="opacity-0">
             <Button
               asChild

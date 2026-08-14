@@ -34,11 +34,15 @@ export default async function HomePage() {
   return (
     <>
       <LoadingScreen />
-      <Hero backgroundImage={restaurant.heroImage} orderHref={orderHref} />
+      <Hero
+        backgroundImage={restaurant.heroImage}
+        orderHref={orderHref}
+        hasMenu={menu.length > 0}
+      />
       <About />
-      <MenuSection categories={menu} orderHref={orderHref} />
-      <SignatureCarousel dishes={signatureDishes} />
-      <GallerySection images={gallery} />
+      {menu.length > 0 && <MenuSection categories={menu} orderHref={orderHref} />}
+      {signatureDishes.length > 0 && <SignatureCarousel dishes={signatureDishes} />}
+      {gallery.length > 0 && <GallerySection images={gallery} />}
       <EventsSection events={events} />
       <Reservations />
       <PrivateEvents />

@@ -29,23 +29,38 @@ export async function PrivateEvents() {
           {types.map((type, i) => (
             <Reveal key={type.id} delay={(i % 3) * 0.1}>
               <article className="group img-zoom relative h-80 overflow-hidden rounded-3xl border border-white/5 transition-all duration-500 hover:border-gold/30 hover:shadow-glow-gold">
-                <Image
-                  src={type.image}
-                  alt={type.title}
-                  fill
-                  sizes="(min-width: 1024px) 32vw, (min-width: 640px) 45vw, 90vw"
-                  className="object-cover"
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent"
-                />
+                {type.image ? (
+                  <>
+                    <Image
+                      src={type.image}
+                      alt={type.title}
+                      fill
+                      sizes="(min-width: 1024px) 32vw, (min-width: 640px) 45vw, 90vw"
+                      className="object-cover"
+                    />
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent"
+                    />
+                  </>
+                ) : (
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_0%,rgba(221,169,67,0.12)_0%,rgba(250,105,6,0.05)_45%,transparent_75%)]"
+                  />
+                )}
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <p className="eyebrow mb-2 text-[10px]">{type.capacity}</p>
                   <h3 className="font-heading text-2xl text-white transition-colors duration-300 group-hover:text-gold-light">
                     {type.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/70 opacity-0 transition-all duration-500 group-hover:opacity-100">
+                  <p
+                    className={
+                      type.image
+                        ? "mt-2 text-sm leading-relaxed text-white/70 opacity-0 transition-all duration-500 group-hover:opacity-100"
+                        : "mt-2 text-sm leading-relaxed text-white/70"
+                    }
+                  >
                     {type.description}
                   </p>
                 </div>

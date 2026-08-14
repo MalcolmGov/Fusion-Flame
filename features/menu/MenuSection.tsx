@@ -31,6 +31,28 @@ function SpiceIndicator({ level }: { level: MenuItem["spiceLevel"] }) {
   );
 }
 
+function MenuBadges({ item }: { item: MenuItem }) {
+  return (
+    <>
+      {item.popular && (
+        <Badge variant="fire">
+          <TrendingUp className="size-3" aria-hidden /> Popular
+        </Badge>
+      )}
+      {item.chefRecommendation && (
+        <Badge variant="gold">
+          <Sparkles className="size-3" aria-hidden /> Chef's Pick
+        </Badge>
+      )}
+      {item.vegetarian && (
+        <Badge variant="green">
+          <Leaf className="size-3" aria-hidden /> Veg
+        </Badge>
+      )}
+    </>
+  );
+}
+
 function MenuCard({ item, index }: { item: MenuItem; index: number }) {
   return (
     <motion.article
@@ -41,38 +63,31 @@ function MenuCard({ item, index }: { item: MenuItem; index: number }) {
       transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
       className="group gold-ring relative overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-1.5 hover:shadow-glow-gold"
     >
-      <div className="img-zoom relative aspect-[16/10]">
-        <Image
-          src={item.image}
-          alt={item.name}
-          fill
-          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
-          className="object-cover"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent"
-        />
-        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-          {item.popular && (
-            <Badge variant="fire">
-              <TrendingUp className="size-3" aria-hidden /> Popular
-            </Badge>
-          )}
-          {item.chefRecommendation && (
-            <Badge variant="gold">
-              <Sparkles className="size-3" aria-hidden /> Chef's Pick
-            </Badge>
-          )}
-          {item.vegetarian && (
-            <Badge variant="green">
-              <Leaf className="size-3" aria-hidden /> Veg
-            </Badge>
-          )}
+      {item.image ? (
+        <div className="img-zoom relative aspect-[16/10]">
+          <Image
+            src={item.image}
+            alt={item.name}
+            fill
+            sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+            className="object-cover"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent"
+          />
+          <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
+            <MenuBadges item={item} />
+          </div>
         </div>
-      </div>
+      ) : null}
 
       <div className="p-5 md:p-6">
+        {!item.image ? (
+          <div className="mb-3 flex flex-wrap gap-1.5 empty:hidden">
+            <MenuBadges item={item} />
+          </div>
+        ) : null}
         <div className="flex items-start justify-between gap-3">
           <h3 className="font-heading text-lg leading-snug text-foreground transition-colors duration-300 group-hover:text-gold-light md:text-xl">
             {item.name}

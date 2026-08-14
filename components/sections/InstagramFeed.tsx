@@ -9,6 +9,7 @@ export async function InstagramFeed() {
     getInstagramFeed(),
     getRestaurant(),
   ]);
+  if (feed.length === 0) return null;
   const instagramUrl =
     restaurant.social.find((s) => s.platform === "Instagram")?.url ??
     "https://instagram.com";

@@ -14,7 +14,7 @@ export interface MenuItem {
   chefRecommendation: boolean;
   seasonal?: boolean;
   available: boolean;
-  image: string;
+  image?: string;
 }
 
 export interface MenuCategory {
@@ -78,7 +78,7 @@ export interface PrivateEventType {
   id: string;
   title: string;
   description: string;
-  image: string;
+  image?: string;
   capacity: string;
 }
 
