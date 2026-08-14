@@ -115,7 +115,7 @@ export function TicketView() {
               width={46}
               height={46}
               aria-hidden
-              className="shrink-0"
+              className="shrink-0 mix-blend-screen print:mix-blend-normal"
             />
             <div>
               <p className="font-heading text-xl leading-none">
