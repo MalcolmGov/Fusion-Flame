@@ -12,9 +12,6 @@ import { Embers } from "@/components/effects/Embers";
 
 gsap.registerPlugin(useGSAP);
 
-const DEFAULT_HERO_IMAGE =
-  "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=2600&auto=format&fit=crop";
-
 export function Hero({
   backgroundImage,
   orderHref,
@@ -87,20 +84,23 @@ export function Hero({
       aria-label="Welcome to Fusion Flame"
       className="relative flex min-h-svh items-center justify-center overflow-hidden"
     >
-      {/* Cinematic background with parallax */}
+      {/* Cinematic background with parallax — image is optional (managed in
+          the admin panel); without one the fire-glow ambience carries the hero */}
       <motion.div
         data-hero-bg
         style={{ y: bgY }}
         className="absolute inset-0 -bottom-32"
       >
-        <Image
-          src={backgroundImage || DEFAULT_HERO_IMAGE}
-          alt="Moody, candle-lit dining room at Fusion Flame"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+        {backgroundImage ? (
+          <Image
+            src={backgroundImage}
+            alt="Moody, candle-lit dining room at Fusion Flame"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        ) : null}
       </motion.div>
 
       {/* Dark + fire gradient overlays */}
