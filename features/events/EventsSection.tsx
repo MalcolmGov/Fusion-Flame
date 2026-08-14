@@ -23,18 +23,18 @@ export function EventsSection({ events }: { events: RestaurantEvent[] }) {
 
         {/* Large horizontal feature cards — poster left (never cropped),
             details right; stacks on mobile */}
-        <div className="mx-auto flex max-w-5xl flex-col gap-8 lg:gap-10">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 lg:gap-10">
           {events.map((event, i) => (
             <Reveal key={event.slug} delay={i * 0.08}>
-              <article className="group gold-ring grid overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-1 hover:shadow-glow-fire md:grid-cols-5">
+              <article className="group gold-ring grid overflow-hidden rounded-3xl transition-all duration-500 hover:-translate-y-1 hover:shadow-glow-fire md:grid-cols-2">
                 {/* Poster — object-contain so text posters stay fully legible */}
-                <div className="relative bg-black/40 md:col-span-2">
+                <div className="relative bg-black/40 md:min-h-[620px]">
                   <div className="relative aspect-[4/5] md:absolute md:inset-0 md:aspect-auto">
                     <Image
                       src={event.image}
                       alt={event.title}
                       fill
-                      sizes="(min-width: 768px) 40vw, 92vw"
+                      sizes="(min-width: 768px) 50vw, 92vw"
                       className="object-contain"
                     />
                   </div>
@@ -45,7 +45,7 @@ export function EventsSection({ events }: { events: RestaurantEvent[] }) {
                   )}
                 </div>
 
-                <div className="flex flex-col p-6 md:col-span-3 md:p-9">
+                <div className="flex flex-col p-6 md:p-10">
                   <h3 className="font-heading text-2xl leading-snug text-foreground transition-colors duration-300 group-hover:text-gold-light md:text-3xl">
                     {event.title}
                   </h3>
