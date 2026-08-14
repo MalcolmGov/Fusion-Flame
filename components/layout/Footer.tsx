@@ -71,7 +71,6 @@ export async function Footer() {
                 ["Our Story", "/#about"],
                 ["Gallery", "/#gallery"],
                 ["Events & Tickets", "/#events"],
-                ["Private Dining", "/#private-events"],
                 ["Reservations", "/#reservations"],
               ].map(([label, href]) => (
                 <li key={href}>

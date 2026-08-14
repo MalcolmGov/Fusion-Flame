@@ -16,7 +16,7 @@ const NAV_LINKS = [
   // SHOW_MENU_SECTION on the homepage).
   { label: "Gallery", href: "/#gallery" },
   { label: "Events", href: "/#events" },
-  { label: "Private Dining", href: "/#private-events" },
+  // Private Dining link returns with SHOW_PRIVATE_EVENTS on the homepage.
   { label: "Contact", href: "/#contact" },
 ];
 
