@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { isAdminAuthenticated } from "@/lib/admin/auth";
 import {
   contentTag,
@@ -64,6 +64,9 @@ export async function PUT(request: Request, { params }: RouteContext) {
 
   revalidateTag(contentTag(collection));
   revalidateTag("content");
+  // Content reads are uncached, so regenerating the prerendered pages is
+  // what actually surfaces the change.
+  revalidatePath("/", "layout");
   console.log("[admin:save]", collection, "published");
   return NextResponse.json({ ok: true });
 }

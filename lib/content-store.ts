@@ -6,12 +6,11 @@
  *  - Local dev: reads/writes the JSON files in data/ directly.
  *  - The bundled data/*.json always serve as defaults when nothing is stored.
  *
- *  Reads are cached with unstable_cache and invalidated by tag when the admin
- *  saves, so published changes appear immediately without a redeploy. */
+ *  Reads are uncached (see readCollection); the admin save path revalidates
+ *  the prerendered pages so published changes appear without a redeploy. */
 
 import { promises as fs } from "fs";
 import path from "path";
-import { unstable_cache } from "next/cache";
 import { head, put } from "@vercel/blob";
 
 import restaurantDefault from "@/data/restaurant.json";
@@ -93,13 +92,15 @@ async function readRaw(key: CollectionKey): Promise<unknown> {
   }
 }
 
+/** Reads are deliberately UNCACHED. The persistent data cache survives
+ *  deployments and only ever revalidated through the admin save path, which
+ *  let stale content resurface in builds — and worse, let the admin editor
+ *  read stale data and publish it back over newer writes. Content documents
+ *  are tiny and pages are prerendered, so fresh reads cost almost nothing. */
 export async function readCollection<T = unknown>(
   key: CollectionKey,
 ): Promise<T> {
-  const cached = unstable_cache(() => readRaw(key), ["content", key], {
-    tags: [contentTag(key), "content"],
-  });
-  return (await cached()) as T;
+  return (await readRaw(key)) as T;
 }
 
 /** Persist a collection. Callers must revalidate the content tags afterwards
