@@ -69,7 +69,6 @@ export async function Footer() {
             <ul className="text-sm text-muted">
               {[
                 ["Our Story", "/#about"],
-                ["Signature Menu", "/#menu"],
                 ["Gallery", "/#gallery"],
                 ["Events & Tickets", "/#events"],
                 ["Private Dining", "/#private-events"],

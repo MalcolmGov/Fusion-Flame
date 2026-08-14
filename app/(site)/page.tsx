@@ -20,6 +20,9 @@ import {
 
 const ORDER_MESSAGE = "Hi Fusion Flame, I'd like to place an order.";
 
+/** Flip to true once the owner's full menu and pricing are loaded. */
+const SHOW_MENU_SECTION = false;
+
 export default async function HomePage() {
   const [menu, signatureDishes, gallery, events, restaurant, orderHref] =
     await Promise.all([
@@ -37,10 +40,12 @@ export default async function HomePage() {
       <Hero
         backgroundImage={restaurant.heroImage}
         orderHref={orderHref}
-        hasMenu={menu.length > 0}
+        hasMenu={SHOW_MENU_SECTION && menu.length > 0}
       />
       <About />
-      {menu.length > 0 && <MenuSection categories={menu} orderHref={orderHref} />}
+      {SHOW_MENU_SECTION && menu.length > 0 && (
+        <MenuSection categories={menu} orderHref={orderHref} />
+      )}
       {signatureDishes.length > 0 && <SignatureCarousel dishes={signatureDishes} />}
       {gallery.length > 0 && <GallerySection images={gallery} />}
       <EventsSection events={events} />

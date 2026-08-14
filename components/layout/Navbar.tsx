@@ -12,7 +12,8 @@ import type { Announcement } from "@/types";
 
 const NAV_LINKS = [
   { label: "About", href: "/#about" },
-  { label: "Menu", href: "/#menu" },
+  // Menu link returns when the owner's full menu is loaded (see
+  // SHOW_MENU_SECTION on the homepage).
   { label: "Gallery", href: "/#gallery" },
   { label: "Events", href: "/#events" },
   { label: "Private Dining", href: "/#private-events" },
