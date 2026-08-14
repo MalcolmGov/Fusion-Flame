@@ -7,7 +7,7 @@ import { Flame, Leaf, MessageCircle, Sparkles, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/effects/SectionHeading";
-import { cn, formatZAR } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import type { MenuCategory, MenuItem } from "@/types";
 
 function SpiceIndicator({ level }: { level: MenuItem["spiceLevel"] }) {
@@ -92,9 +92,7 @@ function MenuCard({ item, index }: { item: MenuItem; index: number }) {
           <h3 className="font-heading text-lg leading-snug text-foreground transition-colors duration-300 group-hover:text-gold-light md:text-xl">
             {item.name}
           </h3>
-          <p className="font-heading shrink-0 text-lg text-gold-gradient md:text-xl">
-            {formatZAR(item.price)}
-          </p>
+          {/* Prices hidden until the owner's final menu pricing arrives. */}
         </div>
         <p className="mt-2 text-sm leading-relaxed text-muted">
           {item.description}
@@ -124,7 +122,7 @@ export function MenuSection({
         <SectionHeading
           eyebrow="Signature Menu"
           title="A Menu Forged in Flame"
-          description="Twelve chapters of fire-driven cuisine — from oak-ember steaks to torched desserts and smoked-gold cocktails."
+          description="A taste of what leaves our kitchen — the full menu lands with our grand opening."
         />
 
         {/* Category tabs */}

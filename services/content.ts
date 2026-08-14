@@ -19,10 +19,14 @@ import type {
 
 export async function getMenu(): Promise<MenuCategory[]> {
   const menu = await readCollection<MenuCategory[]>("menu");
-  return menu.map((category) => ({
-    ...category,
-    items: category.items.filter((item) => item.available),
-  }));
+  return menu
+    .map((category) => ({
+      ...category,
+      // Photo-less items are hidden until the owner's full menu arrives —
+      // only dishes with real photography make the cut for now.
+      items: category.items.filter((item) => item.available && item.image),
+    }))
+    .filter((category) => category.items.length > 0);
 }
 
 export function getSignatureDishes(): Promise<SignatureDish[]> {

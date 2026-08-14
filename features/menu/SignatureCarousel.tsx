@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/effects/SectionHeading";
-import { cn, formatZAR } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import type { SignatureDish } from "@/types";
 
 export function SignatureCarousel({ dishes }: { dishes: SignatureDish[] }) {
@@ -84,9 +84,7 @@ export function SignatureCarousel({ dishes }: { dishes: SignatureDish[] }) {
                     {dish.description}
                   </p>
                   <div className="mt-4 flex items-center gap-5">
-                    <span className="font-heading text-xl text-gold-gradient md:text-2xl">
-                      {formatZAR(dish.price)}
-                    </span>
+                    {/* Prices hidden until the owner's final menu pricing arrives. */}
                     <Button asChild size="sm" variant="outline">
                       <Link href="/#reservations">Order at Your Table</Link>
                     </Button>
