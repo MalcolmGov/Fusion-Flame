@@ -3,7 +3,6 @@ import { after } from "next/server";
 import { isValidYocoWebhook } from "@/lib/yoco";
 import { updatePaymentStatus } from "@/lib/payments";
 import { sendEmail } from "@/lib/email";
-import { getSiteUrl } from "@/lib/site";
 
 /** Yoco webhook receiver.
  *
@@ -63,10 +62,11 @@ export async function POST(request: Request) {
       checkoutId: payload.checkoutId ?? payload.id,
     });
     if (updated) {
-      const ticketUrl = `${getSiteUrl()}/tickets/success?token=${token}`;
-      after(async () => {
-        // Notify the restaurant.
-        await sendEmail({
+      // Guests save/print their ticket on the success page — no guest email
+      // for now. This internal notification is a no-op until RESEND_API_KEY
+      // is configured.
+      after(() =>
+        sendEmail({
           subject: `Ticket payment received — ${updated.eventTitle} [${updated.reference}]`,
           text: [
             "A ticket payment was completed on the website (Yoco):",
@@ -80,32 +80,8 @@ export async function POST(request: Request) {
             `Amount: R ${updated.amountZar.toFixed(2)}`,
           ].join("\n"),
           replyTo: updated.email,
-        });
-        // Send the guest their ticket.
-        await sendEmail({
-          to: updated.email,
-          subject: `Your Fusion Flame ticket — ${updated.eventTitle} [${updated.reference}]`,
-          text: [
-            `Hi ${updated.purchaser},`,
-            "",
-            "Thank you — your payment is confirmed and your ticket is ready.",
-            "",
-            `Event: ${updated.eventTitle}`,
-            `Date: ${updated.date}`,
-            `Time: ${updated.time}`,
-            `Tickets: ${updated.quantity}`,
-            `Reference: ${updated.reference}`,
-            `Amount paid: R ${updated.amountZar.toFixed(2)}`,
-            "",
-            "View your digital ticket (with entry QR code) here:",
-            ticketUrl,
-            "",
-            "Present the QR code at the door — screenshots are welcome.",
-            "",
-            "See you at Fusion Flame!",
-          ].join("\n"),
-        });
-      });
+        }),
+      );
     }
   } else if (failed) {
     await updatePaymentStatus(token, { status: "failed" });

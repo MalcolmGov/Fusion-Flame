@@ -1,8 +1,10 @@
 import { SectionHeading } from "@/components/effects/SectionHeading";
 import { Reveal } from "@/components/effects/Reveal";
 import { ReservationForm } from "@/features/bookings/ReservationForm";
+import { getRestaurant } from "@/services/content";
 
-export function Reservations() {
+export async function Reservations() {
+  const { whatsapp } = await getRestaurant();
   return (
     <section
       id="reservations"
@@ -15,7 +17,7 @@ export function Reservations() {
           description="Choose your evening — we'll have the fire burning and the glasses polished."
         />
         <Reveal>
-          <ReservationForm />
+          <ReservationForm whatsappNumber={whatsapp} />
         </Reveal>
       </div>
     </section>

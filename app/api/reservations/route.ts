@@ -3,10 +3,11 @@ import { after } from "next/server";
 import { reservationSchema } from "@/lib/validation";
 import { generateReference } from "@/lib/site";
 import { sendEmail } from "@/lib/email";
-import { getRestaurant } from "@/services/content";
 
-/** Reservation endpoint: emails the request to the restaurant mailbox and a
- *  confirmation to the guest (once RESEND_API_KEY is configured). */
+/** Reservation endpoint: validates the request and issues a reference; the
+ *  guest sends the booking to the restaurant over WhatsApp from the success
+ *  screen. Also fires an internal notification email (no-op until
+ *  RESEND_API_KEY is configured). */
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const parsed = reservationSchema.safeParse(body);
@@ -22,9 +23,10 @@ export async function POST(request: Request) {
   const reference = generateReference("FF-RES");
   console.log("[reservation]", reference, r.email, r.date, r.time, r.guests);
 
-  // Deliver emails after the response is sent — the guest never waits on SMTP.
+  // Guests hand their request to the restaurant over WhatsApp from the
+  // success screen — no guest email for now. This internal notification is
+  // a no-op until RESEND_API_KEY is configured.
   after(async () => {
-    const restaurant = await getRestaurant();
     const detailLines = [
       `Reference: ${reference}`,
       `Name: ${r.name} ${r.surname}`,
@@ -43,18 +45,6 @@ export async function POST(request: Request) {
       subject: `New reservation — ${r.name} ${r.surname}, ${r.guests} guests on ${r.date} ${r.time} [${reference}]`,
       text: `A new reservation request came in via the website:\n\n${detailLines}`,
       replyTo: r.email,
-    });
-
-    await sendEmail({
-      to: r.email,
-      subject: `Your Fusion Flame reservation request (${reference})`,
-      text:
-        `Hi ${r.name},\n\n` +
-        `Thank you — we've received your reservation request for ${r.guests} ` +
-        `guest${r.guests === 1 ? "" : "s"} on ${r.date} at ${r.time} (${r.seating} seating).\n\n` +
-        `Your reference is ${reference}. Our team will confirm your table shortly.\n\n` +
-        `Need to change anything? Reply to this email or WhatsApp us on ${restaurant.phone}.\n\n` +
-        `Fusion Flame · ${restaurant.address.street}, ${restaurant.address.suburb}, ${restaurant.address.city}`,
     });
   });
 

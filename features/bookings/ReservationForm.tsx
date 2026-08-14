@@ -4,7 +4,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { CalendarCheck2, PartyPopper, RotateCcw } from "lucide-react";
+import {
+  CalendarCheck2,
+  MessageCircle,
+  PartyPopper,
+  RotateCcw,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Input,
@@ -45,7 +50,11 @@ async function submitReservation(
   return res.json();
 }
 
-export function ReservationForm() {
+export function ReservationForm({
+  whatsappNumber,
+}: {
+  whatsappNumber: string;
+}) {
   const {
     register,
     handleSubmit,
@@ -62,6 +71,23 @@ export function ReservationForm() {
 
   if (mutation.isSuccess) {
     const { reference, reservation } = mutation.data;
+    const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      [
+        "Hi Fusion Flame! I'd like to reserve a table.",
+        "",
+        `Reference: ${reference}`,
+        `Name: ${reservation.name} ${reservation.surname}`,
+        `Date: ${reservation.date} at ${reservation.time}`,
+        `Guests: ${reservation.guests} (${reservation.seating} seating)`,
+        reservation.occasion ? `Occasion: ${reservation.occasion}` : null,
+        reservation.specialRequests
+          ? `Special requests: ${reservation.specialRequests}`
+          : null,
+        `Phone: ${reservation.phone}`,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    )}`;
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
@@ -94,20 +120,28 @@ export function ReservationForm() {
         </p>
         <p className="mt-4 text-sm text-muted">
           Booking reference{" "}
-          <span className="font-mono text-gold-light">{reference}</span>. A
-          confirmation is on its way to {reservation.email}.
+          <span className="font-mono text-gold-light">{reference}</span>. Now
+          tap below to send your booking to us on WhatsApp — we'll confirm
+          your table right there.
         </p>
-        <Button
-          variant="outline"
-          className="mt-8"
-          onClick={() => {
-            mutation.reset();
-            reset();
-          }}
-        >
-          <RotateCcw className="size-4" aria-hidden />
-          Make Another Reservation
-        </Button>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button asChild variant="whatsapp">
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="size-4" aria-hidden />
+              Send Booking via WhatsApp
+            </a>
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => {
+              mutation.reset();
+              reset();
+            }}
+          >
+            <RotateCcw className="size-4" aria-hidden />
+            Make Another Reservation
+          </Button>
+        </div>
       </motion.div>
     );
   }

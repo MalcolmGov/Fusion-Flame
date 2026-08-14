@@ -100,8 +100,8 @@ export function TicketView() {
           You're On the List
         </h1>
         <p className="mt-3 text-muted">
-          Payment confirmed. Your digital ticket is below — we've also emailed
-          it to <span className="text-foreground">{ticket.email}</span>.
+          Payment confirmed. Your digital ticket is below — please save or
+          print it now and present the QR code at the door.
         </p>
       </div>
 

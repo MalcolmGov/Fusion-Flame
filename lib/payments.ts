@@ -12,7 +12,7 @@
  *  already used for admin content, applied with a high-entropy key. */
 
 import crypto from "crypto";
-import { head, put } from "@vercel/blob";
+import { head, list, put } from "@vercel/blob";
 
 export type PaymentStatus = "pending" | "paid" | "failed";
 
@@ -63,6 +63,27 @@ export async function getPayment(
   } catch {
     return null;
   }
+}
+
+/** Every payment record, newest first — the admin sales view. */
+export async function listPayments(): Promise<PaymentRecord[]> {
+  const { blobs } = await list({ prefix: "payments/", limit: 1000 });
+  const results = await Promise.all(
+    blobs.map(async (blob) => {
+      try {
+        const res = await fetch(`${blob.url}?t=${Date.now()}`, {
+          cache: "no-store",
+        });
+        if (!res.ok) return null;
+        return (await res.json()) as PaymentRecord;
+      } catch {
+        return null;
+      }
+    }),
+  );
+  return results
+    .filter((r): r is PaymentRecord => Boolean(r?.token))
+    .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
 }
 
 export async function updatePaymentStatus(

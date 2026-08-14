@@ -5,6 +5,7 @@ import {
   GalleryHorizontal,
   Megaphone,
   Settings2,
+  Ticket,
   UtensilsCrossed,
   ArrowRight,
   Database,
@@ -48,6 +49,25 @@ export default function AdminDashboard() {
       ) : null}
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <Link
+          href="/admin/tickets"
+          className="group gold-ring rounded-2xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-gold"
+        >
+          <span className="glass flex size-10 items-center justify-center rounded-xl text-gold">
+            <Ticket className="size-5" aria-hidden />
+          </span>
+          <h2 className="mt-4 flex items-center gap-1.5 font-heading text-lg text-foreground transition-colors group-hover:text-gold-light">
+            Ticket Sales
+            <ArrowRight
+              className="size-3.5 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+              aria-hidden
+            />
+          </h2>
+          <p className="mt-1 text-xs leading-relaxed text-muted">
+            Every ticket order, with revenue and per-event totals from the
+            payment ledger.
+          </p>
+        </Link>
         {ADMIN_COLLECTIONS.map((c) => {
           const Icon = ICONS[c.key] ?? Settings2;
           return (
