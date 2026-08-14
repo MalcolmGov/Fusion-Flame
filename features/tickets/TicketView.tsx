@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
@@ -107,8 +108,24 @@ export function TicketView() {
       {/* Digital ticket */}
       <div className="gold-ring relative mt-9 overflow-hidden rounded-3xl print:border print:border-black/20">
         <div className="bg-[linear-gradient(120deg,rgba(221,169,67,0.14),rgba(250,105,6,0.07))] p-7 md:p-8">
-          <p className="eyebrow text-[10px]">Fusion Flame · Digital Ticket</p>
-          <h2 className="font-heading mt-2 text-3xl text-foreground">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/flame-mark.png"
+              alt=""
+              width={46}
+              height={46}
+              aria-hidden
+              className="shrink-0"
+            />
+            <div>
+              <p className="font-heading text-xl leading-none">
+                <span className="text-gold-gradient">Fusion</span>{" "}
+                <span className="text-red-gradient">Flame</span>
+              </p>
+              <p className="eyebrow mt-1.5 text-[9px]">Digital Ticket</p>
+            </div>
+          </div>
+          <h2 className="font-heading mt-5 text-3xl text-foreground">
             {ticket.eventTitle}
           </h2>
 
