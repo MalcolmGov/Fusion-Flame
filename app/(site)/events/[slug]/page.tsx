@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,13 +9,13 @@ import {
   Clock,
   MapPin,
   Shirt,
-  TriangleAlert,
   Users,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/effects/Reveal";
 import { TicketCheckout } from "@/features/tickets/TicketCheckout";
+import { PaymentNotice } from "@/features/tickets/PaymentNotice";
 import {
   getEvent,
   getEvents,
@@ -27,7 +28,6 @@ import type { RestaurantEvent, RestaurantInfo } from "@/types";
 
 interface EventPageProps {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ payment?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -100,21 +100,14 @@ function EventJsonLd({
   );
 }
 
-export default async function EventPage({ params, searchParams }: EventPageProps) {
+export default async function EventPage({ params }: EventPageProps) {
   const { slug } = await params;
-  const { payment } = await searchParams;
   const [event, restaurant] = await Promise.all([
     getEvent(slug),
     getRestaurant(),
   ]);
   if (!event) notFound();
   const past = isEventPast(event);
-  const paymentNotice =
-    payment === "cancelled"
-      ? "Checkout was cancelled — no money left your account. Ready when you are."
-      : payment === "failed"
-        ? "That payment didn't go through — no money left your account. Please try again."
-        : null;
 
   return (
     <div className="relative pt-24 md:pt-28">
@@ -237,15 +230,9 @@ export default async function EventPage({ params, searchParams }: EventPageProps
               </div>
             ) : (
             <div className="lg:sticky lg:top-28">
-              {paymentNotice ? (
-                <p
-                  role="alert"
-                  className="mb-4 flex items-start gap-2 rounded-xl border border-flame-red/40 bg-flame-red/10 px-4 py-3 text-sm text-flame-red"
-                >
-                  <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
-                  {paymentNotice}
-                </p>
-              ) : null}
+              <Suspense fallback={null}>
+                <PaymentNotice />
+              </Suspense>
               <p className="mb-4 text-center font-heading text-3xl text-gold-gradient lg:text-left">
                 {formatZAR(event.price)}
                 <span className="ml-2 font-sans text-sm text-muted">
