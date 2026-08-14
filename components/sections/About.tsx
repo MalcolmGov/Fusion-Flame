@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "@/components/effects/Reveal";
-import { Counter } from "@/components/effects/Counter";
 import { SectionHeading } from "@/components/effects/SectionHeading";
-import { getRestaurant } from "@/services/content";
 
 const ABOUT_IMAGES = {
   main: "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/grilled-prawns-platter.jpg",
@@ -10,23 +8,11 @@ const ABOUT_IMAGES = {
     "https://aoojryj3c58valkr.public.blob.vercel-storage.com/food/savoury-platter-blooms.jpg",
 };
 
-export async function About() {
-  const { stats } = await getRestaurant();
-
-  const counters = [
-    { label: "Years of Excellence", value: stats.yearsOfExcellence, suffix: "" },
-    { label: "Guests Served", value: stats.guestsServed, suffix: "+" },
-    { label: "Signature Dishes", value: stats.signatureDishes, suffix: "" },
-    { label: "Events Hosted", value: stats.eventsHosted, suffix: "+" },
-  ];
-
+export function About() {
   return (
     <section id="about" className="fire-ambience relative scroll-mt-24 py-24 md:py-36">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <SectionHeading
-          eyebrow="Our Story"
-          title="Born of Fire, Refined by Passion"
-        />
+        <SectionHeading eyebrow="Our Story" title="A New Chapter Begins" />
 
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           {/* Imagery */}
@@ -59,53 +45,45 @@ export async function About() {
           <div>
             <Reveal delay={0.1}>
               <h3 className="font-heading text-2xl leading-snug text-foreground md:text-3xl">
-                A sanctuary of live fire, golden light and
-                <span className="text-fire-gradient"> extraordinary flavour.</span>
+                Authentic flavours,
+                <span className="text-fire-gradient"> unforgettable experiences.</span>
               </h3>
             </Reveal>
             <Reveal delay={0.2}>
               <p className="mt-6 leading-relaxed text-muted">
-                Fusion Flame began with a single conviction: that fire is not
-                merely a way of cooking, but a way of gathering. In the heart of
-                Edenvale, our custom-built open hearth anchors a dining room of
-                smoked glass, brushed gold and candlelight — a stage where every
-                evening becomes theatre.
+                Fusion Flame is a family restaurant in the heart of Edenvale,
+                opening its doors at Eden Terrace Shopping Centre on 21 August
+                2026. We bring together the rich flavours of authentic Indian
+                cuisine with a modern twist — traditional favourites, grilled
+                specialties and signature dishes that celebrate the diverse
+                flavours of South Africa.
               </p>
             </Reveal>
             <Reveal delay={0.3}>
               <p className="mt-4 leading-relaxed text-muted">
-                Chef Laurent Dlamini and his brigade marry African fire-craft
-                with classical technique — dry-aged cuts kissed by oak embers,
-                seafood flamed in chilli-gold butter, desserts torched at your
-                table. Every plate honours the ingredient; every visit honours
-                the moment.
+                Every Sunday we lay on a generous buffet experience — from time
+                to time complete with a spit braai, traditional braai and other
+                culinary delights — while our entertainment area and dance floor
+                set a relaxed supper-club atmosphere where great food, music and
+                unforgettable memories come together.
               </p>
             </Reveal>
             <Reveal delay={0.4}>
+              <p className="mt-4 leading-relaxed text-muted">
+                Fusion Flame comes to you from the family behind Curry Lounge
+                Edenmeadows — which continues to serve you with the same love
+                and authentic flavours as a takeaway outlet at Edenmeadows
+                Shopping Centre.
+              </p>
+            </Reveal>
+            <Reveal delay={0.5}>
               <blockquote className="font-accent mt-8 border-l-2 border-gold/60 pl-6 text-xl italic leading-relaxed text-foreground/85">
-                “We don&rsquo;t serve dinner. We serve the memory you&rsquo;ll
-                retell for years.”
+                &ldquo;Good Food, Good Mood, Good Vibes.&rdquo;
                 <footer className="eyebrow mt-3 not-italic">
-                  — Chef Laurent Dlamini
+                  — The Fusion Flame Family
                 </footer>
               </blockquote>
             </Reveal>
-
-            {/* Animated counters */}
-            <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-              {counters.map((c, i) => (
-                <Reveal key={c.label} delay={0.1 * i}>
-                  <div className="glass rounded-2xl p-5 text-center transition-all duration-500 hover:border-gold/30 hover:shadow-glow-gold">
-                    <p className="font-heading text-3xl text-gold-gradient md:text-4xl">
-                      <Counter target={c.value} suffix={c.suffix} />
-                    </p>
-                    <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-muted">
-                      {c.label}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
           </div>
         </div>
       </div>

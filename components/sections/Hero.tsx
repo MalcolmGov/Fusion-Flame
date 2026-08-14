@@ -124,7 +124,7 @@ export function Hero({
           data-hero-reveal="eyebrow"
           className="eyebrow mb-6 opacity-0 md:text-sm"
         >
-          Premium Contemporary Dining · Edenvale
+          Authentic Flavours · Unforgettable Experiences · Edenvale
         </p>
 
         <h1 className="font-heading text-5xl leading-[1.05] sm:text-6xl md:text-7xl lg:text-8xl">
@@ -141,7 +141,7 @@ export function Hero({
           data-hero-reveal="sub"
           className="font-accent mx-auto mt-7 max-w-xl text-xl italic leading-relaxed text-foreground/80 opacity-0 md:text-2xl"
         >
-          Where exceptional cuisine meets unforgettable moments.
+          Good Food, Good Mood, Good Vibes.
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

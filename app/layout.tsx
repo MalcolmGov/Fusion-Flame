@@ -29,18 +29,21 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Fusion Flame — Premium Contemporary Dining | Johannesburg",
+    default: "Fusion Flame — Authentic Indian Cuisine & Grill | Edenvale",
     template: "%s | Fusion Flame",
   },
   description:
-    "Ignite your taste experience at Fusion Flame — premium flame-grilled cuisine, signature cocktails, live entertainment and unforgettable moments in Edenvale, Johannesburg.",
+    "Fusion Flame is a family restaurant at Eden Terrace Shopping Centre, Edenvale — authentic Indian cuisine with a modern twist, grilled specialties, Sunday buffets with spit braai, and a supper-club atmosphere. Good Food, Good Mood, Good Vibes.",
   keywords: [
     "Fusion Flame",
-    "premium restaurant Johannesburg",
-    "fine dining Edenvale",
-    "steakhouse Johannesburg",
-    "flame grill restaurant",
-    "private dining Johannesburg",
+    "Indian restaurant Edenvale",
+    "family restaurant Edenvale",
+    "Sunday buffet Edenvale",
+    "spit braai Edenvale",
+    "grill restaurant Johannesburg",
+    "supper club Johannesburg",
+    "Eden Terrace Shopping Centre",
+    "Curry Lounge Edenmeadows",
     "restaurant events Edenvale",
   ],
   openGraph: {
@@ -50,7 +53,7 @@ export const metadata: Metadata = {
     siteName: "Fusion Flame",
     title: "Fusion Flame — Ignite Your Taste Experience",
     description:
-      "Where exceptional cuisine meets unforgettable moments. Premium flame-grilled dining, cocktails and live entertainment in Edenvale.",
+      "Authentic Indian cuisine with a modern twist — grills, Sunday buffets and live entertainment at Eden Terrace Shopping Centre, Edenvale. Good Food, Good Mood, Good Vibes.",
     // Image comes from app/opengraph-image.tsx (file convention) — a
     // designed 1200×630 share card, not the raw square logo.
   },
@@ -58,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fusion Flame — Ignite Your Taste Experience",
     description:
-      "Premium flame-grilled dining, cocktails and live entertainment in Edenvale, Johannesburg.",
+      "Authentic Indian cuisine with a modern twist — grills, Sunday buffets and live entertainment in Edenvale. Good Food, Good Mood, Good Vibes.",
     // Falls back to opengraph-image.tsx.
   },
   alternates: { canonical: "/" },
