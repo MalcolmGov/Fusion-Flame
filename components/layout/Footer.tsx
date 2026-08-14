@@ -44,7 +44,7 @@ export async function Footer() {
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
               {restaurant.tagline}
             </p>
-            <div className="mt-6 flex gap-3">
+            <div className="mt-6 flex gap-3 empty:hidden">
               {restaurant.social.map((s) => {
                 const Icon = SOCIAL_ICONS[s.platform] ?? InstagramIcon;
                 return (
