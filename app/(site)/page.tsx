@@ -7,7 +7,6 @@ import { GallerySection } from "@/features/gallery/GallerySection";
 import { EventsSection } from "@/features/events/EventsSection";
 import { PrivateEvents } from "@/components/sections/PrivateEvents";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
-import { Newsletter } from "@/components/sections/Newsletter";
 import { Reservations } from "@/components/sections/Reservations";
 import { Contact } from "@/components/sections/Contact";
 import {
@@ -44,7 +43,6 @@ export default async function HomePage() {
       <Reservations />
       <PrivateEvents />
       <InstagramFeed />
-      <Newsletter />
       <Contact />
     </>
   );

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Award } from "lucide-react";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -8,7 +7,6 @@ import {
   XIcon,
 } from "@/components/ui/social-icons";
 import { getRestaurant } from "@/services/content";
-import { NewsletterForm } from "@/features/bookings/NewsletterForm";
 
 const SOCIAL_ICONS: Record<string, typeof InstagramIcon> = {
   Instagram: InstagramIcon,
@@ -27,7 +25,7 @@ export async function Footer() {
         className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent"
       />
       <div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-3">
           {/* Brand */}
           <div>
             <Link href="/" className="inline-flex items-center gap-3">
@@ -124,19 +122,6 @@ export async function Footer() {
             </div>
           </div>
 
-          {/* Newsletter */}
-          <div>
-            <h3 className="eyebrow mb-5">Stay in the Glow</h3>
-            <p className="mb-4 text-sm leading-relaxed text-muted">
-              Exclusive offers, event invitations and seasonal menus — straight
-              to your inbox.
-            </p>
-            <NewsletterForm compact />
-            <div className="mt-8 flex items-center gap-2 text-xs text-muted">
-              <Award className="size-4 text-gold" aria-hidden />
-              Luxe Restaurant Awards — Best Grill Experience 2024
-            </div>
-          </div>
         </div>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-xs text-muted md:flex-row">

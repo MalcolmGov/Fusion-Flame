@@ -6,7 +6,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Star, ChevronDown, Music, Clock, MessageCircle } from "lucide-react";
+import { ChevronDown, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Embers } from "@/components/effects/Embers";
 
@@ -70,12 +70,6 @@ export function Hero({
           { opacity: 0, y: 24, scale: 0.94 },
           { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.12 },
           "-=0.55",
-        )
-        .fromTo(
-          "[data-hero-reveal='stat']",
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.1 },
-          "-=0.4",
         )
         .fromTo(
           "[data-hero-reveal='scroll']",
@@ -175,34 +169,6 @@ export function Hero({
           </div>
         </div>
 
-        {/* Floating stats */}
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-3 md:gap-4">
-          <div
-            data-hero-reveal="stat"
-            className="glass flex items-center gap-2 rounded-full px-5 py-2.5 text-xs text-foreground/85 opacity-0"
-          >
-            <span className="flex text-gold" aria-label="Five star rating">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="size-3.5 fill-current" aria-hidden />
-              ))}
-            </span>
-            5000+ Happy Guests
-          </div>
-          <div
-            data-hero-reveal="stat"
-            className="glass flex items-center gap-2 rounded-full px-5 py-2.5 text-xs text-foreground/85 opacity-0"
-          >
-            <Clock className="size-3.5 text-gold" aria-hidden />
-            Open Daily
-          </div>
-          <div
-            data-hero-reveal="stat"
-            className="glass flex items-center gap-2 rounded-full px-5 py-2.5 text-xs text-foreground/85 opacity-0"
-          >
-            <Music className="size-3.5 text-gold" aria-hidden />
-            Live Entertainment
-          </div>
-        </div>
       </motion.div>
 
       {/* Scroll indicator */}
