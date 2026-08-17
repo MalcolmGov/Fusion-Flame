@@ -32,7 +32,7 @@ export function TicketCheckout({ event }: { event: RestaurantEvent }) {
     formState: { errors },
   } = useForm<TicketOrderFormValues>({
     resolver: zodResolver(ticketOrderSchema),
-    defaultValues: { eventSlug: event.slug, quantity: 2 },
+    defaultValues: { eventSlug: event.slug, quantity: 1 },
   });
 
   const quantity = watch("quantity") ?? 1;
@@ -120,7 +120,9 @@ export function TicketCheckout({ event }: { event: RestaurantEvent }) {
           <FieldError message={errors.surname?.message} />
         </div>
         <div>
-          <Label htmlFor="ticket-email">Email</Label>
+          <Label htmlFor="ticket-email">
+            Email <span className="text-muted">(optional)</span>
+          </Label>
           <Input
             id="ticket-email"
             type="email"

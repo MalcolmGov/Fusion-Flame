@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       reference,
       event: event.slug,
       qty: String(order.quantity),
-      email: order.email,
+      email: order.email ?? "",
       name: `${order.name} ${order.surname}`,
       amount: String(amountZar),
     });
@@ -76,7 +76,7 @@ export async function POST(request: Request) {
       time: event.time,
       quantity: order.quantity,
       purchaser: `${order.name} ${order.surname}`,
-      email: order.email,
+      email: order.email ?? "",
       phone: order.phone,
       amountZar,
       createdAt: new Date().toISOString(),

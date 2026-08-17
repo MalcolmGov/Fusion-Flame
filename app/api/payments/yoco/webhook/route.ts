@@ -75,11 +75,11 @@ export async function POST(request: Request) {
             `Event: ${updated.eventTitle}`,
             `Tickets: ${updated.quantity}`,
             `Purchaser: ${updated.purchaser}`,
-            `Email: ${updated.email}`,
+            `Email: ${updated.email || "—"}`,
             `Phone: ${updated.phone}`,
             `Amount: R ${updated.amountZar.toFixed(2)}`,
           ].join("\n"),
-          replyTo: updated.email,
+          replyTo: updated.email || undefined,
         }),
       );
     }

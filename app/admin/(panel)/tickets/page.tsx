@@ -143,7 +143,8 @@ export default async function TicketSalesPage() {
                     <td className="px-4 py-3">
                       <p className="text-foreground/90">{p.purchaser}</p>
                       <p className="text-xs text-muted">
-                        {p.email} · {p.phone}
+                        {p.email ? `${p.email} · ` : ""}
+                        {p.phone}
                       </p>
                     </td>
                     <td className="px-4 py-3 text-right text-foreground/90">

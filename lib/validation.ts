@@ -34,7 +34,14 @@ export const ticketOrderSchema = z.object({
     .max(10, "Maximum 10 tickets per order"),
   name: z.string().min(2, "Please enter your first name"),
   surname: z.string().min(2, "Please enter your surname"),
-  email: z.string().email("Please enter a valid email address"),
+  // Guests save/print their own ticket, so email is a nice-to-have, not
+  // required — but if they do type one it must be a real address.
+  email: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address")
+    .optional()
+    .or(z.literal("")),
   phone: z
     .string()
     .min(9, "Please enter a valid phone number")
