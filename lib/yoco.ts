@@ -69,6 +69,22 @@ export async function createCheckout({
   return { id: json.id, redirectUrl: json.redirectUrl, status: json.status };
 }
 
+/** Reconciliation fallback for the ticket success page: if our webhook
+ *  hasn't landed yet (or was ever dropped), ask Yoco directly rather than
+ *  leaving the guest stuck on "pending" forever. */
+export async function getCheckoutStatus(
+  checkoutId: string,
+): Promise<{ status: string } | null> {
+  const res = await fetch(`${YOCO_BASE}/checkouts/${checkoutId}`, {
+    headers: { Authorization: `Bearer ${process.env.YOCO_SECRET_KEY}` },
+    cache: "no-store",
+  });
+  if (!res.ok) return null;
+  const json = await res.json().catch(() => null);
+  if (!json?.status) return null;
+  return { status: json.status };
+}
+
 /** Verify Yoco's webhook signature (svix-style):
  *  HMAC-SHA256 over `${webhook-id}.${webhook-timestamp}.${rawBody}` keyed with
  *  the base64-decoded whsec_ secret; compared constant-time against the

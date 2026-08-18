@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import { getEvent } from "@/services/content";
-import { getPayment } from "@/lib/payments";
+import { getPayment, reconcilePendingPayment } from "@/lib/payments";
 import type { DigitalTicket } from "@/types";
 
-/** Ticket status for the success page. Never trusts the redirect alone —
- *  reads our own webhook-updated payment record (see lib/payments.ts).
+/** Ticket status for the success page. The webhook is the primary source of
+ *  truth, but webhook delivery isn't guaranteed to be fast or to arrive at
+ *  all — so while a record is still "pending", reconcilePendingPayment also
+ *  asks Yoco directly and self-heals the record if Yoco already has a final
+ *  answer. Never trusts the redirect alone.
  *  GET /api/payments/yoco/status?token=...
  *  Sandbox: GET .../status?mock=1&event=...&qty=...&email=...&name=... */
 export async function GET(request: Request) {
@@ -36,8 +39,8 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Missing token" }, { status: 400 });
   }
 
-  const record = await getPayment(token);
-  if (!record) {
+  const found = await getPayment(token);
+  if (!found) {
     return NextResponse.json(
       {
         error:
@@ -46,6 +49,7 @@ export async function GET(request: Request) {
       { status: 404 },
     );
   }
+  const record = await reconcilePendingPayment(found);
 
   const ticket: DigitalTicket = {
     reference: record.reference,

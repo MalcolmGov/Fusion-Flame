@@ -13,6 +13,7 @@
 
 import crypto from "crypto";
 import { head, list, put } from "@vercel/blob";
+import { getCheckoutStatus } from "./yoco";
 
 export type PaymentStatus = "pending" | "paid" | "failed";
 
@@ -81,9 +82,9 @@ export async function listPayments(): Promise<PaymentRecord[]> {
       }
     }),
   );
-  return results
-    .filter((r): r is PaymentRecord => Boolean(r?.token))
-    .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+  const records = results.filter((r): r is PaymentRecord => Boolean(r?.token));
+  const reconciled = await Promise.all(records.map(reconcilePendingPayment));
+  return reconciled.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
 }
 
 export async function updatePaymentStatus(
@@ -95,4 +96,27 @@ export async function updatePaymentStatus(
   const updated = { ...existing, ...patch };
   await savePayment(updated);
   return updated;
+}
+
+/** Self-heals a "pending" record by asking Yoco directly. The webhook is
+ *  still the primary path, but delivery isn't instant or guaranteed — this
+ *  is the backstop so both the customer's ticket page and the admin sales
+ *  view never get stuck showing a stale "pending" after Yoco has already
+ *  resolved the payment. */
+export async function reconcilePendingPayment(
+  record: PaymentRecord,
+): Promise<PaymentRecord> {
+  if (record.status !== "pending" || !record.checkoutId?.startsWith("ch_")) {
+    return record;
+  }
+  const live = await getCheckoutStatus(record.checkoutId);
+  if (!live) return record;
+
+  if (live.status === "succeeded") {
+    return (await updatePaymentStatus(record.token, { status: "paid" })) ?? record;
+  }
+  if (["failed", "cancelled", "expired"].includes(live.status)) {
+    return (await updatePaymentStatus(record.token, { status: "failed" })) ?? record;
+  }
+  return record;
 }

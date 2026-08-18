@@ -57,9 +57,16 @@ export async function POST(request: Request) {
   const failed = status === "failed" || type.includes("failed");
 
   if (succeeded) {
+    // Yoco echoes the real checkout id (ch_...) back in metadata.checkoutId
+    // (see the metadata sent in lib/yoco.ts's createCheckout response) —
+    // payload.checkoutId isn't actually present on this envelope, and
+    // payload.id is the *payment* id, not the checkout id, so prefer
+    // metadata and only fall back to payload.id as a last resort.
+    const checkoutId =
+      payload.metadata?.checkoutId ?? payload.checkoutId ?? payload.id;
     const updated = await updatePaymentStatus(token, {
       status: "paid",
-      checkoutId: payload.checkoutId ?? payload.id,
+      checkoutId,
     });
     if (updated) {
       // Guests save/print their ticket on the success page — no guest email

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -35,6 +36,29 @@ const TIME_SLOTS = [
   "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00",
 ];
 
+function buildWhatsappHref(
+  whatsappNumber: string,
+  { reference, reservation }: ReservationConfirmation,
+) {
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    [
+      "Hi Fusion Flame! I'd like to reserve a table.",
+      "",
+      `Reference: ${reference}`,
+      `Name: ${reservation.name} ${reservation.surname}`,
+      `Date: ${reservation.date} at ${reservation.time}`,
+      `Guests: ${reservation.guests} (${reservation.seating} seating)`,
+      reservation.occasion ? `Occasion: ${reservation.occasion}` : null,
+      reservation.specialRequests
+        ? `Special requests: ${reservation.specialRequests}`
+        : null,
+      `Phone: ${reservation.phone}`,
+    ]
+      .filter(Boolean)
+      .join("\n"),
+  )}`;
+}
+
 async function submitReservation(
   values: ReservationFormValues,
 ): Promise<ReservationConfirmation> {
@@ -65,29 +89,32 @@ export function ReservationForm({
     defaultValues: { guests: 2, seating: "indoor" },
   });
 
-  const mutation = useMutation({ mutationFn: submitReservation });
+  // Opened synchronously inside the form's submit handler (a genuine user
+  // gesture) so the WhatsApp tab can be navigated automatically once the
+  // reservation succeeds — browsers block window.open() called after an
+  // awaited fetch, but not a location change on a tab opened during the
+  // gesture itself.
+  const whatsappTab = useRef<Window | null>(null);
+
+  const mutation = useMutation({
+    mutationFn: submitReservation,
+    onSuccess: (data) => {
+      const href = buildWhatsappHref(whatsappNumber, data);
+      if (whatsappTab.current) {
+        whatsappTab.current.location.href = href;
+      } else {
+        // Pre-open was blocked (rare) — try once more, and the manual
+        // button below still covers the case where this is blocked too.
+        window.open(href, "_blank", "noopener,noreferrer");
+      }
+    },
+  });
 
   const minDate = new Date().toISOString().split("T")[0];
 
   if (mutation.isSuccess) {
     const { reference, reservation } = mutation.data;
-    const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-      [
-        "Hi Fusion Flame! I'd like to reserve a table.",
-        "",
-        `Reference: ${reference}`,
-        `Name: ${reservation.name} ${reservation.surname}`,
-        `Date: ${reservation.date} at ${reservation.time}`,
-        `Guests: ${reservation.guests} (${reservation.seating} seating)`,
-        reservation.occasion ? `Occasion: ${reservation.occasion}` : null,
-        reservation.specialRequests
-          ? `Special requests: ${reservation.specialRequests}`
-          : null,
-        `Phone: ${reservation.phone}`,
-      ]
-        .filter(Boolean)
-        .join("\n"),
-    )}`;
+    const whatsappHref = buildWhatsappHref(whatsappNumber, mutation.data);
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
@@ -120,9 +147,9 @@ export function ReservationForm({
         </p>
         <p className="mt-4 text-sm text-muted">
           Booking reference{" "}
-          <span className="font-mono text-gold-light">{reference}</span>. Now
-          tap below to send your booking to us on WhatsApp — we'll confirm
-          your table right there.
+          <span className="font-mono text-gold-light">{reference}</span>.
+          We've opened WhatsApp with your booking ready to send — if it
+          didn't open, tap below to send it yourself.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild variant="whatsapp">
@@ -134,6 +161,7 @@ export function ReservationForm({
           <Button
             variant="outline"
             onClick={() => {
+              whatsappTab.current = null;
               mutation.reset();
               reset();
             }}
@@ -148,7 +176,10 @@ export function ReservationForm({
 
   return (
     <form
-      onSubmit={handleSubmit((values) => mutation.mutate(values))}
+      onSubmit={handleSubmit((values) => {
+        whatsappTab.current = window.open("", "_blank");
+        mutation.mutate(values);
+      })}
       className="gold-ring mx-auto max-w-3xl rounded-3xl p-7 md:p-10"
       noValidate
       aria-label="Reservation form"
