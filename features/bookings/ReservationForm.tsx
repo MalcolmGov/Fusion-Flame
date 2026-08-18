@@ -5,12 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import {
-  CalendarCheck2,
-  MessageCircle,
-  PartyPopper,
-  RotateCcw,
-} from "lucide-react";
+import { MessageCircle, PartyPopper, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Input,
@@ -309,15 +304,17 @@ export function ReservationForm({
 
       <Button
         type="submit"
+        variant="whatsapp"
         size="lg"
         disabled={mutation.isPending}
         className="mt-8 w-full"
       >
-        <CalendarCheck2 className="size-4" aria-hidden />
-        {mutation.isPending ? "Securing your table…" : "Reserve My Table"}
+        <MessageCircle className="size-4" aria-hidden />
+        {mutation.isPending ? "Sending to WhatsApp…" : "Send Booking via WhatsApp"}
       </Button>
       <p className="mt-4 text-center text-xs text-muted/70">
-        Free cancellation up to 6 hours before your booking.
+        We'll open WhatsApp so you can send it straight to us. Free
+        cancellation up to 6 hours before your booking.
       </p>
     </form>
   );
