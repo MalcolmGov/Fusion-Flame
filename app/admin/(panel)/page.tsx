@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {
+  CalendarCheck2,
   CalendarDays,
   ChefHat,
   GalleryHorizontal,
@@ -66,6 +67,25 @@ export default function AdminDashboard() {
           <p className="mt-1 text-xs leading-relaxed text-muted">
             Every ticket order, with revenue and per-event totals from the
             payment ledger.
+          </p>
+        </Link>
+        <Link
+          href="/admin/reservations"
+          className="group gold-ring rounded-2xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-gold"
+        >
+          <span className="glass flex size-10 items-center justify-center rounded-xl text-gold">
+            <CalendarCheck2 className="size-5" aria-hidden />
+          </span>
+          <h2 className="mt-4 flex items-center gap-1.5 font-heading text-lg text-foreground transition-colors group-hover:text-gold-light">
+            Reservations
+            <ArrowRight
+              className="size-3.5 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+              aria-hidden
+            />
+          </h2>
+          <p className="mt-1 text-xs leading-relaxed text-muted">
+            Every table booking, independent of WhatsApp — with guest
+            counts and contact details.
           </p>
         </Link>
         {ADMIN_COLLECTIONS.map((c) => {

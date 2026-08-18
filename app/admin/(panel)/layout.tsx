@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ExternalLink, LayoutDashboard, Ticket } from "lucide-react";
+import { CalendarDays, ExternalLink, LayoutDashboard, Ticket } from "lucide-react";
 import { isAdminAuthenticated } from "@/lib/admin/auth";
 import { ADMIN_COLLECTIONS } from "@/lib/admin/schema";
 import { LogoutButton } from "@/components/admin/LogoutButton";
@@ -55,6 +55,13 @@ export default async function AdminLayout({
             <Ticket className="size-4" aria-hidden />
             Ticket Sales
           </Link>
+          <Link
+            href="/admin/reservations"
+            className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm text-muted transition-colors hover:bg-white/5 hover:text-gold-light"
+          >
+            <CalendarDays className="size-4" aria-hidden />
+            Reservations
+          </Link>
           <p className="px-3 pb-1 pt-4 text-[10px] uppercase tracking-[0.24em] text-muted/60">
             Content
           </p>
@@ -103,6 +110,12 @@ export default async function AdminLayout({
             className="glass shrink-0 rounded-full px-4 py-1.5 text-xs text-gold-light"
           >
             Ticket Sales
+          </Link>
+          <Link
+            href="/admin/reservations"
+            className="glass shrink-0 rounded-full px-4 py-1.5 text-xs text-gold-light"
+          >
+            Reservations
           </Link>
           {ADMIN_COLLECTIONS.map((c) => (
             <Link

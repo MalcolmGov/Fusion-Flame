@@ -3,11 +3,12 @@ import { after } from "next/server";
 import { reservationSchema } from "@/lib/validation";
 import { generateReference } from "@/lib/site";
 import { sendEmail } from "@/lib/email";
+import { createReservationToken, saveReservation } from "@/lib/reservations";
 
-/** Reservation endpoint: validates the request and issues a reference; the
- *  guest sends the booking to the restaurant over WhatsApp from the success
- *  screen. Also fires an internal notification email (no-op until
- *  RESEND_API_KEY is configured). */
+/** Reservation endpoint: validates the request, saves it to the admin
+ *  ledger, and issues a reference; the guest sends the booking to the
+ *  restaurant over WhatsApp from the success screen. Also fires an
+ *  internal notification email (no-op until RESEND_API_KEY is configured). */
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const parsed = reservationSchema.safeParse(body);
@@ -22,6 +23,28 @@ export async function POST(request: Request) {
   const r = parsed.data;
   const reference = generateReference("FF-RES");
   console.log("[reservation]", reference, r.email, r.date, r.time, r.guests);
+
+  try {
+    await saveReservation({
+      token: createReservationToken(),
+      reference,
+      name: r.name,
+      surname: r.surname,
+      email: r.email,
+      phone: r.phone,
+      date: r.date,
+      time: r.time,
+      guests: r.guests,
+      seating: r.seating,
+      occasion: r.occasion,
+      specialRequests: r.specialRequests,
+      createdAt: new Date().toISOString(),
+    });
+  } catch (err) {
+    // The WhatsApp handoff is still the source of truth for the booking
+    // itself — don't block the guest over an admin-ledger write hiccup.
+    console.error("[reservation] failed to save to admin ledger", err);
+  }
 
   // Guests hand their request to the restaurant over WhatsApp from the
   // success screen — no guest email for now. This internal notification is
