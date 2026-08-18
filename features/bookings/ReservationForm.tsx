@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -89,26 +89,23 @@ export function ReservationForm({
     defaultValues: { guests: 2, seating: "indoor" },
   });
 
-  // Opened synchronously inside the form's submit handler (a genuine user
-  // gesture) so the WhatsApp tab can be navigated automatically once the
-  // reservation succeeds — browsers block window.open() called after an
-  // awaited fetch, but not a location change on a tab opened during the
-  // gesture itself.
-  const whatsappTab = useRef<Window | null>(null);
+  const mutation = useMutation({ mutationFn: submitReservation });
 
-  const mutation = useMutation({
-    mutationFn: submitReservation,
-    onSuccess: (data) => {
-      const href = buildWhatsappHref(whatsappNumber, data);
-      if (whatsappTab.current) {
-        whatsappTab.current.location.href = href;
-      } else {
-        // Pre-open was blocked (rare) — try once more, and the manual
-        // button below still covers the case where this is blocked too.
-        window.open(href, "_blank", "noopener,noreferrer");
-      }
-    },
-  });
+  // A new-tab window.open() is a popup and can be silently blocked even
+  // with a valid user gesture, depending on the browser. A same-tab
+  // location change is a plain navigation, not a popup — no browser
+  // blocks it — so that's what guarantees the booking actually reaches
+  // WhatsApp instead of quietly stalling on a button nobody clicks. The
+  // brief delay lets the guest see their reference before being taken
+  // there; the button covers instant/skip-the-wait and JS-timer edge cases.
+  useEffect(() => {
+    if (!mutation.isSuccess) return;
+    const href = buildWhatsappHref(whatsappNumber, mutation.data);
+    const timer = setTimeout(() => {
+      window.location.href = href;
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [mutation.isSuccess, mutation.data, whatsappNumber]);
 
   const minDate = new Date().toISOString().split("T")[0];
 
@@ -148,8 +145,8 @@ export function ReservationForm({
         <p className="mt-4 text-sm text-muted">
           Booking reference{" "}
           <span className="font-mono text-gold-light">{reference}</span>.
-          We've opened WhatsApp with your booking ready to send — if it
-          didn't open, tap below to send it yourself.
+          We're taking you to WhatsApp to send it through — or tap below to
+          go now.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild variant="whatsapp">
@@ -161,7 +158,6 @@ export function ReservationForm({
           <Button
             variant="outline"
             onClick={() => {
-              whatsappTab.current = null;
               mutation.reset();
               reset();
             }}
@@ -176,10 +172,7 @@ export function ReservationForm({
 
   return (
     <form
-      onSubmit={handleSubmit((values) => {
-        whatsappTab.current = window.open("", "_blank");
-        mutation.mutate(values);
-      })}
+      onSubmit={handleSubmit((values) => mutation.mutate(values))}
       className="gold-ring mx-auto max-w-3xl rounded-3xl p-7 md:p-10"
       noValidate
       aria-label="Reservation form"
