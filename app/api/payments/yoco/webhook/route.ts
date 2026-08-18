@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { after } from "next/server";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { isValidYocoWebhook } from "@/lib/yoco";
-import { updatePaymentStatus } from "@/lib/payments";
+import { getPayment, updatePaymentStatus } from "@/lib/payments";
+import { decrementEventSeats } from "@/services/content";
+import { contentTag } from "@/lib/content-store";
 import { sendEmail } from "@/lib/email";
 
 /** Yoco webhook receiver.
@@ -57,6 +60,12 @@ export async function POST(request: Request) {
   const failed = status === "failed" || type.includes("failed");
 
   if (succeeded) {
+    // Yoco delivers webhooks at-least-once, so the same "succeeded" event
+    // can arrive twice — decrementing seats and emailing must only happen
+    // the first time a payment actually transitions to paid.
+    const existing = await getPayment(token);
+    const alreadyPaid = existing?.status === "paid";
+
     // Yoco echoes the real checkout id (ch_...) back in metadata.checkoutId
     // (see the metadata sent in lib/yoco.ts's createCheckout response) —
     // payload.checkoutId isn't actually present on this envelope, and
@@ -68,7 +77,17 @@ export async function POST(request: Request) {
       status: "paid",
       checkoutId,
     });
-    if (updated) {
+
+    if (updated && !alreadyPaid) {
+      try {
+        await decrementEventSeats(updated.eventSlug, updated.quantity);
+        revalidateTag(contentTag("events"));
+        revalidateTag("content");
+        revalidatePath("/", "layout");
+      } catch (err) {
+        console.error("[yoco:webhook] failed to decrement seats", err);
+      }
+
       // Guests save/print their ticket on the success page — no guest email
       // for now. This internal notification is a no-op until RESEND_API_KEY
       // is configured.

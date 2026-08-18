@@ -14,6 +14,7 @@
 import crypto from "crypto";
 import { head, list, put } from "@vercel/blob";
 import { getCheckoutStatus } from "./yoco";
+import { decrementEventSeats } from "@/services/content";
 
 export type PaymentStatus = "pending" | "paid" | "failed";
 
@@ -113,7 +114,21 @@ export async function reconcilePendingPayment(
   if (!live) return record;
 
   if (live.status === "succeeded") {
-    return (await updatePaymentStatus(record.token, { status: "paid" })) ?? record;
+    const updated = await updatePaymentStatus(record.token, { status: "paid" });
+    if (updated) {
+      // Not called from a route handler here (this also runs from the admin
+      // Ticket Sales page render), so no revalidatePath/revalidateTag — the
+      // webhook path (which is a route handler) is what busts the public
+      // pages' cache on the common, near-instant path. This is only the
+      // rare backstop for a missed webhook, so a brief display lag on the
+      // public site is an acceptable trade for correct seat counts.
+      try {
+        await decrementEventSeats(updated.eventSlug, updated.quantity);
+      } catch (err) {
+        console.error("[reconcilePendingPayment] failed to decrement seats", err);
+      }
+    }
+    return updated ?? record;
   }
   if (["failed", "cancelled", "expired"].includes(live.status)) {
     return (await updatePaymentStatus(record.token, { status: "failed" })) ?? record;

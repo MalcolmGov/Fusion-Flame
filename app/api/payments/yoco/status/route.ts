@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getEvent } from "@/services/content";
 import { getPayment, reconcilePendingPayment } from "@/lib/payments";
+import { contentTag } from "@/lib/content-store";
 import type { DigitalTicket } from "@/types";
 
 /** Ticket status for the success page. The webhook is the primary source of
@@ -50,6 +52,13 @@ export async function GET(request: Request) {
     );
   }
   const record = await reconcilePendingPayment(found);
+  if (found.status === "pending" && record.status !== "pending") {
+    // Reconciliation just resolved this here rather than via the webhook —
+    // bust the public pages' cache so the new seat count/status shows up.
+    revalidateTag(contentTag("events"));
+    revalidateTag("content");
+    revalidatePath("/", "layout");
+  }
 
   const ticket: DigitalTicket = {
     reference: record.reference,

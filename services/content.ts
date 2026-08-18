@@ -3,7 +3,7 @@
  *  All reads go through lib/content-store.ts, so content edited in the
  *  /admin panel is served at runtime (no code changes, no redeploys). */
 
-import { readCollection } from "@/lib/content-store";
+import { readCollection, writeCollection } from "@/lib/content-store";
 import type {
   Announcement,
   ChefProfile,
@@ -74,6 +74,20 @@ export async function getEvent(
   const events = await readCollection<RestaurantEvent[]>("events");
   const event = events.find((e) => e.slug === slug);
   return event ? resolveEventDate(event) : undefined;
+}
+
+/** Called once per confirmed ticket payment (see the Yoco webhook) — the
+ *  checkout route's oversell guard only works if this number actually
+ *  moves as tickets sell. */
+export async function decrementEventSeats(slug: string, quantity: number) {
+  const events = await readCollection<RestaurantEvent[]>("events");
+  const idx = events.findIndex((e) => e.slug === slug);
+  if (idx === -1) return;
+  events[idx] = {
+    ...events[idx],
+    availableSeats: Math.max(0, events[idx].availableSeats - quantity),
+  };
+  await writeCollection("events", events);
 }
 
 export function getTestimonials(): Promise<Testimonial[]> {
