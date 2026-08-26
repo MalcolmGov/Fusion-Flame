@@ -45,6 +45,9 @@ export interface RestaurantEvent {
   recurring?: string;
   /** Theme / dress code, e.g. "Black Tie" or "All-White Party" */
   dressCode?: string;
+  /** "Good to Know" bullet points on the event page. Empty/absent hides
+   *  the whole card — no more hardcoded, one-size-fits-all copy. */
+  notes?: string[];
 }
 
 export interface Testimonial {

@@ -121,6 +121,12 @@ export const ADMIN_COLLECTIONS: CollectionDef[] = [
       { name: "price", label: "Ticket Price (R)", type: "number", min: 0 },
       { name: "availableSeats", label: "Available Seats", type: "number", min: 0 },
       {
+        name: "notes",
+        label: "Good to Know (bullet points)",
+        type: "string-list",
+        help: "Shown as a bullet list on the event page — e.g. what's included, refund policy, doors open time. Leave empty to hide this section entirely.",
+      },
+      {
         name: "recurring",
         label: "Recurring label (optional)",
         type: "text",

@@ -9,7 +9,13 @@
     "price": 250,
     "availableSeats": 84,
     "recurring": "Every Friday",
-    "dressCode": "Smart Casual"
+    "dressCode": "Smart Casual",
+    "notes": [
+      "Ticket price includes welcome drink on arrival.",
+      "Dinner menu available à la carte throughout the event.",
+      "Tickets are refundable up to 48 hours before the event.",
+      "Theme / dress code: Smart Casual."
+    ]
   },
   {
     "slug": "jazz-nights",
@@ -21,7 +27,13 @@
     "price": 450,
     "availableSeats": 46,
     "recurring": "First Thursday monthly",
-    "dressCode": "Cocktail Chic"
+    "dressCode": "Cocktail Chic",
+    "notes": [
+      "Ticket price includes welcome drink on arrival.",
+      "Dinner menu available à la carte throughout the event.",
+      "Tickets are refundable up to 48 hours before the event.",
+      "Theme / dress code: Cocktail Chic."
+    ]
   },
   {
     "slug": "comedy-night",
@@ -32,7 +44,13 @@
     "time": "20:00 – 22:00",
     "price": 300,
     "availableSeats": 92,
-    "dressCode": "Casual & Comfortable"
+    "dressCode": "Casual & Comfortable",
+    "notes": [
+      "Ticket price includes welcome drink on arrival.",
+      "Dinner menu available à la carte throughout the event.",
+      "Tickets are refundable up to 48 hours before the event.",
+      "Theme / dress code: Casual & Comfortable."
+    ]
   },
   {
     "slug": "wine-tasting",
@@ -43,7 +61,13 @@
     "time": "18:30 – 21:00",
     "price": 550,
     "availableSeats": 30,
-    "dressCode": "Smart Casual"
+    "dressCode": "Smart Casual",
+    "notes": [
+      "Ticket price includes welcome drink on arrival.",
+      "Dinner menu available à la carte throughout the event.",
+      "Tickets are refundable up to 48 hours before the event.",
+      "Theme / dress code: Smart Casual."
+    ]
   },
   {
     "slug": "steak-festival",
@@ -54,7 +78,13 @@
     "time": "12:00 – 22:00",
     "price": 650,
     "availableSeats": 120,
-    "dressCode": "Casual — come hungry"
+    "dressCode": "Casual — come hungry",
+    "notes": [
+      "Ticket price includes welcome drink on arrival.",
+      "Dinner menu available à la carte throughout the event.",
+      "Tickets are refundable up to 48 hours before the event.",
+      "Theme / dress code: Casual — come hungry."
+    ]
   },
   {
     "slug": "valentines-dinner",
@@ -65,7 +95,13 @@
     "time": "18:00 – 23:00",
     "price": 1250,
     "availableSeats": 60,
-    "dressCode": "Formal, with a touch of red"
+    "dressCode": "Formal, with a touch of red",
+    "notes": [
+      "Ticket price includes welcome drink on arrival.",
+      "Dinner menu available à la carte throughout the event.",
+      "Tickets are refundable up to 48 hours before the event.",
+      "Theme / dress code: Formal, with a touch of red."
+    ]
   },
   {
     "slug": "christmas-dinner",
@@ -76,7 +112,13 @@
     "time": "12:00 – 17:00",
     "price": 950,
     "availableSeats": 110,
-    "dressCode": "Festive Elegant"
+    "dressCode": "Festive Elegant",
+    "notes": [
+      "Ticket price includes welcome drink on arrival.",
+      "Dinner menu available à la carte throughout the event.",
+      "Tickets are refundable up to 48 hours before the event.",
+      "Theme / dress code: Festive Elegant."
+    ]
   },
   {
     "slug": "new-years-gala",
@@ -87,6 +129,12 @@
     "time": "19:00 – 02:00",
     "price": 1850,
     "availableSeats": 150,
-    "dressCode": "Black Tie"
+    "dressCode": "Black Tie",
+    "notes": [
+      "Ticket price includes welcome drink on arrival.",
+      "Dinner menu available à la carte throughout the event.",
+      "Tickets are refundable up to 48 hours before the event.",
+      "Theme / dress code: Black Tie."
+    ]
   }
 ]

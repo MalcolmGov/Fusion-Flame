@@ -213,21 +213,18 @@ export default async function EventPage({ params }: EventPageProps) {
               ))}
             </dl>
 
-            <div className="glass mt-8 rounded-2xl p-6">
-              <h2 className="font-heading text-xl text-foreground">
-                Good to Know
-              </h2>
-              <ul className="mt-3 list-inside list-disc space-y-2 text-sm leading-relaxed text-muted">
-                <li>Ticket price includes welcome drink on arrival.</li>
-                <li>Dinner menu available à la carte throughout the event.</li>
-                <li>Tickets are refundable up to 48 hours before the event.</li>
-                <li>
-                  {event.dressCode
-                    ? `Theme / dress code: ${event.dressCode}.`
-                    : "Smart casual dress code applies."}
-                </li>
-              </ul>
-            </div>
+            {event.notes && event.notes.length > 0 ? (
+              <div className="glass mt-8 rounded-2xl p-6">
+                <h2 className="font-heading text-xl text-foreground">
+                  Good to Know
+                </h2>
+                <ul className="mt-3 list-inside list-disc space-y-2 text-sm leading-relaxed text-muted">
+                  {event.notes.map((note, i) => (
+                    <li key={i}>{note}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </Reveal>
 
           <Reveal from="right" delay={0.1} className="lg:col-span-2">
