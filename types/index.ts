@@ -174,5 +174,5 @@ export interface DigitalTicket {
   purchaser: string;
   email: string;
   amount: number;
-  status: "paid" | "pending" | "failed";
+  status: "paid" | "pending" | "failed" | "cancelled";
 }
