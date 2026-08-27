@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Banknote, Clock3, Ticket, Users } from "lucide-react";
+import { BadgeCheck, Ban, Banknote, Clock3, Ticket, Users } from "lucide-react";
 import { listPayments } from "@/lib/payments";
 import { formatZAR } from "@/lib/utils";
 import { TicketOrdersTable } from "@/components/admin/TicketOrdersTable";
@@ -39,6 +39,12 @@ export default async function TicketSalesPage() {
     { label: "Tickets Sold", value: String(ticketsSold), icon: Ticket },
     { label: "Revenue", value: formatZAR(revenue), icon: Banknote },
     { label: "Pending", value: String(pendingCount), icon: Clock3 },
+    {
+      label: "Cancelled",
+      value: String(cancelledCount),
+      icon: Ban,
+      href: cancelledCount > 0 ? "/admin/tickets/cancelled" : undefined,
+    },
   ];
 
   return (
@@ -53,18 +59,33 @@ export default async function TicketSalesPage() {
       </p>
 
       {/* Summary */}
-      <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {tiles.map((t) => (
-          <div key={t.label} className="glass rounded-2xl p-5">
-            <t.icon className="size-4 text-gold" aria-hidden />
-            <p className="font-heading mt-3 text-2xl text-gold-gradient md:text-3xl">
-              {t.value}
-            </p>
-            <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-muted">
-              {t.label}
-            </p>
-          </div>
-        ))}
+      <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        {tiles.map((t) => {
+          const content = (
+            <>
+              <t.icon className="size-4 text-gold" aria-hidden />
+              <p className="font-heading mt-3 text-2xl text-gold-gradient md:text-3xl">
+                {t.value}
+              </p>
+              <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-muted">
+                {t.label}
+              </p>
+            </>
+          );
+          return t.href ? (
+            <Link
+              key={t.label}
+              href={t.href}
+              className="glass rounded-2xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-gold"
+            >
+              {content}
+            </Link>
+          ) : (
+            <div key={t.label} className="glass rounded-2xl p-5">
+              {content}
+            </div>
+          );
+        })}
       </div>
 
       {/* Per-event rollup */}
@@ -91,21 +112,7 @@ export default async function TicketSalesPage() {
 
       {/* Orders table */}
       <div className="mt-8">
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="eyebrow">All Orders</h2>
-          {cancelledCount > 0 ? (
-            <Link
-              href="/admin/tickets/cancelled"
-              className="group inline-flex items-center gap-1 text-xs text-muted transition-colors hover:text-gold-light"
-            >
-              {cancelledCount} cancelled
-              <ArrowRight
-                className="size-3 transition-transform group-hover:translate-x-0.5"
-                aria-hidden
-              />
-            </Link>
-          ) : null}
-        </div>
+        <h2 className="eyebrow mb-3">All Orders</h2>
         <TicketOrdersTable
           payments={payments}
           emptyMessage="No ticket orders yet. They'll appear here the moment someone starts a checkout."
