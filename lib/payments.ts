@@ -16,7 +16,7 @@ import { head, list, put } from "@vercel/blob";
 import { getCheckoutStatus } from "./yoco";
 import { decrementEventSeats } from "@/services/content";
 
-export type PaymentStatus = "pending" | "paid" | "failed";
+export type PaymentStatus = "pending" | "paid" | "failed" | "cancelled";
 
 export interface PaymentRecord {
   token: string;
@@ -97,6 +97,27 @@ export async function updatePaymentStatus(
   const updated = { ...existing, ...patch };
   await savePayment(updated);
   return updated;
+}
+
+export type CancelPaymentResult =
+  | { ok: true; record: PaymentRecord }
+  | { ok: false; reason: "not_found" | "not_pending" };
+
+/** Admin-triggered cancellation (Ticket Sales page) — pending orders only.
+ *  A pending order never held a seat (seats only decrement on confirmed
+ *  payment), so there's no seat math here. Paid orders are deliberately
+ *  not cancellable this way: voiding a real sale needs an actual refund in
+ *  Yoco first, which this action doesn't perform. */
+export async function cancelPayment(
+  token: string,
+): Promise<CancelPaymentResult> {
+  const existing = await getPayment(token);
+  if (!existing) return { ok: false, reason: "not_found" };
+  if (existing.status !== "pending") return { ok: false, reason: "not_pending" };
+
+  const updated = await updatePaymentStatus(token, { status: "cancelled" });
+  if (!updated) return { ok: false, reason: "not_found" };
+  return { ok: true, record: updated };
 }
 
 /** Self-heals a "pending" record by asking Yoco directly. The webhook is

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BadgeCheck, Banknote, Clock3, Ticket, Users } from "lucide-react";
 import { listPayments, type PaymentRecord } from "@/lib/payments";
 import { formatZAR } from "@/lib/utils";
+import { CancelTicketButton } from "@/components/admin/CancelTicketButton";
 
 export const metadata: Metadata = { title: "Ticket Sales" };
 
@@ -9,6 +10,7 @@ const STATUS_STYLES: Record<PaymentRecord["status"], string> = {
   paid: "bg-gold/15 text-gold-light border-gold/40",
   pending: "bg-white/5 text-muted border-white/15",
   failed: "bg-flame-red/10 text-flame-red border-flame-red/40",
+  cancelled: "bg-white/5 text-muted/60 border-white/10",
 };
 
 function formatWhen(iso: string) {
@@ -154,11 +156,16 @@ export default async function TicketSalesPage() {
                       {formatZAR(p.amountZar)}
                     </td>
                     <td className="px-4 py-3">
-                      <span
-                        className={`inline-block rounded-full border px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] ${STATUS_STYLES[p.status]}`}
-                      >
-                        {p.status}
-                      </span>
+                      <div className="flex flex-col items-start gap-1.5">
+                        <span
+                          className={`inline-block rounded-full border px-2.5 py-0.5 text-[10px] uppercase tracking-[0.14em] ${STATUS_STYLES[p.status]}`}
+                        >
+                          {p.status}
+                        </span>
+                        {p.status === "pending" ? (
+                          <CancelTicketButton token={p.token} reference={p.reference} />
+                        ) : null}
+                      </div>
                     </td>
                   </tr>
                 ))}
